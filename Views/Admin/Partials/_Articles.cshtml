@@ -1,0 +1,84 @@
+﻿<div class="content">
+
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2>مدیریت مقالات</h2>
+        <button class="btn btn-success" onclick="openArticleModal()">افزودن مقاله</button>
+    </div>
+
+    <table class="table" id="articleTable">
+        <thead>
+            <tr>
+                <th>عنوان</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <button class="btn btn-danger"
+                            onclick="deleteArticle(1)">
+                        حذف
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="modal-overlay" id="articleModal" style="display:none;">
+    <div class="Modal">
+
+        <h3>افزودن مقاله</h3>
+
+        <form id="articleForm" enctype="multipart/form-data">
+
+            <label>عکس مقاله</label>
+            <input type="file" name="ImageFile" required />
+
+            <label>عنوان مقاله</label>
+            <input type="text" name="Title" required />
+
+            <label>متن مقاله</label>
+            <textarea name="Content" id="editor"></textarea>
+
+            <div style="margin-top:20px;">
+                <button type="submit" class="btn btn-success">ذخیره</button>
+                <button type="button" class="btn btn-danger" onclick="closeArticleModal()">انصراف</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+
+    const articleModal = document.getElementById("articleModal");
+
+    function openArticleModal() {
+        articleModal.style.display = "flex";
+    }
+
+    function closeArticleModal() {
+        articleModal.style.display = "none";
+    }
+
+    articleModal.addEventListener("click", function(e) {
+        if (e.target === articleModal) {
+            closeArticleModal();
+        }
+    });
+
+    function deleteArticle(id) {
+
+        if (!confirm("آیا از حذف مقاله مطمئن هستید؟"))
+            return;
+
+        // اینجا Ajax بزن به سرور
+        console.log("Delete article:", id);
+
+        alert("مقاله حذف شد (نمونه تست)");
+    }
+</script>

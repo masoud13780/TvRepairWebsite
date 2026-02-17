@@ -1,0 +1,57 @@
+﻿<head>
+    <link href="~/css/Admin.css" rel="stylesheet" />
+    <style>
+        header {
+            display: none;
+        }
+
+        footer {
+            display: none;
+        }
+
+        main {
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<ul class="sidebar" id="sidebar">
+    <li class="menu-item" id="Dashboard">داشبورد</li>
+    <li class="menu-item" id="Products">محصولات</li>
+    <li class="menu-item" id="Articles">مقالات</li>
+    <li class="menu-item" id="Users">کاربران</li>
+    <li class="menu-item" id="SmsPanel">پنل پیامکی</li>
+</ul>
+
+<div class="main" id="main-body-panel-Partial">
+</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $(".menu-item").on("click", function () {
+
+                let actionName = this.id;   // چون id = اسم اکشن
+
+                $.ajax({
+                    url: '/Admin/' + actionName,
+                    type: 'GET',
+                    success: function (result) {
+                        $("#main-body-panel-Partial").html(result);
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                        alert("خطا در بارگذاری صفحه");
+                    }
+                });
+
+            });
+
+            // لود خودکار داشبورد هنگام ورود
+            $("#Dashboard").click();
+
+        });
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿.store-products-container {
+    background: radial-gradient( circle at 20% 30%, rgba(33,33,101,0.08), transparent 60% );
+    padding: 10px 20px 30px 20px;
+    scrollbar-width: thin;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-around;
+}
+
+.store-filter {
+    width: 20%;
+}
+
+.brands {
+    margin-bottom: 20px;
+    height: 25vh;
+    overflow-y: auto;
+}
+
+    .brands::-webkit-scrollbar {
+        display: none;
+    }
+
+    .brands ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        list-style: none;
+        width: 100%;
+    }
+
+        .brands ul li {
+            width: fit-content;
+            padding: 5px;
+            border: 1px solid black;
+            margin-bottom: 1%;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+            .brands ul li:hover {
+                background-color: aliceblue;
+            }
+
+

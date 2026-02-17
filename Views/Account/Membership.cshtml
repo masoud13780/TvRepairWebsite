@@ -1,0 +1,71 @@
+﻿@model TvRepairWebsite.Models.ViewModels.CreateUserVM;
+
+<head>
+    <link href="~/css/Account.css" rel="stylesheet" />
+    <style>
+        header {
+            display: none;
+        }
+
+        footer {
+            display: none;
+        }
+
+        main {
+            height: 100vh;
+        }
+    </style>
+</head>
+<div class="register-container">
+    <h2>عضویت</h2>
+
+    <form asp-action="Membership" method="post">
+
+        <div class="row">
+            <div class="form-group">
+                <input type="text" asp-for= "FirstName" required placeholder=" ">
+                <span asp-validation-for="FirstName"></span>
+                <label>نام*</label>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="LastName" required placeholder=" ">
+                <label>نام خانوادگی*</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="tel" name="Phone" required placeholder=" ">
+            <label>شماره موبایل*</label>
+        </div>
+
+@*         <div class="form-group">
+            <input type="email" placeholder=" ">
+            <label>ایمیل*</label>
+        </div> *@
+
+        <div class="form-group">
+            <input type="text" name="TvType" placeholder=" ">
+            <label>مدل تلویزیون (اختیاری)</label>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <input type="password" name="Password" required placeholder=" ">
+                <label>رمز عبور*</label>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="RePassword" required placeholder=" ">
+                <label>تکرار رمز عبور*</label>
+            </div>
+        </div>
+
+        <button type="submit" class="register-btn">ایجاد حساب کاربری</button>
+
+        <div class="extra-links">
+            <a asp-controller="Account" asp-action="Login">قبلاً ثبت‌نام کرده‌اید؟ ورود</a>
+        </div>
+
+    </form>
+</div>

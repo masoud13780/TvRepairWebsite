@@ -1,0 +1,95 @@
+﻿.contact-us {
+    width:85%;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    font-family: 'Tahoma', sans-serif;
+    color: #333;
+}
+
+    .contact-us h2 {
+        text-align: center;
+        color: #0056b3;
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .contact-us p {
+        font-size: 1.05em;
+        margin-bottom: 18px;
+        line-height: 1.7;
+    }
+
+.contact-info p {
+    margin-bottom: 12px;
+}
+
+.contact-info a {
+    color: #d63384;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .contact-info a:hover {
+        text-decoration: underline;
+    }
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1em;
+        width: 100%;
+        box-sizing: border-box;
+        resize: vertical;
+    }
+
+    .contact-form textarea {
+        min-height: 120px;
+    }
+
+    .contact-form button {
+        background-color: #0056b3;
+        color: #fff;
+        border: none;
+        padding: 14px;
+        font-size: 1.1em;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .contact-form button:hover {
+            background-color: #004494;
+        }
+
+.contact-us a.whatsapp-link {
+    color: #25d366;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .contact-us {
+        margin: 20px;
+        padding: 20px;
+    }
+
+        .contact-us h2 {
+            font-size: 1.6em;
+        }
+
+        .contact-us p,
+        .contact-info p {
+            font-size: 1em;
+        }
+}

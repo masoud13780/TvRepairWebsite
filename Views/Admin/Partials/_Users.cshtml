@@ -1,0 +1,119 @@
+﻿<div class="content">
+
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2>مدیریت کاربران</h2>
+        <button class="btn btn-success" onclick="openUserModal()">افزودن کاربر</button>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>نام</th>
+                <th>نام خانوادگی</th>
+                <th>موبایل</th>
+                <th>ایمیل</th>
+                <th>مدل تلویزیون</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>علی</td>
+                <td>محمدی</td>
+                <td>09123456789</td>
+                <td>test@gmail.com</td>
+                <td>Samsung AU8000</td>
+                <td>
+                    <button class="btn btn-primary"
+                            onclick="openEditUser(1,'علی','محمدی','09123456789','test@gmail.com','Samsung AU8000')">
+                        ویرایش
+                    </button>
+
+                    <button class="btn btn-danger"
+                            onclick="deleteUser(1)">
+                        حذف
+                    </button>
+
+                    <button class="btn btn-warning"
+                            onclick="sendSms('09123456789')">
+                        پیامک
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="modal-overlay" id="userModal" style="display:none">
+    <div class="Modal">
+
+        <h3 id="userModalTitle">افزودن کاربر</h3>
+
+        <form id="userForm">
+
+            <input type="hidden" id="UserId" />
+
+            <label>نام*</label>
+            <input type="text" id="FirstName" required />
+
+            <label>نام خانوادگی*</label>
+            <input type="text" id="LastName" required />
+
+            <label>شماره موبایل*</label>
+            <input type="text" id="Mobile" required />
+
+            <label>ایمیل*</label>
+            <input type="email" id="Email" />
+
+            <label>مدل تلویزیون</label>
+            <input type="text" id="TvModel" />
+
+            <label>رمز عبور*</label>
+            <input type="password" id="Password" />
+
+            <div style="margin-top:20px;">
+                <button type="submit" class="btn btn-success">ذخیره</button>
+                <button type="button" class="btn btn-danger" onclick="closeUserModal()">انصراف</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+<script>
+
+    const userModal = document.getElementById("userModal");
+    const userModalTitle = document.getElementById("userModalTitle");
+    const userForm = document.getElementById("userForm");
+
+    function openUserModal() {
+        userForm.reset();
+        document.getElementById("UserId").value = "";
+        userModalTitle.innerText = "افزودن کاربر";
+        userModal.style.display = "flex";
+    }
+
+    function openEditUser() {
+
+        userModalTitle.innerText = "ویرایش کاربر";
+
+        userModal.style.display = "flex";
+    }
+
+    function closeUserModal() {
+        userModal.style.display = "none";
+    }
+
+    userModal.addEventListener("click", function (e) {
+        if (e.target === userModal) {
+            closeUserModal();
+        }
+    });
+
+    function deleteUser(id) {
+        if (!confirm("آیا از حذف این کاربر مطمئن هستید؟"))
+            return;
+        alert("کاربر حذف شد (نمونه تست)");
+    }
+
+</script>
