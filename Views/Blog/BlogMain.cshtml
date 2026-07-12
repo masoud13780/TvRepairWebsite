@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<TvRepairWebsite.Models.Article>
+
+@{
     ViewData["Title"] = "مقالات تخصصی تعمیرات تلویزیون";
 }
 <head>
@@ -17,17 +19,42 @@
 
     <div class="Blog-Container">
 
+        @foreach(var item in Model)
+        {
+            <div class="blog-item">
+                <img src="~/images/@item.ImgUrl" alt="">
+                <div class="blog-content">
+                    <h4>@item.Title</h4>
+                    <p>
+                        @item.Description
+                    </p>
+                    <a asp-controller="Blog" asp-action="BlogPage" asp-route-id = "@item.ArticleId" class="Btn">ادامه مطلب</a>
+                </div>
+            </div>
+
+        }
+
         <div class="blog-item">
-            <img src="~/images/BrokenTv.png" alt="">
+            <img src="~/images/BadFlat.jpg" alt="تلویزیون با پنل آسیب‌دیده و خطوط عمودی رنگی روی صفحه نمایش">
             <div class="blog-content">
-                <h4>علائم خرابی پنل</h4>
-                <p>
-                    پنل تلویزیون مهم‌ترین و گران‌ترین بخش دستگاه است که مستقیماً تصویر را تولید می‌کند...
-                </p>
-                <a asp-controller="Blog" asp-action="BlogPage" class="Btn">ادامه مطلب</a>
+                <h2>فلت تلویزیون چیست؟ علت خط دار شدن تصویر تلویزیون و روش‌های تعمیر آن</h2>
+                <a asp-controller="Blog" asp-action="FlatBreak" class="Btn">ادامه مطلب</a>
             </div>
         </div>
-
+        <div class="blog-item">
+            <img src="~/images/PowerOff.jpg" alt="چرا تلویزیون روشن می‌شود اما تصویر بالا نمی‌آید؟ بررسی علت‌ها و راه‌حل‌ها">
+            <div class="blog-content">
+                <h2>چرا تلویزیون روشن می‌شود اما تصویر بالا نمی‌آید؟ بررسی علت‌ها و راه‌حل‌ها</h2>
+                <a asp-controller="Blog" asp-action="PowerOff" class="Btn">ادامه مطلب</a>
+            </div>
+        </div>
+        <div class="blog-item">
+            <img src="~/images/Water.jpg" alt="آب خوردگی تلویزیون؛ بعد از ریختن آب روی تلویزیون چه کارهایی باید انجام دهیم؟">
+            <div class="blog-content">
+                <h2>آب خوردگی تلویزیون؛ بعد از ریختن آب روی تلویزیون چه کارهایی باید انجام دهیم؟</h2>
+                <a asp-controller="Blog" asp-action="Water" class="Btn">ادامه مطلب</a>
+            </div>
+        </div>
     </div>
 </div>
 

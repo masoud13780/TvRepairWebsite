@@ -37,28 +37,29 @@ body {
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 25px;
 }
 
 h2 {
-    font-size: 1.4rem;
+    font-size: 18px;
 }
 
 h3 {
-    font-size: 1.2rem;
+    font-size: 15px;
 }
 
 h4 {
-    font-size: 1rem;
+    font-size: 15px;
 }
 
 p {
-    font-size: 0.9rem;
+    font-size: 15px;
 }
 
 a {
     color: black !important;
     text-decoration: none;
+    font-size: 15px;
 }
 
 i {
@@ -145,7 +146,7 @@ i {
 
 /*layout*/
 
-header {
+.header1 {
     position: fixed;
     top: 0;
     left: 50%;
@@ -160,7 +161,7 @@ header {
     height: 12vh;
     border-radius: 20px;
     text-align: center;
-    z-index: 100;
+    z-index: 1000;
 }
 
 #little-menu {
@@ -351,7 +352,7 @@ footer {
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 100;
     color: black;
 }
 
@@ -367,7 +368,7 @@ footer {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    z-index: 99;
+    z-index: 1;
 }
 /*subhero1*/
 .subhero1 {
@@ -388,18 +389,30 @@ footer {
 }
 
 .experience {
-    width: 24%;
-    margin: 2% 0;
+    width: 250px;
+    margin: 2% auto;
     padding: 20px;
     background-color: rgba(255,255,255,0.7);
 }
-/*subhero2*/
-.subhero2 {
-    width: 100%;
-    margin: 1% auto;
-    padding: 0 2.5%;
-    text-align: center;
+
+.experience1 {
+    width: 550px;
+    margin: 2% auto;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.7);
 }
+
+    .experience1 img{
+        width:250px;
+        height:250px;
+    }
+    /*subhero2*/
+    .subhero2 {
+        width: 100%;
+        margin: 1% auto;
+        padding: 0 2.5%;
+        text-align: center;
+    }
 
 .products-container {
     overflow-x: auto;
@@ -786,7 +799,7 @@ footer {
 }
 
 .Blog-Container {
-    margin:50px auto;
+    margin: 50px auto;
     width: 90%;
     display: flex;
     justify-content: space-between;
@@ -844,6 +857,7 @@ footer {
 
 @media (max-width: 992px) {
 
+
     .honors-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -859,14 +873,14 @@ footer {
     }
 
     .info {
-        width:100%;
+        width: 100%;
         margin: auto;
         text-align: right;
         margin-bottom: 5%;
     }
 
-    .comments-container{
-        width:100%;
+    .comments-container {
+        width: 100%;
     }
 }
 
@@ -874,6 +888,10 @@ footer {
     .banner {
         height: 60vh;
         margin-bottom: 150px;
+    }
+
+    .subhero4::before {
+        display: none;
     }
 
     .header1 {
@@ -901,18 +919,24 @@ footer {
         margin-bottom: 150px;
     }
 
-    .header1 {
-        display: none;
-        background-color: #F5F7FA;
-        right: -170px;
-        width: 60%;
-        padding:0;
-        margin: 0;
-        height: fit-content;
-        border-radius: 15px 0 0 15px;
-        text-align: center;
-        z-index: 100;
+    header {
+        position: relative;
     }
+
+    .header1 {
+        position: fixed;
+        top: -2%;
+        right: -200%;
+        width: 60%;
+        height: 100vh;
+        background: #F5F7FA;
+        transition: right .3s ease;
+        z-index: 1000;
+    }
+
+        .header1.active {
+            right: -100%;
+        }
 
     .header-item {
         display: block;
@@ -926,19 +950,19 @@ footer {
 
     .nav-c {
         width: 100% !important;
-        padding:0;
+        padding: 0;
     }
 
         .nav-c ul {
             display: block;
-            padding:0;
+            padding: 0;
             width: 100%;
             text-align: center;
         }
 
             .nav-c ul li {
-                width:95%; 
-                border-radius:0;
+                width: 95%;
+                border-radius: 0;
             }
 
     #little-menu {
@@ -986,19 +1010,19 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .subhero6{
-        display:none;
+    .subhero6 {
+        display: none;
     }
 
     .honor-item {
         border: none;
     }
 
-    .footer-links ul{
-        padding:0;
+    .footer-links ul {
+        padding: 0;
     }
 
-    .footer-img{
-        width:80%;
+    .footer-img {
+        width: 80%;
     }
 }

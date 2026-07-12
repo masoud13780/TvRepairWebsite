@@ -1,14 +1,35 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var PhoneUser = Context.Session.GetString("PhoneUser");
+    var Admin = Context.Session.GetString("Admin");
+}
+
+
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="تعمیرات تلویزیون سلیمی با تیمی متخصص و مجرب در تعمیر انواع تلویزیون‌های LED، OLED و LCD آماده ارائه خدمات سریع و مطمئن است.">
-    <meta name="keywords" content="درباره ما, تعمیر تلویزیون, تیم متخصص تلویزیون, تعمیرات تلویزیون سلیمی, خدمات تلویزیون">
-    <title>@ViewData["Title"]  تعمیرات تلویزیون سلیمی</title>
+    <link rel="icon" type="image/x-icon" href="~/images/logo.png" />
+    @RenderSection("Meta", required: false)
+
+    <title>
+        @(ViewData["Title"] ?? "تعمیرات تلویزیون سلیمی مشهد")
+    </title>
+
+    <meta name="description"
+        content="@(ViewData["Description"] ?? "تعمیر تخصصی تلویزیون در مشهد")">
+
+    <link rel="canonical"
+        href="@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}")">
+    <meta property="og:title" content="@ViewData["Title"]" />
+    <meta property="og:description" content="@ViewData["Description"]" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
+    <link rel="canonical" href="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @RenderSection("Styles", required: false)
     <link rel="stylesheet" href="~/TvRepairWebsite.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -18,33 +39,69 @@
     <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="application/ld+json">
+        {
+        "@@context":"https://schema.org",
+        "@@type":"LocalBusiness",
+        "name":"تعمیرات تلویزیون سلیمی",
+        "telephone":"09154868011",
+        "address":{
+        "@@type":"PostalAddress",
+        "addressLocality":"مشهد"
+        }
+        }
+    </script>
 </head>
 <body>
-    <header class="header1">
-        <div class="header-item">
-            <img src=~/images/salimi-logo.png alt="تعمیرات تلویزیون سلیمی مشهد" class="logo" />
-        </div>
-        <nav class="nav-c header-item">
-            <ul>
-                <li class="elevated"><a asp-controller="Home" asp-action="Index">صفحه اصلی</a></li>
-                <li class="elevated"><a asp-controller="Blog" asp-action="BlogMain">مقالات</a></li>
-                <li class="elevated"><a asp-controller="Store" asp-action="Store">فروشگاه</a></li>
-                <li class="elevated"><a asp-controller="ContactUs" asp-action="ContactUs">تماس با ما</a></li>
-                <li class="elevated"><a asp-controller="AboutUs" asp-action="AboutUs">درباره ما</a></li>
-            </ul>
-        </nav>
-        <div class="header-item num-header">
-            <a href="tel:+989123456789" class="num-subs number-box">
-                09383552379
-            </a>
-            <a asp-controller="Account" asp-action="Login" class="Btn num-subs">
-                ورود
-            </a>
+    <header>
+        <div class="header1">
+            <div class="header-item">
+                <img src=~/images/salimi-logo.png alt="تعمیرات تلویزیون سلیمی مشهد" class="logo" />
+            </div>
+            <nav class="nav-c header-item">
+                <ul>
+                    <li class="elevated"><a asp-controller="Home" asp-action="Index">صفحه اصلی</a></li>
+                    <li class="elevated"><a asp-controller="Blog" asp-action="BlogMain">مقالات</a></li>
+                    <li class="elevated"><a asp-controller="Store" asp-action="Store">فروشگاه</a></li>
+                    <li class="elevated"><a asp-controller="ContactUs" asp-action="ContactUs">تماس با ما</a></li>
+                    <li class="elevated"><a asp-controller="AboutUs" asp-action="AboutUs">درباره ما</a></li>
+                </ul>
+            </nav>
+            <div class="header-item num-header">
+                <a href="tel:+989154868011" class="num-subs number-box">
+                    09154868011
+                </a>
+                @{
+
+                    if (!string.IsNullOrEmpty(PhoneUser))
+                    {
+                        if (Admin == "True")
+                        {
+                            <a asp-controller="Admin" asp-action="AdminPanel" class="Btn num-subs">
+                                پنل ادمین
+                            </a>
+                        }
+                        else
+                        {
+                            <span>خوش آمدید</span>
+                        }
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Login" class="Btn num-subs">
+                            ورود
+                        </a>
+                    }
+                   
+                }
+
+      
+            </div>
         </div>
     </header>
     <i class="fas fa-bars" id="little-menu"></i>
 
-    <main role="main">
+    <main role="main" >
         @RenderBody()
     </main>
 
@@ -53,12 +110,20 @@
             <h2>با ما در تماس باشید</h2>
             <div class="divider" style="background: linear-gradient( to right, transparent, rgb(238, 129, 36), transparent ); width:90%;"></div>
             <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-telegram"></i></a>
-                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://t.me/+989154868011" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-telegram"></i>
+                </a>
+
+                <a href="https://wa.me/989154868011" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+                <a href="https://instagram.com/USERNAME" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
             </div>
             <div class="header-item" style=" margin:auto">
-                <a href="tel:+989123456789" class="footer-btn num-subs">
+                <a href="tel:+989154868011" class="footer-btn num-subs">
                     تماس بگیرید!
                 </a>
 
@@ -80,28 +145,28 @@
         <div class="footer-img">
             <div class="adress">
                 <h4>آدرس:</h4>
-                <p>استان خراسان رضوی، مشهد، خیابان سعدی، پاساژ بهزاد، طبقه اول، واحد </p>
+                <p>استان خراسان رضوی، مشهد، خیابان سعدی، پاساژ بهزاد، طبقه دوم، واحد 30 </p>
             </div>
             <img src="~/images/white-logo.png" alt="تعمیرات تلویزیون سلیمی مشهد" class="logo" />
         </div>
     </footer>
     <script>
         $(document).ready(function() {
-            const $menu = $('#little-menu');
-            const $header = $('.header1');
+        const $menu = $('#little-menu');
+        const $header = $('.header1');
 
-            // toggle منو با کلیک روی آیکون
-            $menu.on('click', function(e) {
-                e.stopPropagation(); // جلوگیری از بسته شدن بلافاصله
-                $header.toggleClass('active');
-            });
+        // toggle منو با کلیک روی آیکون
+        $menu.on('click', function(e) {
+        e.stopPropagation(); // جلوگیری از بسته شدن بلافاصله
+        $header.toggleClass('active');
+        });
 
-            // بستن منو وقتی خارج از آن کلیک شد
-            $(document).on('click', function(e) {
-                if (!$header.is(e.target) && $header.has(e.target).length === 0 && !$menu.is(e.target)) {
-                    $header.removeClass('active');
-                }
-            });
+        // بستن منو وقتی خارج از آن کلیک شد
+        $(document).on('click', function(e) {
+        if (!$header.is(e.target) && $header.has(e.target).length === 0 && !$menu.is(e.target)) {
+        $header.removeClass('active');
+        }
+        });
         });
 
     </script>

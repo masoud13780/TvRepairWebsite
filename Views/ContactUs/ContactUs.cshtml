@@ -1,4 +1,5 @@
-﻿
+﻿@model TvRepairWebsite.Models.ViewModels.ContactUsVM;
+
 <head>
     <link href="~/css/ContactUs.css" rel="stylesheet" />
 </head>
@@ -20,19 +21,25 @@
     <p>برای دریافت مشاوره یا خدمات تعمیر تلویزیون، با تیم متخصص <strong>تعمیرات تلویزیون سلیمی</strong> تماس بگیرید. ما آماده پاسخگویی به سوالات شما هستیم.</p>
 
     <div class="contact-info">
-        <p>📞 تلفن: <a href="tel:+982112345678">09383552379</a></p>
+        <p>📞 تلفن: <a href="tel:+989154868011">09154868011</a></p>
         <p>📧 ایمیل: <a href="mailto:info@example.com">info@example.com</a></p>
-        <p>📍 آدرس: استان خراسان رضوی، مشهد، خیابان سعدی، پاساژ بهزاد، طبقه اول، واحد</p>
-        <p>🕒 ساعات کاری: شنبه تا چهارشنبه ۹ صبح تا 9 شب</p>
+        <p>📍 30 آدرس: استان خراسان رضوی، مشهد، خیابان سعدی، پاساژ بهزاد، طبقه دوم، واحد</p>
+        <p>🕒 ساعات کاری: شنبه تا پنج شنبه ۹ صبح تا 9 شب</p>
     </div>
 
     <form action="#" method="post" class="contact-form">
-        <input type="text" name="name" placeholder="نام و نام خانوادگی" required>
-        <input type="email" name="email" placeholder="ایمیل یا شماره تماس" required>
-        <input type="text" name="subject" placeholder="موضوع پیام" required>
-        <textarea name="message" placeholder="متن پیام خود را بنویسید..." required></textarea>
+        <div asp-validation-summary="All"></div>
+        <input type="text" asp-for="FullName" placeholder="نام و نام خانوادگی" required>
+        <span asp-validation-for="FullName"></span>
+        <input type="text" asp-for="EmailOrPhone" placeholder="ایمیل یا شماره تماس" required>
+        <span asp-validation-for="EmailOrPhone"></span>
+        <input type="text" asp-for="Subject" placeholder="موضوع پیام" required>
+        <span asp-validation-for="Subject"></span>
+        <textarea asp-for="Message" placeholder="متن پیام خود را بنویسید..." required></textarea>
+        <span asp-validation-for="Message"></span>
+        <input  type="hidden" asp-for="CraeteDate"/>
         <button type="submit">ارسال پیام</button>
     </form>
 
-    <p>همچنین می‌توانید از طریق <a href="https://wa.me/98123456789" target="_blank" rel="noopener">واتساپ</a> با ما در ارتباط باشید.</p>
+    <p>همچنین می‌توانید از طریق <a href="https://wa.me/989154868011" target="_blank" rel="noopener">واتساپ</a> با ما در ارتباط باشید.</p>
 </section>

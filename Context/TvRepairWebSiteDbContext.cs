@@ -17,7 +17,20 @@ namespace TvRepairWebsite.Data
 
         //تعریف جدول کاربران
         public DbSet<User> Users { get; set; }
-
+        //تعریف جدول نظرات
+        public DbSet<Comment> Comments { get; set; }
+        //تعریف جدول ارتباط بای ما
+        public DbSet<ContactUs> contactUs { get; set; }
+        //تعریف جدول مقاله
+        public DbSet<Article> Articles { get; set; }    
+        //تعریف جدول دسته بندی
+        public DbSet<CategoryProduct> CategoryProducts { get; set; }
+        //تعریف جدول قطعات
+        public DbSet<PartType> partTypes { get; set; }
+        //تعریف جدول محصولات
+        public DbSet<Product> products { get; set; }
+       //جدول
+       public DbSet<SmsTemplate> smsTemplates { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

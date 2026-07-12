@@ -17,23 +17,14 @@ Options.UseSqlServer(
 
 //Add Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-
-////Add Identity
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-//    .AddEntityFrameworkStores<TvRepairWebSiteDbContext>()
-//    .AddDefaultTokenProviders();
-
-
-
+builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
-
-
+//Add Session
+builder.Services.AddSession();
 
 
 var app = builder.Build();
@@ -55,6 +46,7 @@ app.UseAuthorization();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
 
 app.MapControllerRoute(

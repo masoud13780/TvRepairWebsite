@@ -1,4 +1,6 @@
-﻿<div class="content">
+﻿@model IEnumerable<TvRepairWebsite.Models.User>
+
+<div class="content">
 
     <div style="display:flex; justify-content:space-between; align-items:center;">
         <h2>مدیریت کاربران</h2>
@@ -11,35 +13,37 @@
                 <th>نام</th>
                 <th>نام خانوادگی</th>
                 <th>موبایل</th>
-                <th>ایمیل</th>
                 <th>مدل تلویزیون</th>
                 <th>عملیات</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>علی</td>
-                <td>محمدی</td>
-                <td>09123456789</td>
-                <td>test@gmail.com</td>
-                <td>Samsung AU8000</td>
-                <td>
-                    <button class="btn btn-primary"
-                            onclick="openEditUser(1,'علی','محمدی','09123456789','test@gmail.com','Samsung AU8000')">
-                        ویرایش
-                    </button>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Phone</td>
+                    <td>@item.TVType</td>
+                    <td>
+                        <button class="btn btn-primary"
+                                onclick="openEditUser('@item.UserId', '@item.FirstName', '@item.LastName', '@item.Phone', '@item.TVType', '@item.Admin', '@item.Password')">
+                            ویرایش
+                        </button>
 
-                    <button class="btn btn-danger"
-                            onclick="deleteUser(1)">
-                        حذف
-                    </button>
+                        <button class="btn btn-danger"
+                                onclick="deleteUser(@item.UserId)">
+                            حذف
+                        </button>
 
-                    <button class="btn btn-warning"
-                            onclick="sendSms('09123456789')">
-                        پیامک
-                    </button>
-                </td>
-            </tr>
+                        <button class="btn btn-warning"
+                                onclick="sendSms('09123456789')">
+                            پیامک
+                        </button>
+                    </td>
+                </tr>
+
+            }
         </tbody>
     </table>
 
@@ -51,25 +55,25 @@
 
         <form id="userForm">
 
-            <input type="hidden" id="UserId" />
+            <input type="hidden" id="UserId" name="UserId" />
 
             <label>نام*</label>
-            <input type="text" id="FirstName" required />
+            <input type="text" id="FirstName" name="FirstName" required />
 
             <label>نام خانوادگی*</label>
-            <input type="text" id="LastName" required />
+            <input type="text" id="LastName" name="LastName" required />
 
             <label>شماره موبایل*</label>
-            <input type="text" id="Mobile" required />
-
-            <label>ایمیل*</label>
-            <input type="email" id="Email" />
+            <input type="text" id="Mobile" name="Phone" required />
 
             <label>مدل تلویزیون</label>
-            <input type="text" id="TvModel" />
+            <input type="text" id="TvModel" name="TVType" />
 
             <label>رمز عبور*</label>
-            <input type="password" id="Password" />
+            <input type="password" id="Password" name="Password" />
+
+             <label>سمت کاربر*</label>
+            <input type="checkbox" id="IsAdmin" name="Admin" />
 
             <div style="margin-top:20px;">
                 <button type="submit" class="btn btn-success">ذخیره</button>
@@ -81,11 +85,11 @@
     </div>
 </div>
 <script>
+    var userModal = document.getElementById("userModal");
+    var userModalTitle = document.getElementById("userModalTitle");
+    var userForm = document.getElementById("userForm");
 
-    const userModal = document.getElementById("userModal");
-    const userModalTitle = document.getElementById("userModalTitle");
-    const userForm = document.getElementById("userForm");
-
+    // تابع باز کردن مودال افزودن
     function openUserModal() {
         userForm.reset();
         document.getElementById("UserId").value = "";
@@ -93,10 +97,17 @@
         userModal.style.display = "flex";
     }
 
-    function openEditUser() {
+    // تابع باز کردن مودال ویرایش
+    function openEditUser(id, firstName, lastName, phone, tvModel, Admin, pass) {
+        document.getElementById("UserId").value = id;
+        document.getElementById("FirstName").value = firstName;
+        document.getElementById("LastName").value = lastName;
+        document.getElementById("Mobile").value = phone;
+        document.getElementById("TvModel").value = tvModel;
+        document.getElementById("IsAdmin").value = Admin;
+        document.getElementById("Password").value = pass;
 
         userModalTitle.innerText = "ویرایش کاربر";
-
         userModal.style.display = "flex";
     }
 
@@ -105,15 +116,50 @@
     }
 
     userModal.addEventListener("click", function (e) {
-        if (e.target === userModal) {
-            closeUserModal();
-        }
+        if (e.target === userModal) closeUserModal();
+    });
+
+    userForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(userForm);
+        const id = document.getElementById("UserId").value;
+        const url = id ? '/Admin/EditUser' : '/Admin/AddUser';
+
+        fetch(url, { method: 'POST', body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) location.reload();
+                else alert(data.message || "خطا در ذخیره اطلاعات");
+            })
+            .catch(err => {
+                console.error(err);
+                alert("خطای سیستمی رخ داده است");
+            });
     });
 
     function deleteUser(id) {
-        if (!confirm("آیا از حذف این کاربر مطمئن هستید؟"))
-            return;
-        alert("کاربر حذف شد (نمونه تست)");
-    }
 
+        if (!confirm("آیا از حذف این محصول مطمئن هستید؟"))
+            return;
+
+        fetch(`/Admin/DeleteUser?id=${id}`, {
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                if (data.success) {
+                    location.reload();
+                }
+                else {
+                    alert(data.message || "خطا در حذف");
+                }
+
+            })
+            .catch(err => {
+                console.error(err);
+                alert("خطای سیستمی رخ داده است");
+            });
+    }
 </script>
+

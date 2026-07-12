@@ -1,4 +1,6 @@
-﻿<head>
+﻿@model TvRepairWebsite.Models.ViewModels.ProductAdminVM;
+
+<head>
     <link href="~/css/Admin.css" rel="stylesheet" />
 </head>
 <div class="content">
@@ -19,23 +21,36 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <button class="btn btn-primary"
-                            onclick="openEditModal()">
-                        ویرایش
-                    </button>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Price</td>
+                    <td>@item.Category.CategoryName</td>
+                    <td>@item.Part.PartName</td>
+                    <td>
+                        <button class="btn btn-primary"
+                                onclick="openEditModal(
+                                        @item.ProductId,
+                                       '@item.Title',
+                                       '@item.Description',
+                                        @item.DiscountPrice,
+                                        @item.Price,
+                                        '@item.CategoryId',
+                                        '@item.PartId',
+                                         '@item.ImgUrl'
+                                    )">
+                            ویرایش
+                        </button>
 
-                    <button class="btn btn-danger"
-                            onclick="deleteProduct()">
-                        حذف
-                    </button>
-                </td>
-            </tr>
+                        <button class="btn btn-danger"
+                                onclick="deleteProduct(@item.ProductId)">
+                            حذف
+                        </button>
+                    </td>
+                </tr>
+
+            }
         </tbody>
     </table>
 
@@ -48,10 +63,11 @@
 
         <form id="productForm" enctype="multipart/form-data">
 
-            <input type="hidden" id="ProductId" name="Id" />
+            <input type="hidden" id="ProductId" name="ProductId" />
+            <input type="hidden" id="ExistingImage" name="ExistingImage" />
 
             <label>عکس محصول</label>
-            <input type="file" name="ImageFile" />
+            <input type="file" name="ImgUrl" id="currentImage" />
 
             <label>نام محصول</label>
             <input type="text" name="Title" id="Title" required />
@@ -60,41 +76,25 @@
             <textarea name="Description" id="Description"></textarea>
 
             <label>قیمت قبلی</label>
-            <input type="number" name="OldPrice" id="OldPrice" />
+            <input type="text" name="discountPrice" id="OldPrice" />
 
             <label>قیمت فعلی</label>
-            <input type="number" name="Price" id="Price" required />
+            <input type="text" name="Price" id="Price" required />
 
             <label>برند</label>
-            <select name="Brand" id="Brand">
-                <option>Sony</option>
-                <option>Samsung</option>
-                <option>lg</option>
-                <option>Tcl</option>
-                <option>panasonic</option>
-                <option>sam</option>
-                <option>sharp</option>
-                <option>shahb</option>
-                <option>xvision</option>
-                <option>snowa</option>
-                <option>hisense</option>
-                <option>daewoo</option>
-                <option>G+</option>
+            <select name="CategoryId" id="Brand">
+                @foreach (var item in Model.Categories)
+                {
+                    <option value="@item.CategoryId">@item.CategoryName</option>
+                }
             </select>
 
             <label>نوع قطعه</label>
-            <select name="PartType" id="PartType">
-                <option>مین برد</option>
-                <option>برد تغذیه</option>
-                <option>بک لایت</option>
-                <option>قاب و بدنه</option>
-                <option>پایه‌ها</option>
-                <option>سیستم صوتی</option>
-                <option>پنل</option>
-                <option>برد اینورتر</option>
-                <option>آی سی‌ها</option>
-                <option>برنامه‌های فلش</option>
-                <option>سنسورها</option>
+            <select name="PartId" id="PartType">
+                @foreach (var item in Model.Parts)
+                {
+                    <option value="@item.PartId">@item.PartName</option>
+                }
             </select>
 
             <div style="margin-top:15px;">
@@ -108,67 +108,128 @@
 
 <script>
 
-    const overlay = document.getElementById("productModal");
-    const modalTitle = document.getElementById("modalTitle");
-    const form = document.getElementById("productForm");
+    var overlay1 = document.getElementById("productModal");
+    var productmodalTitle = document.getElementById("modalTitle");
+    var productform = document.getElementById("productForm");
 
-    // ===============================
+    // =========================================
+    // ثبت فرم (افزودن / ویرایش)
+    // =========================================
+    productform.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+        const formData = new FormData(productform);
+        const id = document.getElementById("ProductId").value;
+
+        const url = id
+            ? '/Admin/EditProduct'
+            : '/Admin/AddProduct';
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                if (data.success) {
+                    location.reload();
+                }
+                else {
+                    alert(data.message || "خطا در ذخیره اطلاعات");
+                }
+
+            })
+            .catch(err => {
+                console.error(err);
+                alert("خطای سیستمی رخ داده است");
+            });
+
+    });
+
+
+    // =========================================
     // باز کردن مودال افزودن
-    // ===============================
+    // =========================================
     function openAddModal() {
 
-        form.reset(); // خالی کردن فرم
+        productform.reset();
         document.getElementById("ProductId").value = "";
 
-        modalTitle.innerText = "افزودن محصول";
-
-        overlay.style.display = "flex";
+        productmodalTitle.innerText = "افزودن محصول";
+        overlay1.style.display = "flex";
     }
 
 
-    // ===============================
+    // =========================================
     // باز کردن مودال ویرایش
-    // ===============================
-    function openEditModal() {
+    // =========================================
+    function openEditModal(id, title, description, oldPrice, price, brand, partType, imgUrl) {
+        document.getElementById("ProductId").value = id;
+        document.getElementById("Title").value = title;
+        document.getElementById("Description").value = description;
+        document.getElementById("OldPrice").value = oldPrice;
+        document.getElementById("Price").value = price;
+        document.getElementById("Brand").value = brand;
+        document.getElementById("PartType").value = partType;
+        document.getElementById("ExistingImage").value = imgUrl;
 
-        modalTitle.innerText = "ویرایش محصول";
+        // نمایش تصویر قبلی
+        // const currentImg = document.getElementById("currentImage");
+        // if (currentImg) {
+        //     currentImg.src = `/images/products/${imgUrl}`;
+        // }
 
-        overlay.style.display = "flex";
+        productmodalTitle.innerText = "ویرایش محصول";
+        overlay1.style.display = "flex";
     }
 
 
-    // ===============================
+    // =========================================
     // بستن مودال
-    // ===============================
+    // =========================================
     function closeModal() {
-        overlay.style.display = "none";
+        overlay1.style.display = "none";
     }
 
 
-    // ===============================
+    // =========================================
     // بستن با کلیک خارج از مودال
-    // ===============================
-    overlay.addEventListener("click", function (e) {
-        if (e.target === overlay) {
+    // =========================================
+    overlay1.addEventListener("click", function (e) {
+        if (e.target === overlay1) {
             closeModal();
         }
     });
 
 
-    // ===============================
+    // =========================================
     // حذف محصول
-    // ===============================
+    // =========================================
     function deleteProduct(id) {
 
-        const confirmDelete = confirm("آیا از حذف این محصول مطمئن هستید؟");
+        if (!confirm("آیا از حذف این محصول مطمئن هستید؟"))
+            return;
 
-        if (!confirmDelete) return;
+        fetch(`/Admin/DeleteProduct?id=${id}`, {
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(data => {
 
-        // اینجا بعدا Ajax میزنی
-        console.log("Deleting product id:", id);
+                if (data.success) {
+                    location.reload();
+                }
+                else {
+                    alert(data.message || "خطا در حذف");
+                }
 
-        // فعلا فقط پیام
-        alert("محصول حذف شد (نمونه تست)");
+            })
+            .catch(err => {
+                console.error(err);
+                alert("خطای سیستمی رخ داده است");
+            });
     }
 
 </script>

@@ -1,4 +1,7 @@
-﻿<head>
+﻿@model IEnumerable<TvRepairWebsite.Models.Product>
+
+
+<head>
     <link href="~/css/store.css" rel="stylesheet" />
 </head>
 <section class="banner  diagonal-soft-bg">
@@ -17,59 +20,148 @@
                 <h3>برندها</h3>
                 <div class="divider"></div>
                 <ul>
-                    <li>Sony</li>
-                    <li>Sumsung</li>
-                    <li>lg</li>
-                    <li>Tcl</li>
-                    <li>panasonic</li>
-                    <li>Sam</li>
-                    <li>sharp</li>
-                    <li>shahb</li>
-                    <li>xvision</li>
-                    <li>snowa</li>
-                    <li>hisense</li>
-                    <li>daewoo</li>
-                    <li>G+</li>
-
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="Sony" asp-route-part="@Context.Request.Query["brand"]">Sony</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="Sumsung" asp-route-part="@Context.Request.Query["brand"]">Sumsung</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="lg" asp-route-part="@Context.Request.Query["brand"]">lg</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="Tcl" asp-route-part="@Context.Request.Query["brand"]">Tcl</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="panasonic" asp-route-part="@Context.Request.Query["brand"]">panasonic</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="Sam" asp-route-part="@Context.Request.Query["brand"]">Sam</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="sharp" asp-route-part="@Context.Request.Query["brand"]">sharp</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="shahb" asp-route-part="@Context.Request.Query["brand"]">shahb</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="xvision" asp-route-part="@Context.Request.Query["brand"]">xvision</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="snowa" asp-route-part="@Context.Request.Query["brand"]">snowa</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="hisense" asp-route-part="@Context.Request.Query["brand"]">hisense</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="daewoo" asp-route-part="@Context.Request.Query["brand"]">daewoo</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">G+</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Aiwa</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">sunnya</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Orion</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Emperial</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Olive</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Hardstone</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Univa</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Awox</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Axun</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Media star</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">star sat</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Hyundai</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Blest</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Boost</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Tooshiba</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Panaromic</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Himalia</a></li>
+                    <li><a asp-action="Store" asp-controller="Store" asp-route-brand="G+" asp-route-part="@Context.Request.Query["brand"]">Benq</a></li>
                 </ul>
+
             </div>
             <div class="brands elevated">
                 <h3>نوع قطعه</h3>
                 <div class="divider"></div>
                 <ul>
-                    <li>مین برد</li>
-                    <li>برد تغذیه</li>
-                    <li>بک لایت</li>
-                    <li>قاب و بدنه</li>
-                    <li>پایه‌ها</li>
-                    <li>سیستم صوتی</li>
-                    <li>پنل</li>
-                    <li>برد اینورتر</li>
-                    <li>آی سی‌ها</li>
-                    <li>برنامه‌های فلش</li>
-                    <li>سنسورها</li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-controller="Store"
+                               asp-route-part="مین برد"
+                               asp-route-brand='@Context.Request.Query["part"]'>
+                            مین برد
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-controller="Store"
+                               asp-route-part="برد تغذیه"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            برد تغذیه
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-controller="Store"
+                               asp-route-part="بک لایت"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            بک لایت
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-route-part="قاب و بدنه"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            قاب و بدنه
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-route-part="پایه‌ها"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            پایه‌ها
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-route-part="سیستم صوتی"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            سیستم صوتی
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-route-part="پنل"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            پنل
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-route-part="برد اینورتر"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            برد اینورتر
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-route-part="آی سی‌ها"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            آی سی‌ها
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-route-part="برنامه‌های فلش"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            برنامه‌های فلش
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Store"
+                               asp-route-part="سنسورها"
+                               asp-route-brand="@Context.Request.Query["part"]">
+                            سنسورها
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="products-track" style="width:70%; flex-wrap:wrap">
 
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="tv.jpg" alt="">
-                    <span class="badge-discount">15٪</span>
+
+            @foreach (var item in Model)
+            {
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="~/images/products/@item.ImgUrl" alt="">
+                    </div>
+
+                    <h3 class="product-title">@item.Title</h3>
+
+                    <div class="product-price">
+                        <span class="old-price">@(item.Price != null ? item.Price.ToString() : "")</span>
+                        <span class="new-price">@item.DiscountPrice تومان</span>
+                    </div>
+
+                    <button class="btn-buy">مشاهده محصول</button>
                 </div>
 
-                <h3 class="product-title">تلویزیون ال جی 55 اینچ مدل ...</h3>
-
-                <div class="product-price">
-                    <span class="old-price">32,000,000</span>
-                    <span class="new-price">27,200,000 تومان</span>
-                </div>
-
-                <button class="btn-buy">مشاهده محصول</button>
-            </div>
-
-
+            }
 
         </div>
     </div>

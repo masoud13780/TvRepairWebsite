@@ -22,6 +22,10 @@ namespace TvRepairWebsite.Models
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         [MaxLength(500)]
         public string Message { get; set; }
+        [Display(Name ="تاریخ ثبت")]
+        public DateTime CraeteDate { get; set; }
+
+
 
     }
 }

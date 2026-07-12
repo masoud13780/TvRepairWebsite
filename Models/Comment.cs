@@ -7,10 +7,15 @@ namespace TvRepairWebsite.Models
     {
         [Key]
         public int CommentId { get; set; }
-        [Required]
-        public User UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
-        public User User { get; set; }
+
+        [Display(Name = "نام و نام خانوادگی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
+        [MaxLength(500)]
+        public string FullName { get; set; }
+        [Required(ErrorMessage = "لطفا {0} خود را وارد نمایید")]
+        [Display(Name = "شماره همراه")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "فرمت شماره همراه درست نمی‌باشد")]
+        public string Phone { get; set; }
         [Display(Name = "نظر")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         [MaxLength(500)]
@@ -21,8 +26,6 @@ namespace TvRepairWebsite.Models
         [Display(Name = "تاریخ")]
         public DateTime CreateDate { get; set; }
 
-
-        
 
 
     }

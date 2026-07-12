@@ -1,0 +1,425 @@
+﻿@model TvRepairWebsite.Models.Article
+
+@{
+    ViewData["Title"] = "خرابی فلت تلویزیون | علائم، علت و امکان تعمیر";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/BlogPro.css" rel="stylesheet" />
+}
+
+@section Meta {
+    <meta name="description" content="خرابی فلت تلویزیون چه علائمی دارد؟ علت ایجاد خطوط روی تصویر، قطع شدن تصویر و امکان تعمیر یا تعویض فلت تلویزیون را بررسی می‌کنیم.">
+
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "Article",
+          "headline": "فلت تلویزیون چیست؟ علت خط دار شدن تصویر تلویزیون و روش‌های تعمیر آن",
+          "description": "خرابی فلت تلویزیون چه علائمی دارد؟ علت ایجاد خطوط روی تصویر، قطع شدن تصویر و امکان تعمیر یا تعویض فلت تلویزیون را بررسی می‌کنیم.",
+          "datePublished": "2026-06-28"
+          "author": {
+            "@@type": "Organization",
+            "name": "تعمیرات تلویزیون سلیمی"
+          },
+          "publisher": {
+            "@@type": "Organization",
+            "name": "تعمیرات تلویزیون سلیمی"
+          }
+          "mainEntityOfPage": {
+          "@@type": "WebPage",
+          "@@id": "http://salimivision.ir/Blog/FlatBreak"
+           }
+        }
+    </script>
+    <style>
+        .article-hero {
+            background: linear-gradient(135deg,#0f172a,#1e293b);
+            color: #ffff;
+            padding: 60px 0;
+        }
+
+            .article-hero img {
+                margin-top: 10%;
+                width: 500px;
+                height: 250px;
+                border-radius: 25px;
+            }
+
+        .article-title {
+            margin-top: 3%;
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .article-desc {
+            opacity: .85;
+            margin-top: 10px;
+        }
+
+        .article-badges span {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .article-cta {
+            margin-top: 20px;
+        }
+
+        .toc {
+            position: sticky;
+            top: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .article-content {
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .trust-box {
+            margin-top: 40px;
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .mid-cta {
+            background: #111827;
+            color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .final-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+}
+
+<!-- HERO -->
+<section class="article-hero">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8">
+                <img src="~/images/BadFlat.jpg" alt="" />
+                <h1 class="article-title">فلت تلویزیون چیست؟ علت خط دار شدن تصویر تلویزیون و روش‌های تعمیر آن</h1>
+                <p class="article-desc">یکی از رایج‌ترین مشکلاتی که کاربران تلویزیون‌های LED،OLED  و QLED با آن مواجه می‌شوند، ظاهر شدن خطوط عمودی یا افقی روی صفحه نمایش است. بسیاری از افراد پس از مشاهده این مشکل تصور می‌کنند پنل تلویزیون کاملاً خراب شده و دستگاه دیگر قابل تعمیر نیست. در حالی که در بسیاری از موارد، علت اصلی این مشکل خرابی فلت تلویزیون، اختلال در اتصالات پنل یا مشکلات مرتبط با برد T-Con است.</p>
+
+                <div class="article-badges">
+                    <span>تعمیر تخصصی</span>
+                    <span>خدمات در محل</span>
+                    <span>گارانتی خدمات</span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 d-none d-lg-block">
+                <div class="hero-card">
+                    <h5>نیاز به تعمیر دارید؟</h5>
+                    <p>مشاوره رایگان + اعزام سریع</p>
+                    <a href="tel:09154868011" class="btn btn-light w-100">تماس</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- CONTENT AREA -->
+<section class="article-body container" style="margin-top:2%;">
+
+    <div class="row">
+
+        <!-- TOC -->
+        <aside class="col-lg-3 d-none d-lg-block">
+            <div class="toc">
+                <h6>فهرست محتوا</h6>
+                <ul>
+                    <li><a href="#intro">مقدمه</a></li>
+                    <li><a href="#content">محتوا</a></li>
+                    <li><a href="#trust">چرا ما؟</a></li>
+                    <li><a href="#faq">سوالات متداول</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="col-lg-9">
+
+            <!-- INTRO -->
+            <section id="intro" class="mb-4">
+                <p class="">
+                    خطوط روی تصویر ممکن است به صورت نوارهای باریک رنگی، خطوط سیاه، خطوط سفید یا حتی خطوطی باشند که کل ارتفاع یا عرض صفحه را درگیر می‌کنند. شدت این مشکل از یک خط باریک تا از کار افتادن بخش بزرگی از تصویر متفاوت است.
+                    شناخت دقیق ساختار فلت تلویزیون و نقش آن در انتقال اطلاعات تصویری می‌تواند به کاربران کمک کند تا بهتر علت خرابی را تشخیص دهند و قبل از صرف هزینه‌های سنگین، از وضعیت واقعی دستگاه خود آگاه شوند. در این مقاله به صورت کامل بررسی می‌کنیم که فلت تلویزیون چیست، چه وظیفه‌ای دارد، چه عواملی باعث خرابی آن می‌شوند و چگونه می‌توان مشکل خط افتادن روی تصویر را تشخیص و برطرف کرد.
+                </p>
+            </section>
+
+            <!-- ARTICLE CONTENT -->
+            <section id="content" class="article-content">
+                <h2>فلت تلویزیون چیست؟</h2>
+                <p>
+                    فلت تلویزیون نوعی کابل انعطاف‌پذیر الکترونیکی است که برای انتقال اطلاعات تصویری و سیگنال‌های کنترلی میان بخش‌های مختلف تلویزیون استفاده می‌شود. این کابل‌ها معمولاً از لایه‌های بسیار نازک رسانا ساخته شده‌اند و به دلیل ضخامت کم و انعطاف بالا، امکان انتقال حجم زیادی از اطلاعات را در فضای محدود فراهم می‌کنند.
+                    در تلویزیون‌های امروزی، فلت‌ها نقش بسیار مهمی در انتقال اطلاعات بین برد T-Con و پنل نمایشگر دارند. هرگونه اختلال در عملکرد این قطعات می‌تواند باعث ایجاد مشکلات مختلف تصویری شود.
+                    به طور کلی فلت‌ها در تلویزیون وظیفه دارند:
+                    <br />
+                    •	انتقال داده‌های تصویری به پنل
+                    <br />
+                    •	برقراری ارتباط بین بردها
+                    <br />
+                    •	انتقال فرمان‌های کنترلی
+                    <br />
+                    •	هماهنگ‌سازی نمایش پیکسل‌ها
+                    <br />
+                    •	کنترل ستون‌ها و ردیف‌های تصویر
+                    <br />
+                    به دلیل حساسیت بسیار بالای این قطعات، کوچک‌ترین آسیب یا قطعی در آن‌ها می‌تواند موجب ایجاد خطوط روی تصویر شود.
+                </p>
+                <h2>فلت تلویزیون در کجای دستگاه قرار دارد؟</h2>
+                <p>
+                    بسیاری از کاربران تصور می‌کنند فلت یک قطعه بزرگ و قابل مشاهده است، اما در واقع فلت‌ها معمولاً در بخش داخلی دستگاه قرار دارند و تنها پس از باز کردن قاب پشت تلویزیون قابل مشاهده هستند.
+                    در اغلب مدل‌های سامسونگ، ال جی، سونی، ایکس ویژن، TCL و اسنوا، فلت‌ها بین برد T-Con و پنل قرار گرفته‌اند. این بخش حساس‌ترین قسمت سیستم نمایش تصویر محسوب می‌شود.
+                    به همین دلیل توصیه می‌شود کاربران بدون داشتن دانش فنی اقدام به دستکاری فلت‌ها نکنند؛ زیرا کوچک‌ترین فشار یا خم شدن بیش از حد می‌تواند باعث آسیب دائمی شود.
+                </p>
+                <h2>وظیفه فلت در تلویزیون چیست؟</h2>
+                <p>
+                    برای درک بهتر نقش فلت، ابتدا باید مسیر انتقال تصویر را بشناسیم.
+                    هنگامی که تلویزیون روشن می‌شود، اطلاعات تصویری از مین برد به برد T-Con ارسال می‌شود. سپس برد T-Con این اطلاعات را پردازش کرده و از طریق فلت‌ها به پنل منتقل می‌کند.
+                    در واقع فلت مانند یک بزرگراه اطلاعاتی عمل می‌کند. اگر این مسیر دچار مشکل شود، بخشی از داده‌های تصویری به مقصد نمی‌رسند و نتیجه آن ایجاد نقص در تصویر خواهد بود.
+                    از مهم‌ترین وظایف فلت می‌توان به موارد زیر اشاره کرد:
+                </p>
+                <h3>انتقال داده‌های تصویری</h3>
+                <p>فلت‌ها حجم بسیار زیادی از اطلاعات را در کسری از ثانیه منتقل می‌کنند.</p>
+                <h3>کنترل پیکسل‌ها</h3>
+                <p>هر پیکسل برای نمایش رنگ صحیح نیاز به دریافت فرمان دقیق دارد.</p>
+                <h3>هماهنگی تصویر</h3>
+                <p>نمایش روان و بدون پرش تصویر تا حد زیادی به عملکرد صحیح فلت وابسته است.</p>
+                <h3>ارتباط با درایورهای پنل</h3>
+                <p>فلت‌ها واسطه ارتباط بین برد T-Con و درایورهای پنل هستند.</p>
+                <br />
+                <h2>علائم خرابی فلت تلویزیون</h2>
+                <p>خرابی فلت معمولاً با علائم مشخصی همراه است که در ادامه مهم‌ترین آن‌ها را بررسی می‌کنیم.</p>
+                <h3>ایجاد خطوط عمودی روی تصویر</h3>
+                <p>
+                    یکی از رایج‌ترین نشانه‌های خرابی فلت، ظاهر شدن خطوط عمودی است.
+                    این خطوط ممکن است:
+                    <br />
+                    •	سفید باشند
+                    <br />
+                    •	مشکی باشند
+                    <br />
+                    •	رنگی باشند
+                    <br />
+                    •	ثابت باشند
+                    <br />
+                    •	به مرور بیشتر شوند
+                    <br />
+                    در بسیاری از موارد، این مشکل به دلیل اختلال در انتقال اطلاعات ستون‌های تصویر رخ می‌دهد.
+                </p>
+                <h2>ایجاد خطوط افقی روی تصویر</h2>
+                <p>
+                    خطوط افقی نیز معمولاً به دلیل اختلال در ارتباط بخش‌های مختلف پنل ایجاد می‌شوند.
+                    گاهی تنها یک خط افقی ظاهر می‌شود و گاهی چندین نوار در بخش‌های مختلف صفحه دیده می‌شود.
+                </p>
+
+                <hr>
+
+                <h2>پرش تصویر</h2>
+                <p>
+                    اگر تصویر تلویزیون به طور ناگهانی پرش داشته باشد یا بخشی از تصویر جابجا شود،
+                    احتمال خرابی فلت وجود دارد.
+                </p>
+
+                <hr>
+
+                <h2>تار شدن بخشی از تصویر</h2>
+                <p>
+                    در برخی موارد بخشی از صفحه تار می‌شود در حالی که سایر قسمت‌ها کاملاً سالم هستند.
+                </p>
+
+                <hr>
+
+                <h2>دو تکه شدن تصویر</h2>
+                <p>
+                    این مشکل معمولاً زمانی رخ می‌دهد که بخشی از داده‌های تصویری به درستی به پنل منتقل نشوند.
+                </p>
+
+                <hr>
+
+                <h2>علت خط دار شدن تصویر تلویزیون چیست؟</h2>
+                <p>
+                    یکی از سوالات پرتکرار کاربران این است که چرا تصویر تلویزیون خط دار می‌شود؟
+                </p>
+
+                <h3>خرابی فلت</h3>
+                <p>
+                    رایج‌ترین علت خط افتادن روی تصویر، آسیب دیدن فلت است. این آسیب می‌تواند ناشی از:
+                </p>
+                <ul>
+                    <li>استهلاک</li>
+                    <li>حرارت</li>
+                    <li>ضربه</li>
+                    <li>فشار فیزیکی</li>
+                    <li>رطوبت</li>
+                </ul>
+
+                <h3>خرابی برد T-Con</h3>
+                <p>
+                    برد T-Con وظیفه کنترل تصویر را بر عهده دارد. خرابی این برد می‌تواند علائمی مشابه خرابی فلت ایجاد کند.
+                </p>
+
+                <h3>خرابی پنل</h3>
+                <p>
+                    در برخی موارد خود پنل آسیب دیده است. این نوع خرابی معمولاً هزینه بیشتری دارد و تشخیص آن نیازمند بررسی تخصصی است.
+                </p>
+
+                <h3>نوسانات برق</h3>
+                <p>
+                    استفاده نکردن از محافظ استاندارد می‌تواند باعث آسیب به بخش‌های مختلف تلویزیون شود.
+                </p>
+
+                <h3>آب خوردگی</h3>
+                <p>
+                    نفوذ آب یا رطوبت یکی از دلایل رایج خرابی فلت و اتصالات پنل است.
+                </p>
+
+                <hr>
+
+            </section>
+
+            <!-- TRUST SECTION -->
+            <section id="trust" class="trust-box">
+                <h3>چرا تعمیرات تلویزیون سلیمی؟</h3>
+
+                <div class="trust-grid">
+                    <div>✔ تعمیر تخصصی انواع تلویزیون</div>
+                    <div>✔ اعزام سریع تعمیرکار</div>
+                    <div>✔ قیمت منصفانه</div>
+                    <div>✔ ضمانت خدمات</div>
+                </div>
+            </section>
+
+            <!-- CTA MID -->
+            <div class="mid-cta">
+                <h4>اگر مشکل تلویزیون دارید</h4>
+                <p>همین الان تماس بگیرید تا کارشناسان راهنمایی کنند</p>
+                <a href="tel:09154868011" class="btn btn-success">
+                    تماس فوری
+                </a>
+            </div>
+
+            <!-- FAQ -->
+            <section id="faq" class="faq-section">
+                <h3>سوالات متداول</h3>
+
+                <div class="accordion" id="faqAcc">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f1h">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#f1" aria-expanded="true" aria-controls="f1">
+                                آیا خطوط افقی روی تصویر تلویزیون همیشه به معنی خرابی پنل است؟
+                            </button>
+                        </h2>
+                        <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                خیر. خطوط افقی می‌تواند به دلایل مختلفی مانند خرابی فلت، برد T-Con یا اتصالات ضعیف ایجاد شود.
+                                خرابی پنل تنها یکی از احتمالات است.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f2h">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2" aria-expanded="false" aria-controls="f2">
+                                چگونه بفهمیم مشکل از فلت تلویزیون است یا پنل؟
+                            </button>
+                        </h2>
+                        <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                تشخیص دقیق نیاز به بررسی تخصصی دارد، اما اگر با فشار یا تغییر حالت تصویر مشکل تغییر کند،
+                                احتمال خرابی فلت بیشتر است.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f3h">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3" aria-expanded="false" aria-controls="f3">
+                                آیا خرابی فلت تلویزیون قابل تعمیر است؟
+                            </button>
+                        </h2>
+                        <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                در برخی موارد بله؛ با تمیز کردن اتصالات یا ترمیم مسیرها مشکل برطرف می‌شود،
+                                اما در خرابی شدید معمولاً نیاز به تعویض قطعه وجود دارد.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f4h">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f4" aria-expanded="false" aria-controls="f4">
+                                برد T-Con چه نقشی در ایجاد خطوط تصویر دارد؟
+                            </button>
+                        </h2>
+                        <div id="f4" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                برد T-Con وظیفه پردازش و انتقال تصویر به پنل را دارد و خرابی آن می‌تواند باعث خطوط،
+                                پرش تصویر یا نمایش ناقص تصویر شود.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f5h">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f5" aria-expanded="false" aria-controls="f5">
+                                آیا نوسان برق می‌تواند باعث خط افتادن روی تصویر شود؟
+                            </button>
+                        </h2>
+                        <div id="f5" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                بله. نوسانات برق می‌تواند به فلت، برد T-Con و پنل آسیب بزند،
+                                به همین دلیل استفاده از محافظ برق استاندارد توصیه می‌شود.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- FINAL CTA -->
+            <section class="final-cta">
+                <h3>نیاز به تعمیر فوری دارید؟</h3>
+
+                <p>
+                    تعمیرات تخصصی در <strong>تیم مهندسی سلیمی تعمیرات</strong> با بررسی دقیق و عیب‌یابی حرفه‌ای انجام می‌شود.
+                    برای دریافت مشاوره یا ثبت درخواست تعمیر می‌توانید با
+                    <a href="tel:09154868011" class="text-primary fw-bold">این شماره</a>
+                    تماس بگیرید.
+                </p>
+            </section>
+
+        </div>
+
+    </div>
+
+</section>

@@ -34,7 +34,9 @@ namespace TvRepairWebsite.Models.ViewModels
         public string RePassword { get; set; }
         [Display(Name = "مدل تلویزیون")]
         [MaxLength(50)]
-        public string TVType { get; set; }
+        public string? TVType { get; set; }
+
+        public bool Admin { get; set; } = false;
 
 
     }

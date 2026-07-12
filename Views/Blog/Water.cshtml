@@ -1,0 +1,462 @@
+﻿@model TvRepairWebsite.Models.Article
+
+@{
+    ViewData["Title"] = "آب خوردگی تلویزیون | بعد از ریختن آب روی تلویزیون چه کار کنیم؟";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/BlogPro.css" rel="stylesheet" />
+}
+
+@section Meta {
+    <meta name="description" content="آب خوردگی تلویزیون می‌تواند باعث خرابی برد پاور، مین برد، پنل و سایر قطعات شود. در این مقاله اقدامات ضروری بعد از ریختن آب روی تلویزیون، کارهایی که نباید انجام دهید و روش‌های جلوگیری از آسیب بیشتر را بررسی می‌کنیم.">
+
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "Article",
+          "headline": "آب خوردگی تلویزیون؛ بعد از ریختن آب روی تلویزیون چه کارهایی باید انجام دهیم؟",
+          "description": "آب خوردگی تلویزیون می‌تواند باعث خرابی برد پاور، مین برد، پنل و سایر قطعات شود. در این مقاله اقدامات ضروری بعد از ریختن آب روی تلویزیون، کارهایی که نباید انجام دهید و روش‌های جلوگیری از آسیب بیشتر را بررسی می‌کنیم.",
+           "datePublished": "2026-06-29",
+            "author": {
+            "@@type": "Organization",
+            "name": "تعمیرات تلویزیون سلیمی"
+          },
+          "publisher": {
+            "@@type": "Organization",
+            "name": "تعمیرات تلویزیون سلیمی"
+          }
+          "mainEntityOfPage": {
+          "@@type": "WebPage",
+          "@@id": "http://salimivision.ir/Blog/Water"
+           }
+        }
+    </script>
+    <style>
+        .article-hero {
+            background: linear-gradient(135deg,#0f172a,#1e293b);
+            color: #ffff;
+            padding: 60px 0;
+        }
+
+            .article-hero img {
+                margin-top: 10%;
+                width: 500px;
+                height: 250px;
+                border-radius: 25px;
+            }
+
+        .article-title {
+            margin-top: 3%;
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .article-desc {
+            opacity: .85;
+            margin-top: 10px;
+        }
+
+        .article-badges span {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .article-cta {
+            margin-top: 20px;
+        }
+
+        .toc {
+            position: sticky;
+            top: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .article-content {
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .trust-box {
+            margin-top: 40px;
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .mid-cta {
+            background: #111827;
+            color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .final-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+}
+
+<!-- HERO -->
+<section class="article-hero">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8">
+                <img src="~/images/Water.jpg" alt="" />
+                <h1 class="article-title">آب خوردگی تلویزیون؛ بعد از ریختن آب روی تلویزیون چه کارهایی باید انجام دهیم؟</h1>
+                <p class="article-desc">آب خوردگی تلویزیون یکی از خطرناک‌ترین اتفاقاتی است که می‌تواند برای دستگاه رخ دهد. بسیاری از افراد تصور می‌کنند اگر تلویزیون پس از تماس با آب همچنان روشن شود، مشکلی برای آن به وجود نیامده است؛ در حالی که در بسیاری از موارد آسیب‌های ناشی از آب خوردگی به صورت تدریجی ظاهر می‌شوند و ممکن است چند ساعت یا حتی چند روز بعد باعث خرابی قطعات داخلی شوند.</p>
+
+                <div class="article-badges">
+                    <span>تعمیر تخصصی</span>
+                    <span>خدمات در محل</span>
+                    <span>گارانتی خدمات</span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 d-none d-lg-block">
+                <div class="hero-card">
+                    <h5>نیاز به تعمیر دارید؟</h5>
+                    <p>مشاوره رایگان + اعزام سریع</p>
+                    <a href="tel:09154868011" class="btn btn-light w-100">تماس</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- CONTENT AREA -->
+<section class="article-body container" style="margin-top:2%;">
+
+    <div class="row">
+
+        <!-- TOC -->
+        <aside class="col-lg-3 d-none d-lg-block">
+            <div class="toc">
+                <h6>فهرست محتوا</h6>
+                <ul>
+                    <li><a href="#intro">مقدمه</a></li>
+                    <li><a href="#content">محتوا</a></li>
+                    <li><a href="#trust">چرا ما؟</a></li>
+                    <li><a href="#faq">سوالات متداول</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="col-lg-9">
+
+            <!-- INTRO -->
+            <section id="intro" class="mb-4">
+                <p class="">
+                    ریختن آب، چای، قهوه، نوشابه یا سایر مایعات روی تلویزیون می‌تواند بخش‌های حساس الکترونیکی دستگاه را درگیر کند. برد پاور، مین برد، فلت‌ها، برد T-Con و حتی پنل نمایشگر از جمله قطعاتی هستند که ممکن است در اثر نفوذ رطوبت آسیب ببینند.
+                    در این مقاله بررسی می‌کنیم بعد از آب خوردگی تلویزیون چه اقداماتی باید انجام شود، چه کارهایی نباید انجام داد و چه قطعاتی بیشتر در معرض آسیب قرار دارند.
+                </p>
+            </section>
+
+            <!-- ARTICLE CONTENT -->
+            <section id="content" class="article-content">
+                <h2>اگر روی تلویزیون آب ریخت چه کار کنیم؟</h2>
+                <p>
+                    اولین دقایق پس از آب خوردگی اهمیت بسیار زیادی دارند.
+                    بسیاری از خرابی‌های شدید زمانی اتفاق می‌افتند که کاربر بدون توجه به وجود رطوبت، دستگاه را روشن می‌کند.
+                    به محض مشاهده آب یا مایع روی تلویزیون:
+                    <ol>
+                        <li>فوراً دستگاه را خاموش کنید</li>
+                        <li>دوشاخه را از برق بکشید</li>
+                        <li>کابل‌ها را جدا کنید</li>
+                        <li>اجازه دهید رطوبت خارج شود</li>
+                    </ol>
+                    تلویزیون باید در محیطی خشک و دارای جریان هوا قرار بگیرد.
+                </p>
+                <h2>بعد از آب خوردگی چه کارهایی را نباید انجام دهیم؟</h2>
+                <p>
+                    بسیاری از کاربران ناخواسته باعث افزایش خسارت می‌شوند.
+                </p>
+                <h3>روشن کردن مجدد تلویزیون</h3>
+                <p>
+                    بزرگ‌ترین اشتباه همین است.
+                    برخی افراد برای تست سلامت دستگاه بلافاصله تلویزیون را روشن می‌کنند.
+                    اگر آب وارد مدار شده باشد، این کار می‌تواند باعث اتصال کوتاه و سوختن قطعات شود.
+                </p>
+                <h3>استفاده از سشوار با حرارت زیاد</h3>
+                <p>
+                    گرمای شدید ممکن است:
+                    <ul>
+                        <li>به پنل آسیب بزند</li>
+                        <li>فلت‌ها را خراب کند</li>
+                        <li>چسب‌های داخلی را ضعیف کند</li>
+                    </ul>
+                </p>
+                <h3>باز کردن تلویزیون بدون دانش فنی</h3>
+                <p>
+                    تلویزیون‌های امروزی دارای قطعات بسیار حساس هستند.
+                    باز کردن غیراصولی دستگاه می‌تواند خسارت بیشتری ایجاد کند.
+                </p>
+                <h3>اسپری کردن مواد شوینده</h3>
+                <p>
+                    برخی افراد برای تمیز کردن مایع ریخته شده از مواد شیمیایی استفاده می‌کنند.
+                    این کار می‌تواند باعث خوردگی بیشتر قطعات شود.
+                </p>
+                <h2>چه قطعاتی در اثر آب خوردگی آسیب می‌بینند؟</h2>
+                <p>
+                    شدت آسیب بستگی به مقدار مایع، محل نفوذ و مدت زمان تماس دارد.
+                </p>
+
+                <hr>
+
+                <h2>آسیب به مین برد</h2>
+                <p>
+                    مین برد را می‌توان مغز تلویزیون دانست.
+                    این برد وظیفه پردازش تصویر، صدا و کنترل بخش‌های مختلف دستگاه را بر عهده دارد.
+                    در صورت نفوذ آب ممکن است:
+                    <ul>
+                        <li>تلویزیون روشن نشود</li>
+                        <li>لوگوی برند نمایش داده نشود</li>
+                        <li>دستگاه ریستارت شود</li>
+                        <li>تصویر ظاهر نشود</li>
+                    </ul>
+                </p>
+
+                <hr>
+
+                <h2>آسیب به برد پاور</h2>
+                <p>
+                    برد پاور تأمین کننده برق تمام قسمت‌های تلویزیون است.
+                    نفوذ رطوبت به این بخش می‌تواند باعث:
+                    <ul>
+                        <li>روشن نشدن دستگاه</li>
+                        <li>خاموش شدن ناگهانی</li>
+                        <li>ایجاد بوی سوختگی</li>
+                        <li>آسیب به سایر قطعات</li>
+                    </ul>
+                    شود.
+                </p>
+
+                <hr>
+
+                <h2>آسیب به فلت‌ها</h2>
+                <p>
+                    فلت‌ها کابل‌های ظریفی هستند که اطلاعات تصویر را منتقل می‌کنند.
+                    آب خوردگی در این قسمت ممکن است باعث:
+                    <ul>
+                        <li>خطوط عمودی روی تصویر</li>
+                        <li>خطوط افقی</li>
+                        <li>پرش تصویر</li>
+                        <li>تار شدن بخشی از صفحه</li>
+                    </ul>
+                    شود.
+                </p>
+
+                <hr>
+
+                <h2>آسیب به برد T-Con</h2>
+                <p>
+                    برد T-Con مسئول انتقال سیگنال تصویر به پنل است.
+                    در صورت آسیب دیدن این برد ممکن است:
+                    <ul>
+                        <li>تصویر کاملاً قطع شود</li>
+                        <li>بخشی از تصویر نمایش داده نشود</li>
+                        <li>خطوط رنگی روی صفحه ایجاد شود</li>
+                    </ul>
+                </p>
+
+                <h2>آسیب به پنل تلویزیون</h2>
+                <p>
+                    گران‌ترین بخش تلویزیون پنل آن است.
+                    اگر مایع به لایه‌های داخلی پنل نفوذ کند ممکن است مشکلات زیر ایجاد شود:
+                    <ul>
+                        <li>لکه‌های دائمی</li>
+                        <li>خطوط ثابت</li>
+                        <li>سیاه شدن بخشی از تصویر</li>
+                        <li>تغییر رنگ صفحه</li>
+                    </ul>
+                    در برخی موارد آسیب پنل قابل جبران نیست.
+                </p>
+
+                <hr />
+                <h2>آیا تلویزیون آب خورده همیشه خراب می‌شود؟</h2>
+                <p>
+                    خیر.
+                    در بسیاری از موارد اگر به موقع برق دستگاه قطع شود و تلویزیون سریعاً توسط متخصص بررسی گردد، می‌توان از آسیب‌های جدی جلوگیری کرد.
+                    هرچه زمان بین آب خوردگی و بررسی دستگاه کمتر باشد، احتمال موفقیت تعمیر بیشتر خواهد بود.
+                </p>
+                <hr />
+                <h2>اگر تلویزیون بعد از آب خوردگی هنوز کار می‌کند چه؟</h2>
+                <p>
+                    این موضوع به معنای سالم بودن دستگاه نیست.
+                    گاهی آب خوردگی باعث ایجاد خوردگی تدریجی روی قطعات الکترونیکی می‌شود.
+                    ممکن است:
+
+                    <ul>
+                        <li>امروز تلویزیون کاملاً سالم به نظر برسد</li>
+                        <li>چند روز بعد خطوط روی تصویر ظاهر شوند</li>
+                        <li>چند هفته بعد دستگاه روشن نشود</li>
+                    </ul>
+                    به همین دلیل بررسی تخصصی پس از آب خوردگی توصیه می‌شود.
+                </p>
+                <hr />
+                <h2>نشانه‌های آسیب ناشی از آب خوردگی</h2>
+                <p>
+                    علائمی که ممکن است پس از نفوذ آب مشاهده شوند:
+                    <ul>
+                        <li>روشن نشدن تلویزیون</li>
+                        <li>خاموش شدن ناگهانی</li>
+                        <li>نداشتن تصویر</li>
+                        <li>نداشتن صدا</li>
+                        <li>ایجاد خطوط روی تصویر</li>
+                        <li>پرش تصویر</li>
+                        <li>بوی سوختگی</li>
+                        <li>تغییر رنگ تصویر</li>
+                        <li>ریستارت شدن مداوم</li>
+                    </ul>
+                </p>
+                <hr />
+                <h2>آیا می‌توان تلویزیون آب خورده را در خانه تعمیر کرد؟</h2>
+                <p>
+                    خیر.
+                    کاربر تنها می‌تواند اقدامات اولیه را انجام دهد که عبارت است از:
+                    <br />
+                    خاموش کردن دستگاه،
+                    قطع برق،
+                    خشک نگه داشتن محیط،
+                    انتقال دستگاه به تعمیرکار.
+                    اما تشخیص میزان آسیب و تعمیر قطعات نیازمند تجهیزات تخصصی است.
+                </p>
+
+                <hr>
+
+            </section>
+
+            <!-- TRUST SECTION -->
+            <section id="trust" class="trust-box">
+                <h3>چرا تعمیرات تلویزیون سلیمی؟</h3>
+
+                <div class="trust-grid">
+                    <div>✔ تعمیر تخصصی انواع تلویزیون</div>
+                    <div>✔ اعزام سریع تعمیرکار</div>
+                    <div>✔ قیمت منصفانه</div>
+                    <div>✔ ضمانت خدمات</div>
+                </div>
+            </section>
+
+            <!-- CTA MID -->
+            <div class="mid-cta">
+                <h4>اگر مشکل تلویزیون دارید</h4>
+                <p>همین الان تماس بگیرید تا کارشناسان راهنمایی کنند</p>
+                <a href="tel:09154868011" class="btn btn-success">
+                    تماس فوری
+                </a>
+            </div>
+
+            <!-- FAQ -->
+            <section id="faq" class="faq-section">
+                <h3>سوالات متداول</h3>
+
+                <div class="accordion" id="faqAcc">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f1h">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#f1" aria-expanded="true" aria-controls="f1">
+                                اگر روی تلویزیون آب ریخت فوراً چه کار کنیم؟
+                            </button>
+                        </h2>
+                        <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                تلویزیون را خاموش کرده و دوشاخه برق را از پریز جدا کنید.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f2h">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2" aria-expanded="false" aria-controls="f2">
+                                آیا می‌توان تلویزیون آب خورده را روشن کرد؟
+                            </button>
+                        </h2>
+                        <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                خیر. روشن کردن دستگاه می‌تواند باعث آسیب شدیدتر به قطعات داخلی شود.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f3h">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3" aria-expanded="false" aria-controls="f3">
+                                آیا آب خوردگی باعث خرابی پنل می‌شود؟
+                            </button>
+                        </h2>
+                        <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                بله. در صورت نفوذ رطوبت به لایه‌های داخلی پنل امکان آسیب جدی وجود دارد.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f4h">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f4" aria-expanded="false" aria-controls="f4">
+                                آیا تلویزیون آب خورده قابل تعمیر است؟
+                            </button>
+                        </h2>
+                        <div id="f4" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                در بسیاری از موارد بله، اما میزان موفقیت تعمیر به سرعت اقدام و میزان نفوذ مایع بستگی دارد.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f5h">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f5" aria-expanded="false" aria-controls="f5">
+                                آیا اگر تلویزیون هنوز کار کند نیازی به بررسی نیست؟
+                            </button>
+                        </h2>
+                        <div id="f5" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">
+                                برخی آسیب‌های ناشی از آب خوردگی با تأخیر ظاهر می‌شوند و بهتر است دستگاه توسط متخصص بررسی شود.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- FINAL CTA -->
+            <section class="final-cta">
+                <h3>نیاز به تعمیر فوری دارید؟</h3>
+
+                <p>
+                    تعمیرات تخصصی در <strong>تیم مهندسی سلیمی تعمیرات</strong> با بررسی دقیق و عیب‌یابی حرفه‌ای انجام می‌شود.
+                    برای دریافت مشاوره یا ثبت درخواست تعمیر می‌توانید با
+                    <a href="tel:09154868011" class="text-primary fw-bold">این شماره</a>
+                    تماس بگیرید.
+                </p>
+            </section>
+
+        </div>
+
+    </div>
+
+</section>

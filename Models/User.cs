@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TvRepairWebsite.Models
 {
@@ -6,6 +7,7 @@ namespace TvRepairWebsite.Models
     {
         [Key]
         public int UserId { get; set; }
+        public bool Admin { get; set; } = false;
         [Required(ErrorMessage ="لطفا {0} خود را وارد نمایید")]
         [Display(Name ="نام")]
         [StringLength(50)]
@@ -30,18 +32,19 @@ namespace TvRepairWebsite.Models
         public string Password { get; set; }
         [Required(ErrorMessage = "لطفا {0} خود را وارد نمایید")]
         [Display(Name = "تکرار رمز عبور")]
-        [MinLength(6, ErrorMessage = "تکرار رمز عبور از 6 کاراکتر نمی‌تواند کمتر باشد")]
+        [MinLength(6)]
         [MaxLength(20)]
-        [Compare("Password")]
+        [Compare("Password",ErrorMessage ="تکرار رمز عبور با رمز عبور یکسان نیست")]
+        [NotMapped]
         public string RePassword { get; set; }
         [Display(Name = "مدل تلویزیون")]
         [MaxLength(50)]
-        public string TVType { get; set; }
+        public string? TVType { get; set; } = null;
 
 
 
 
-        public ICollection<Comment> comments { get; set; }  
+        //public ICollection<Article> Articles { get; set; } = new List<Article>();
 
     }
 }

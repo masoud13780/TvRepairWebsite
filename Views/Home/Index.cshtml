@@ -1,10 +1,18 @@
-﻿<div class="banner diagonal-soft-bg">
+﻿@model TvRepairWebsite.Models.ViewModels.HomeVM;
+@{
+    ViewData["Title"] = "تعمیر تلویزیون در مشهد";
+    ViewData["Description"] =
+        "تعمیر تخصصی تلویزیون ال جی، سامسونگ، سونی، آیوا، پاناسونیک، ایکس ویژن، تی سی ال، سام و انواع تلویزیون‌ها در مشهد";
+}
+
+<div class="banner diagonal-soft-bg">
     <div class="banner-text">
-        <h1>تیم مهندسی سلیمی</h1>
+        <h1>تعمیر تخصصی تلویزیون در مشهد</h1>
+        <h2>تیم مهندسی سلیمی</h2>
         <div class="divider"></div>
-        <h2>۳۵ سال تجربه در کنار تخصص و سرعت</h2>
-        <h3>با استفاده از قطعات اورجینال، کیفیت تصویر را به تلویزیون شما برمی‌گردانیم.</h3>
-        <a href="tel:+989123456789" class="Btn num-subs">
+        <h3>۳۵ سال تجربه در کنار تخصص و سرعت</h2>
+        <h4>با استفاده از قطعات اورجینال، کیفیت تصویر را به تلویزیون شما برمی‌گردانیم.</h3>
+        <a href="tel:+989154868011" class="Btn num-subs">
             تماس بگیرید!
         </a>
     </div>
@@ -40,7 +48,21 @@
             <i class="fa-solid fa-tv"></i>
             <h4 style="color:#1d0c75">تعمیر پنل و مشکلات تصویر</h4>
             <div class="divider"></div>
-            <p>رفع خطوط عمودی و افقی، سایه افتادن تصویر، پیکسل سوخته، دو تصویر شدن و مشکلات T-Con.</p>
+            <p>رفع خطوط عمودی و افقی، سایه افتادن تصویر، آب خوردگی، دو تصویر شدن و مشکلات T-Con.</p>
+
+        </div>
+        <div class="experience1 elevated">
+            <img src="~/images/Rebal.png" alt="خدمات ریبال برد سی پی یو در مشهد" />
+            <h4 style="color:#1d0c75">ریبال</h4>
+            <div class="divider"></div>
+            <p>ریبال تخصصی آی‌سی‌های BGA تلویزیون، رفع ایراد روشن نشدن و ریست شدن دستگاه، بازسازی اتصالات آسیب‌دیده برد مین، تعمیر مشکلات ناشی از سردی لحیم آی‌سی‌ها، تست و کنترل کیفیت پس از ریبال، مناسب انواع تلویزیون‌های LED، LCD و هوشمند.</p>
+
+        </div>
+        <div class="experience1 elevated">
+            <img src="~/images/Bonding.png" alt="خدمات بندینگ فلت تلویزیون در مشهد"/>
+            <h4 style="color:#1d0c75">بندینگ</h4>
+            <div class="divider"></div>
+            <p>رفع خطوط روی تصویر تلویزیون، تعمیر و باندینگ فلت پنل LED و LCD، ترمیم اتصالات COF و TAB، رفع مشکلات ناشی از قطعی فلت پنل، کاهش هزینه تعمیر نسبت به تعویض پنل، انجام تعمیرات با دستگاه‌های تخصصی باندینگ.</p>
 
         </div>
     </div>
@@ -53,23 +75,24 @@
     <div class="products-container elevated">
         <div class="products-track ">
 
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="tv.jpg" alt="">
-                    <span class="badge-discount">15٪</span>
+            @foreach (var item in Model.Products)
+            {
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="~/images//products/@item.ImgUrl" alt="">
+                        <span class="badge-discount">15٪</span>
+                    </div>
+
+                    <h3 class="product-title">@item.Title</h3>
+
+                    <div class="product-price">
+                        <span class="old-price">@item.Price</span>
+                        <span class="new-price">@item.DiscountPrice تومان</span>
+                    </div>
+
+                    <button class="btn-buy">مشاهده محصول</button>
                 </div>
-
-                <h3 class="product-title">تلویزیون ال جی 55 اینچ مدل ...</h3>
-
-                <div class="product-price">
-                    <span class="old-price">32,000,000</span>
-                    <span class="new-price">27,200,000 تومان</span>
-                </div>
-
-                <button class="btn-buy">مشاهده محصول</button>
-            </div>
-
-
+            }
 
         </div>
     </div>
@@ -84,17 +107,17 @@
 
     <div class="honors-grid">
 
-        <div class="honor-item" style="border-right:none;"><img src="~/images/sony.png" alt=""></div>
-        <div class="honor-item"><img src="~/images/lg.png" alt=""></div>
-        <div class="honor-item"><img src="~/images/samsung.png" alt=""></div>
-        <div class="honor-item"><img src="~/images/tcl.png" alt=""></div>
-        <div class="honor-item"><img src="~/images/daewoo.png" alt=""></div>
+        <div class="honor-item" style="border-right:none;"><img src="~/images/sony.png" alt="تعمیر تلویزیون سونی در مشهد"></div>
+        <div class="honor-item"><img src="~/images/lg.png" alt="تعمیر تلویزیون ال جی در مشهد"></div>
+        <div class="honor-item"><img src="~/images/samsung.png" alt="تعمیر تلویزیون سامسونگ در مشهد"></div>
+        <div class="honor-item"><img src="~/images/tcl.png" alt="تعمیر تلویزیون تی سی ال در مشهد"></div>
+        <div class="honor-item"><img src="~/images/daewoo.png" alt="تعمیر تلویزیون دوو در مشهد"></div>
 
-        <div class="honor-item" style="border-right:none; border-bottom:none;"><img src="~/images/g+.png" alt=""></div>
-        <div class="honor-item" style="border-bottom:none;"><img src="~/images/hisense.png" alt=""></div>
-        <div class="honor-item" style="border-bottom:none;"><img src="~/images/snowa.png" alt=""></div>
-        <div class="honor-item" style="border-bottom:none;"><img src="~/images/xvision.png" alt=""></div>
-        <div class="honor-item" style="border-bottom:none;"><img src="~/images/sam.png" alt=""></div>
+        <div class="honor-item" style="border-right:none; border-bottom:none;"><img src="~/images/g+.png" alt="تعمیر تلویزیون جی پلاس در مشهد"></div>
+        <div class="honor-item" style="border-bottom:none;"><img src="~/images/hisense.png" alt="تعمیر تلویزیون هایسنس در مشهد"></div>
+        <div class="honor-item" style="border-bottom:none;"><img src="~/images/snowa.png" alt="تعمیر تلویزیون اسنوا در مشهد"></div>
+        <div class="honor-item" style="border-bottom:none;"><img src="~/images/xvision.png" alt="تعمیر تلویزیون ایکس ویژن در مشهد"></div>
+        <div class="honor-item" style="border-bottom:none;"><img src="~/images/sam.png" alt="تعمیر تلویزیون سام در مشهد"></div>
 
     </div>
 </div>
@@ -102,7 +125,15 @@
 <div class="subhero4">
     <div class="info">
         <h2>نظرات شما</h2>
-        <p>تیم مهندسی سلیمی سال‌هاست در حوزه تعمیرات تخصصی تلویزیون فعالیت می‌کند. در این مسیر، هیچ چیز به اندازه تجربه‌ای که شما از خدمات ما دارید، برای ما ارزشمند و تعیین‌کننده نیست.</p>
+        <p>
+             تیم مهندسی سلیمی با بیش از 35 سال سابقه در زمینه تعمیر تلویزیون در مشهد،
+             خدمات تخصصی تعمیر تلویزیون ال جی، سامسونگ، سونی، TCL،
+             اسنوا، ایکس ویژن و سایر برندها را ارائه می‌دهد.
+        </p>
+        <p>
+            خدمات ما شامل تعمیر بک لایت، تعمیر برد پاور،
+            تعمیر مین برد، تعمیر پنل و بندینگ تلویزیون در مشهد می‌باشد.
+        </p>
         <p>وقتی شما نظر می‌دهید:</p>
         <ul>
             <li>ما نقاط ضعف کارمان را دقیق‌تر می‌بینیم.</li>
@@ -116,11 +147,12 @@
             صدای شما، سرمایه واقعی تیم مهندسی سلیمی است.
         </p>
     </div>
-    <form class="comments-container elevated" method="post" action="#">
+    <form class="comments-container elevated" method="post" asp-action="Index" asp-controller="Home">
+        <div asp-validation-summary="All"></div>
         <h2>نظرات خود را بنویسید</h2>
-        <input type="text" placeholder="نام و نام خانوادگی شما">
-        <input type="text" placeholder="شماره تماس">
-        <textarea placeholder="نظر خود را بنویسید..."></textarea>
+        <input type="text" asp-for="CreateComment.FullName" placeholder="نام و نام خانوادگی شما">
+        <input type="text" asp-for="CreateComment.Phone" placeholder="شماره تماس">
+        <textarea asp-for="CreateComment.Description" placeholder="نظر خود را بنویسید..."></textarea>
         <div class="rating">
             <div class="stars" id="starRating">
                 <i class="fa-regular fa-star" data-value="1"></i>
@@ -131,7 +163,7 @@
             </div>
 
             <!-- مقدار انتخاب‌شده برای ارسال به بک‌اند -->
-            <input type="hidden" name="rate" id="rateValue" value="0">
+            <input type="hidden" id="rateValue" value="0" asp-for="CreateComment.Rate">
         </div>
 
         <button type="submit" class="Btn">ثبت نظرات</button>
@@ -144,21 +176,32 @@
     <div class="swiper commentsSwiper">
         <div class="swiper-wrapper">
 
-            <div class="swiper-slide">
-                <div class="comment-card elevated">
-                    <div class="comment-header">
-                        <div class="avatar">ع</div>
-                        <div>
-                            <div class="name">علی رضایی</div>
-                            <div class="stars">★★★★★</div>
+            @foreach (var item in Model.Comments)
+            {
+                <div class="swiper-slide">
+                    <div class="comment-card elevated">
+                        <div class="comment-header">
+                            @{
+                                string avatar = item.FullName[0].ToString();
+                            }
+                            <div class="avatar">@avatar</div>
+                            <div>
+                                <div class="name">@item.FullName</div>
+                                <div class="stars">
+                                    @for (int i = 0; i < item.Rate; i++)
+                                    {
+                                        <text>★</text>
+
+                                    }
+                                </div>
+                            </div>
                         </div>
+                        <p>
+                            @item.Description
+                        </p>
                     </div>
-                    <p>
-                        تلویزیون ما تصویر نداشت، خیلی سریع تشخیص دادن مشکل از بک‌لایت هست.
-                        همون روز تعمیر شد. واقعاً کارشون تمیز و حرفه‌ای بود.
-                    </p>
                 </div>
-            </div>
+            }
 
             <div class="swiper-slide">
                 <div class="comment-card elevated">
@@ -202,7 +245,7 @@
                         </div>
                     </div>
                     <p>
-                        خیلی خوش قول بودن. سر تایمی که گفتن اومدن و تلویزیون رو در محل تعمیر کردن.
+                        خیلی خوش قول بودن. سر تایمی که گفتن تلویزیون رو تعمیر کردن.
                         عالی بود واقعاً.
                     </p>
                 </div>
@@ -214,7 +257,7 @@
                         <div class="avatar">ر</div>
                         <div>
                             <div class="name">رضا کریمی</div>
-                            <div class="stars">★★★★★</div>
+                            <div class="stars">★★★★☆</div>
                         </div>
                     </div>
                     <p>
@@ -249,16 +292,36 @@
 
     <div class="Blog-Container">
 
-        <div class="blog-item">
-            <img src="~/images/BrokenTv.png" alt="">
-            <div class="blog-content">
-                <h4>علائم خرابی پنل</h4>
-                <p>
-                    پنل تلویزیون مهم‌ترین و گران‌ترین بخش دستگاه است که مستقیماً تصویر را تولید می‌کند...
-                </p>
-                <a asp-controller="Blog" asp-action="BlogPage" class="Btn">ادامه مطلب</a>
+        @foreach (var item in Model.Articles)
+        {
+            <div class="blog-item">
+                <img src="~/images/@item.ImgUrl" alt="">
+                <div class="blog-content">
+                    <h4>@item.Title</h4>
+                    <p>
+                        @item.Description
+                    </p>
+                    <a asp-controller="Blog" asp-action="BlogPage" asp-route-id="@item.ArticleId" class="Btn">ادامه مطلب</a>
+                </div>
             </div>
-        </div>
+
+        }
+
+            <div class="blog-item">
+                <img src="~/images/BadFlat.jpg" alt="تلویزیون با پنل آسیب‌دیده و خطوط عمودی رنگی روی صفحه نمایش">
+                <div class="blog-content">
+                    <h2>فلت تلویزیون چیست؟ علت خط دار شدن تصویر تلویزیون و روش‌های تعمیر آن</h2>
+                    <a asp-controller="Blog" asp-action="FlatBreak" class="Btn">ادامه مطلب</a>
+                </div>
+            </div>
+            <div class="blog-item">
+                <img src="~/images/PowerOff.jpg" alt="چرا تلویزیون روشن می‌شود اما تصویر بالا نمی‌آید؟ بررسی علت‌ها و راه‌حل‌ها">
+                <div class="blog-content">
+                    <h2>چرا تلویزیون روشن می‌شود اما تصویر بالا نمی‌آید؟ بررسی علت‌ها و راه‌حل‌ها</h2>
+                    <a asp-controller="Blog" asp-action="PowerOff" class="Btn">ادامه مطلب</a>
+                </div>
+            </div>
+
         <div class="more-articles" style="display:block; width:100%;">
             <a asp-controller="Blog" asp-action="BlogMain" class="Btn">مشاهده مقالات بیشتر</a>
         </div>

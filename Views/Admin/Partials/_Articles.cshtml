@@ -1,4 +1,6 @@
-﻿<div class="content">
+﻿@model IEnumerable<Article>
+
+<div class="content">
 
     <div style="display:flex; justify-content:space-between; align-items:center;">
         <h2>مدیریت مقالات</h2>
@@ -13,17 +15,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td>
-                    <button class="btn btn-danger"
-                            onclick="deleteArticle(1)">
-                        حذف
-                    </button>
-                </td>
-            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>
+                        <button class="btn btn-danger deleteBtn" data-id="@item.ArticleId">
+                              
+                            حذف
+                        </button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
+
 
 </div>
 
@@ -55,7 +61,33 @@
 <script>
     CKEDITOR.replace('editor');
 
-    const articleModal = document.getElementById("articleModal");
+    document.getElementById("articleForm")
+        .addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+            // چون CKEditor داری
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+
+            var formData = new FormData(this);
+
+            fetch('/Admin/ArticleCreate', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert("خطا در ذخیره مقاله");
+                    }
+                });
+        });
+
+
+    var articleModal = document.getElementById("articleModal");
 
     function openArticleModal() {
         articleModal.style.display = "flex";
@@ -71,14 +103,49 @@
         }
     });
 
+    document.querySelectorAll(".deleteBtn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const id = this.dataset.id;
+            if (!confirm("آیا از حذف مقاله مطمئن هستید؟")) return;
+            deleteArticle(id);
+        });
+    });
+
+    // function deleteArticle(id) {
+    //     fetch('/Admin/ArticleDelete', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ id: id })
+    //     })
+    //         .then(response => {
+    //             if (response.ok) location.reload();
+    //             else alert("خطا در حذف مقاله");
+    //         });
+    // }
+
     function deleteArticle(id) {
 
-        if (!confirm("آیا از حذف مقاله مطمئن هستید؟"))
+        if (!confirm("آیا از حذف این محصول مطمئن هستید؟"))
             return;
 
-        // اینجا Ajax بزن به سرور
-        console.log("Delete article:", id);
+        fetch(`/Admin/ArticleDelete?id=${id}`, {
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(data => {
 
-        alert("مقاله حذف شد (نمونه تست)");
+                if (data.success) {
+                    location.reload();
+                }
+                else {
+                    alert(data.message || "خطا در حذف");
+                }
+
+            })
+            .catch(err => {
+                console.error(err);
+                alert("خطای سیستمی رخ داده است");
+            });
     }
+
 </script>

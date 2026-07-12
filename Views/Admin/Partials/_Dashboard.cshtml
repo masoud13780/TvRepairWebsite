@@ -1,4 +1,4 @@
-﻿
+﻿@model TvRepairWebsite.Models.ViewModels.AdminPanelVM;
 
 <div class="content">
 
@@ -9,18 +9,21 @@
         <div class="card">
             <h3>تعداد کاربران</h3>
             <h1 style="margin-top:15px; font-size:32px;">
+                @Model.UserCount
             </h1>
         </div>
 
         <div class="card">
             <h3>تعداد محصولات</h3>
             <h1 style="margin-top:15px; font-size:32px;">
+                @Model.ProductCount
             </h1>
         </div>
 
         <div class="card">
             <h3>تعداد مقالات</h3>
             <h1 style="margin-top:15px; font-size:32px;">
+                @Model.ArticleCount
             </h1>
         </div>
 

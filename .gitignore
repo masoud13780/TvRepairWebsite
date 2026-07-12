@@ -1,0 +1,102 @@
+# =========================
+# Build Results
+# =========================
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# =========================
+# Visual Studio
+# =========================
+.vs/
+.vscode/
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# =========================
+# Rider
+# =========================
+.idea/
+
+# =========================
+# ReSharper
+# =========================
+_ReSharper*/
+*.DotSettings.user
+
+# =========================
+# NuGet
+# =========================
+packages/
+*.nupkg
+*.snupkg
+
+# Uncomment if you don't want to commit lock files
+# packages.lock.json
+
+# =========================
+# Publish
+# =========================
+publish/
+wwwroot/publish/
+
+# =========================
+# IIS Express
+# =========================
+iisexpress/
+
+# =========================
+# Node
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Environment
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS Files
+# =========================
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# =========================
+# Certificates
+# =========================
+*.pfx
+*.key
+
+# =========================
+# Generated Files
+# =========================
+Generated/
+TestResults/
+coverage/
+
+# =========================
+# Database
+# =========================
+*.mdf
+*.ldf
+
+# =========================
+# Temporary Files
+# =========================
+*.tmp
+*.temp
