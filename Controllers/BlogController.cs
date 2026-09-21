@@ -35,5 +35,27 @@ namespace TvRepairWebsite.Controllers
         {
             return View();
         }
+        public IActionResult PowerLight()
+        {
+            return View();
+        }
+        public IActionResult PowerOffReason()
+        {
+            return View();
+        }
+        public IActionResult SuddenTvOff()
+        {
+            return View();
+        }
+        public IActionResult TvDimScreen()
+        {
+            return View();
+        }
+        public IActionResult TVNoPicture()
+        {
+            return View();
+        }
+
+
     }
 }

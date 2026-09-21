@@ -33,11 +33,11 @@
 
 article {
     width: 100%;
-    margin:auto;
+    margin: auto;
     border-radius: 18px;
     overflow: hidden;
-    padding:50px;
-    text-align:center;
+    padding: 50px;
+    text-align: center;
 }
 
     article h1 {
@@ -45,8 +45,8 @@ article {
         color: #0056b3;
         margin-bottom: 20px;
         text-align: right;
-        width:95%;
-        margin:20px auto;
+        width: 95%;
+        margin: 20px auto;
     }
 
     article p {
@@ -91,3 +91,57 @@ article {
         article a:hover {
             text-decoration: underline;
         }
+
+/* Tablet */
+@media (max-width: 992px) {
+
+    .blogpage-hero {
+        height: 60vh;
+        padding: 0 20px;
+    }
+
+    .blogpage-hero-content h1 {
+        font-size: 28px;
+    }
+
+    .blogpage-hero-content p {
+        font-size: 15px;
+    }
+
+    .blog-item {
+        width: 48%;
+        margin-bottom: 4%;
+    }
+}
+
+
+/* Mobile */
+@media (max-width: 576px) {
+
+    .blogpage-hero {
+        height: 50vh;
+        padding: 0 15px;
+    }
+
+    .blogpage-hero-content h1 {
+        font-size: 22px;
+        line-height: 1.5;
+    }
+
+    .blogpage-hero-content p {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .blog-item {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .subhero6 {
+        display: block !important;
+    }
+}
