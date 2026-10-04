@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TvRepairWebsite.Models;
 using TvRepairWebsite.Repository;
 
 namespace TvRepairWebsite.Controllers
@@ -11,8 +13,31 @@ namespace TvRepairWebsite.Controllers
             _articleRepository = articleRepository;
         }
 
+        [Authorize]
+        public IActionResult BlogPage(int id)
+        {
+            //بدست آوردن کاربر برای ذخیره لاگ دیدن مقاله
+            var UserId = HttpContext.Session.GetInt32("UserId");
+            if (!UserId.HasValue)
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
+            ArticleView articleView = new ArticleView()
+            {
+                UserId = UserId.Value,
+                ArticleId = id,
+                ViewedAt = DateTime.Now
+            };
 
+            //ثبت ویو مقاله
+            _articleRepository.InsertArticleView(articleView);
+
+            //بدست آوردن مقاله
+            var article = _articleRepository.GetArticle(id);
+
+            return View(article);
+        }
 
         public IActionResult BlogMain()
         {

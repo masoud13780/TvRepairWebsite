@@ -31,6 +31,7 @@ namespace TvRepairWebsite.Data
         public DbSet<Product> products { get; set; }
        //جدول
        public DbSet<SmsTemplate> smsTemplates { get; set; }
+        public DbSet<ArticleView> ArticleViews { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

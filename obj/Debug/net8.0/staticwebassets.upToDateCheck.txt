@@ -18,8 +18,6 @@ wwwroot\images\hisense.png
 wwwroot\images\lg.png
 wwwroot\images\logo.png
 wwwroot\images\nexar.png
-wwwroot\images\NoPicture.webp
-wwwroot\images\power-binking.jpg
 wwwroot\images\PowerOff.jpg
 wwwroot\images\Rebal.png
 wwwroot\images\salimi-logo.png
@@ -27,11 +25,8 @@ wwwroot\images\sam.png
 wwwroot\images\samsung.png
 wwwroot\images\snowa.png
 wwwroot\images\sony.png
-wwwroot\images\SuddenTvOff.jpg
 wwwroot\images\tcl.png
 wwwroot\images\tv-set.png
-wwwroot\images\TvDimScreen.jpg
-wwwroot\images\tvNotTurnOn.jpg
 wwwroot\images\Water.jpg
 wwwroot\images\white-logo.png
 wwwroot\images\xvision.png
@@ -95,3 +90,8 @@ wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
 wwwroot\robots.txt
 wwwroot\sitemap.xml
+wwwroot\images\power-binking.jpg
+wwwroot\images\tvNotTurnOn.jpg
+wwwroot\images\SuddenTvOff.jpg
+wwwroot\images\TvDimScreen.jpg
+wwwroot\images\NoPicture.webp

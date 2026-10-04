@@ -8,7 +8,7 @@ namespace TvRepairWebsite.Repository
         public List<Article> GetAllArticles();
         public Article GetArticle(int ArticleId);
 
-
+        public void InsertArticleView(ArticleView articleView);
     }
 
 
@@ -49,6 +49,20 @@ namespace TvRepairWebsite.Repository
             }
 
             return null;
+        }
+        public void InsertArticleView(ArticleView articleView)
+        {
+            var articleViewDb = _context.ArticleViews
+                .FirstOrDefault(a => a.UserId == articleView.UserId && a.ArticleId == articleView.ArticleId);
+            if (articleViewDb != null)
+            {
+                articleViewDb.ViewedAt = DateTime.Now;
+                _context.SaveChanges();
+                return;
+            }
+
+            _context.ArticleViews.Add(articleView);
+            _context.SaveChanges();
         }
 
 
