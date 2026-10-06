@@ -7,9 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <Compile Remove="Services\**" />
+    <Content Remove="NewFolder\**" />
+    <Content Remove="Services\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="NewFolder\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="NewFolder\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

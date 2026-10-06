@@ -4,25 +4,23 @@
     ViewData["Description"] =
         "تعمیر تخصصی تلویزیون ال جی، سامسونگ، سونی، آیوا، پاناسونیک، ایکس ویژن، تی سی ال، سام و انواع تلویزیون‌ها در مشهد";
 }
-
 <div class="banner diagonal-soft-bg">
     <div class="banner-text">
         <h1>تعمیر تخصصی تلویزیون در مشهد</h1>
         <h2>تیم مهندسی سلیمی</h2>
         <div class="divider"></div>
         <h3>
-            ۳۵ سال تجربه در کنار تخصص و سرعت</h2>
-            <h4>با استفاده از قطعات اورجینال، کیفیت تصویر را به تلویزیون شما برمی‌گردانیم.
+            ۳۵ سال تجربه در کنار تخصص و سرعت
         </h3>
+        <h4>
+            با استفاده از قطعات اورجینال، کیفیت تصویر را به تلویزیون شما برمی‌گردانیم.
+        </h4>
         <a href="tel:+989154868011" class="Btn num-subs">
             تماس بگیرید!
         </a>
     </div>
     <div class="tv-img"></div>
-
 </div>
-
-
 <div class="subhero1">
     <h2>خدمات تیم مهندسی سلیمی </h2>
     <div class="experience-container">
@@ -37,46 +35,39 @@
             <h4 style="color:#1d0c75">تعمیر و پروگرام برد مین</h4>
             <div class="divider"></div>
             <p>رفع ایرادات هنگ کردن، نداشتن تصویر، نداشتن صدا، مشکل HDMI و پروگرام آی‌سی‌ها با دستگاه تخصصی.</p>
-
         </div>
         <div class="experience elevated">
             <i class="fa-solid fa-lightbulb" style="color:crimson"></i>
             <h4 style="color:crimson">تعمیر و تعویض بک‌لایت</h4>
             <div class="divider"></div>
             <p style="color:crimson">رفع مشکل سیاه شدن تصویر، کم‌نور شدن صفحه و لکه‌های نوری با استفاده از بک‌لایت اورجینال.</p>
-
         </div>
         <div class="experience elevated">
             <i class="fa-solid fa-tv" style="color:darkgoldenrod"></i>
             <h4 style="color:darkgoldenrod">تعمیر پنل و مشکلات تصویر</h4>
             <div class="divider"></div>
             <p style="color:darkgoldenrod">رفع خطوط عمودی و افقی، سایه افتادن تصویر، آب خوردگی، دو تصویر شدن و مشکلات T-Con.</p>
-
         </div>
         <div class="experience1 elevated">
             <img src="~/images/Rebal.png" alt="خدمات ریبال برد سی پی یو در مشهد" />
             <h4 style="color:#1d0c75">ریبال</h4>
             <div class="divider"></div>
             <p>ریبال تخصصی آی‌سی‌های BGA تلویزیون، رفع ایراد روشن نشدن و ریست شدن دستگاه، بازسازی اتصالات آسیب‌دیده برد مین، تعمیر مشکلات ناشی از سردی لحیم آی‌سی‌ها، تست و کنترل کیفیت پس از ریبال، مناسب انواع تلویزیون‌های LED، LCD و هوشمند.</p>
-
         </div>
         <div class="experience1 elevated">
             <img src="~/images/Bonding.png" alt="خدمات بندینگ فلت تلویزیون در مشهد" />
             <h4 style="color:#1d0c75">بندینگ</h4>
             <div class="divider"></div>
             <p>رفع خطوط روی تصویر تلویزیون، تعمیر و باندینگ فلت پنل LED و LCD، ترمیم اتصالات COF و TAB، رفع مشکلات ناشی از قطعی فلت پنل، کاهش هزینه تعمیر نسبت به تعویض پنل، انجام تعمیرات با دستگاه‌های تخصصی باندینگ.</p>
-
         </div>
     </div>
 </div>
-
 <div class="subhero2">
     <h2>محصولات فروشگاه سلیمی</h2>
     <div class="divider"></div>
 
     <div class="products-container elevated">
         <div class="products-track ">
-
             @foreach (var item in Model.Products)
             {
                 <div class="product-card">
@@ -84,46 +75,35 @@
                         <img src="~/images//products/@item.ImgUrl" alt="">
                         <span class="badge-discount">15٪</span>
                     </div>
-
                     <h3 class="product-title">@item.Title</h3>
-
                     <div class="product-price">
                         <span class="old-price">@item.Price</span>
                         <span class="new-price">@item.DiscountPrice تومان</span>
                     </div>
-
                     <button class="btn-buy">مشاهده محصول</button>
                 </div>
             }
-
         </div>
     </div>
-
 </div>
-
 <div class="subhero3">
     <div class="honors-header">
         <h2>نمایندگی ها</h2>
         <span>Representations</span>
     </div>
-
     <div class="honors-grid">
-
         <div class="honor-item" style="border-right:none;"><img src="~/images/sony.png" alt="تعمیر تلویزیون سونی در مشهد"></div>
         <div class="honor-item"><img src="~/images/lg.png" alt="تعمیر تلویزیون ال جی در مشهد"></div>
         <div class="honor-item"><img src="~/images/samsung.png" alt="تعمیر تلویزیون سامسونگ در مشهد"></div>
         <div class="honor-item"><img src="~/images/tcl.png" alt="تعمیر تلویزیون تی سی ال در مشهد"></div>
         <div class="honor-item"><img src="~/images/daewoo.png" alt="تعمیر تلویزیون دوو در مشهد"></div>
-
         <div class="honor-item" style="border-right:none; border-bottom:none;"><img src="~/images/gplus.png" alt="تعمیر تلویزیون جی پلاس در مشهد"></div>
         <div class="honor-item" style="border-bottom:none;"><img src="~/images/hisense.png" alt="تعمیر تلویزیون هایسنس در مشهد"></div>
         <div class="honor-item" style="border-bottom:none;"><img src="~/images/snowa.png" alt="تعمیر تلویزیون اسنوا در مشهد"></div>
         <div class="honor-item" style="border-bottom:none;"><img src="~/images/xvision.png" alt="تعمیر تلویزیون ایکس ویژن در مشهد"></div>
         <div class="honor-item" style="border-bottom:none;"><img src="~/images/sam.png" alt="تعمیر تلویزیون سام در مشهد"></div>
-
     </div>
 </div>
-
 <div class="subhero4">
     <div class="info">
         <h2>نظرات شما</h2>
@@ -163,21 +143,17 @@
                 <i class="fa-regular fa-star" data-value="4"></i>
                 <i class="fa-regular fa-star" data-value="5"></i>
             </div>
-
             <!-- مقدار انتخاب‌شده برای ارسال به بک‌اند -->
             <input type="hidden" id="rateValue" value="0" asp-for="CreateComment.Rate">
         </div>
-
         <button type="submit" class="Btn">ثبت نظرات</button>
     </form>
 </div>
 <div class="subhero5">
     <h2>نظرات شما</h2>
     <div class="divider"></div>
-
     <div class="swiper commentsSwiper">
         <div class="swiper-wrapper">
-
             @foreach (var item in Model.Comments)
             {
                 <div class="swiper-slide">
@@ -193,7 +169,6 @@
                                     @for (int i = 0; i < item.Rate; i++)
                                     {
                                         <text>★</text>
-
                                     }
                                 </div>
                             </div>
@@ -204,7 +179,6 @@
                     </div>
                 </div>
             }
-
             <div class="swiper-slide">
                 <div class="comment-card elevated">
                     <div class="comment-header">
@@ -220,7 +194,6 @@
                     </p>
                 </div>
             </div>
-
             <div class="swiper-slide">
                 <div class="comment-card elevated">
                     <div class="comment-header">
@@ -236,7 +209,6 @@
                     </p>
                 </div>
             </div>
-
             <div class="swiper-slide">
                 <div class="comment-card elevated">
                     <div class="comment-header">
@@ -252,7 +224,6 @@
                     </p>
                 </div>
             </div>
-
             <div class="swiper-slide">
                 <div class="comment-card elevated">
                     <div class="comment-header">
@@ -268,7 +239,6 @@
                     </p>
                 </div>
             </div>
-
             <div class="swiper-slide">
                 <div class="comment-card elevated">
                     <div class="comment-header">
@@ -284,16 +254,13 @@
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 <div class="subhero6">
     <h2>مقالات</h2>
     <div class="divider"></div>
-
     <div class="Blog-Container">
-
         @foreach (var item in Model.Articles)
         {
             <div class="blog-item">
@@ -306,7 +273,6 @@
                     <a asp-controller="Blog" asp-action="BlogPage" asp-route-id="@item.ArticleId" class="Btn">ادامه مطلب</a>
                 </div>
             </div>
-
         }
         <div class="blog-item">
             <img src="~/images/tvNotTurnOn.jpg" alt="چرا تلویزیون زوشن نمی شود؟">
@@ -337,14 +303,60 @@
         </div>
     </div>
 </div>
+<!-- Discount Popup -->
+<div id="discountPopup" class="discount-popup-overlay">
+    <div class="discount-popup">
 
+        <button type="button" class="discount-close" onclick="closeDiscountPopup()">
+            ×
+        </button>
+
+        <div class="discount-icon">
+            🎁
+        </div>
+
+        <div class="discount-title">
+            تبریک!
+        </div>
+
+        <div class="discount-subtitle">
+            شما برنده کد تخفیف شدید
+        </div>
+
+        <div class="discount-divider"></div>
+
+        <div class="discount-message">
+            کد تخفیف شما:
+        </div>
+
+        <div id="discountCode" class="discount-code">
+            sm000000
+        </div>
+
+        <button type="button"
+                class="discount-copy-btn"
+                onclick="copyDiscountCode()">
+            📋 کپی کردن کد
+        </button>
+
+        <div class="discount-warning">
+            لطفاً اسکرین‌شات بگیرید و هنگام تحویل دستگاه،
+            اسکرین‌شات را نشان دهید.
+        </div>
+
+        <div id="copyMessage" class="copy-message">
+            کد با موفقیت کپی شد ✓
+        </div>
+
+    </div>
+</div>
 <script>
     const swiper = new Swiper(".commentsSwiper", {
         slidesPerView: 2,
         spaceBetween: 30,
         loop: true,
         autoplay: {
-            delay: 5000,
+            delay: 2000,
             disableOnInteraction: false,
         },
         breakpoints: {
@@ -354,24 +366,20 @@
     });
     const stars = document.querySelectorAll('#starRating i');
     const rateInput = document.getElementById('rateValue');
-
     stars.forEach(star => {
         star.addEventListener('mouseover', function () {
             const val = this.dataset.value;
             highlightStars(val);
         });
-
         star.addEventListener('mouseout', function () {
             highlightStars(rateInput.value);
         });
-
         star.addEventListener('click', function () {
             const val = this.dataset.value;
             rateInput.value = val;
             highlightStars(val);
         });
     });
-
     function highlightStars(count){
         stars.forEach(star => {
             star.classList.remove('active');
@@ -380,4 +388,108 @@
             }
         });
     }
+        /* =========================
+       Discount Popup
+    ========================= */
+
+    function generateDiscountCode() {
+
+        // بررسی می‌کنیم آیا قبلاً کدی ساخته شده
+        let savedCode = localStorage.getItem("siteDiscountCode");
+
+        if (savedCode) {
+            return savedCode;
+        }
+
+        // تولید عدد 6 رقمی
+        const randomNumber = Math.floor(
+            100000 + Math.random() * 900000
+        );
+
+        const code = "sm" + randomNumber;
+
+        // ذخیره کد
+        localStorage.setItem(
+            "siteDiscountCode",
+            code
+        );
+
+        return code;
+    }
+
+
+    /* نمایش Popup */
+
+    function showDiscountPopup() {
+
+        const code = generateDiscountCode();
+
+        document.getElementById("discountCode").innerText = code;
+
+        document
+            .getElementById("discountPopup")
+            .classList.add("show");
+    }
+
+
+    /* بستن Popup */
+
+    function closeDiscountPopup() {
+
+        document
+            .getElementById("discountPopup")
+            .classList.remove("show");
+    }
+
+
+    /* کپی کردن کد */
+
+    function copyDiscountCode() {
+
+        const code =
+            document.getElementById("discountCode").innerText;
+
+        navigator.clipboard.writeText(code)
+            .then(function () {
+
+                const message =
+                    document.getElementById("copyMessage");
+
+                message.classList.add("show");
+
+                setTimeout(function () {
+                    message.classList.remove("show");
+                }, 2000);
+
+            })
+            .catch(function () {
+
+                // fallback برای مرورگرهای قدیمی
+                const tempInput =
+                    document.createElement("input");
+
+                tempInput.value = code;
+
+                document.body.appendChild(tempInput);
+
+                tempInput.select();
+
+                document.execCommand("copy");
+
+                document.body.removeChild(tempInput);
+            });
+    }
+
+
+    /* کلیک روی فضای بیرون Popup */
+
+    document
+        .getElementById("discountPopup")
+        .addEventListener("click", function (event) {
+
+            if (event.target === this) {
+                closeDiscountPopup();
+            }
+
+        });
 </script>

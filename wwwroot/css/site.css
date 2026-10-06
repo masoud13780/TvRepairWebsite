@@ -1036,3 +1036,234 @@ footer {
 .trust-grid div{
     font-size:14px;
 }
+
+/* =========================
+   Discount Popup
+========================= */
+
+.discount-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+    .discount-popup-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+/* Popup */
+
+.discount-popup {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 35px 30px 30px;
+    text-align: center;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.30);
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.35s ease;
+    overflow: hidden;
+}
+
+.discount-popup-overlay.show .discount-popup {
+    transform: translateY(0) scale(1);
+}
+
+
+/* Decorative top */
+
+.discount-popup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7px;
+    background: linear-gradient( 90deg, #7b2ff7, #f107a3 );
+}
+
+
+/* Close */
+
+.discount-close {
+    position: absolute;
+    top: 15px;
+    right: 17px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: #f4f4f4;
+    color: #555;
+    font-size: 25px;
+    line-height: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .discount-close:hover {
+        background: #eeeeee;
+        transform: rotate(90deg);
+    }
+
+
+/* Gift Icon */
+
+.discount-icon {
+    width: 75px;
+    height: 75px;
+    margin: 10px auto 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    background: linear-gradient( 135deg, #7b2ff7, #f107a3 );
+    box-shadow: 0 10px 25px rgba(123, 47, 247, 0.30);
+}
+
+
+/* Title */
+
+.discount-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #222;
+    margin-bottom: 6px;
+}
+
+.discount-subtitle {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 18px;
+}
+
+
+/* Divider */
+
+.discount-divider {
+    height: 1px;
+    background: #eeeeee;
+    margin: 15px 0 20px;
+}
+
+
+/* Message */
+
+.discount-message {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+
+/* Discount Code */
+
+.discount-code {
+    direction: ltr;
+    display: inline-block;
+    min-width: 220px;
+    padding: 15px 25px;
+    border-radius: 14px;
+    background: #f7f3ff;
+    border: 2px dashed #7b2ff7;
+    color: #6d28d9;
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 16px;
+}
+
+
+/* Copy Button */
+
+.discount-copy-btn {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 20px;
+    background: linear-gradient( 135deg, #7b2ff7, #f107a3 );
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .discount-copy-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(123, 47, 247, 0.30);
+    }
+
+
+/* Warning */
+
+.discount-warning {
+    margin-top: 20px;
+    padding: 13px 15px;
+    border-radius: 12px;
+    background: #fff8e6;
+    border: 1px solid #ffe4a3;
+    color: #8a6200;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+
+/* Copy message */
+
+.copy-message {
+    margin-top: 10px;
+    color: #16803c;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+    .copy-message.show {
+        opacity: 1;
+    }
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .discount-popup {
+        padding: 30px 20px 22px;
+        border-radius: 20px;
+    }
+
+    .discount-title {
+        font-size: 24px;
+    }
+
+    .discount-subtitle {
+        font-size: 14px;
+    }
+
+    .discount-code {
+        min-width: 190px;
+        font-size: 25px;
+        letter-spacing: 2px;
+    }
+
+    .discount-warning {
+        font-size: 12px;
+    }
+}
