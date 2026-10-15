@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TvRepairWebsite")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+161622a63ef7c7b79f642f01b2eded70d7d6210a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f73c84407e139ef2379bcc2d0bb75ff7c70d32bd")]
 [assembly: System.Reflection.AssemblyProductAttribute("TvRepairWebsite")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TvRepairWebsite")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

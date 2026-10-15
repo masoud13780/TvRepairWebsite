@@ -32,7 +32,7 @@ namespace TvRepairWebsite.Data
        //جدول
        public DbSet<SmsTemplate> smsTemplates { get; set; }
         public DbSet<ArticleView> ArticleViews { get; set; }
-
+        public DbSet<DiscountCode> DicountCodes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

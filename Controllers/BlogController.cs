@@ -8,9 +8,13 @@ namespace TvRepairWebsite.Controllers
     public class BlogController : Controller
     {
         private readonly IArticleRepository _articleRepository;
-        public BlogController(IArticleRepository articleRepository)
+        private readonly IDiscountCodeRepository _codeRepository;
+        private readonly ICommentRepository _commentRepository;
+        public BlogController(IArticleRepository articleRepository, IDiscountCodeRepository codeRepository, ICommentRepository commentRepository)
         {
             _articleRepository = articleRepository;
+            _codeRepository = codeRepository;
+            _commentRepository = commentRepository;
         }
 
         [Authorize]
@@ -23,15 +27,38 @@ namespace TvRepairWebsite.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+           
             ArticleView articleView = new ArticleView()
             {
                 UserId = UserId.Value,
                 ArticleId = id,
                 ViewedAt = DateTime.Now
             };
-
             //ثبت ویو مقاله
             _articleRepository.InsertArticleView(articleView);
+            //*اگر کاربر کد تخفیف نداشت باید چک کنیم ایا دو مقاله خونده و یک نظر
+            //که کد تخفیف براش ایجاد بشه*//
+            bool ExistDiscountCode = _codeRepository.ExistCodeForUser(UserId.Value);
+            if (!ExistDiscountCode)
+            {
+                //کاربر تاحالا کد تخفیف نگرفته
+                //آیا تا الان دو مقاله دیده؟
+                //آیا کامنتی گذاشته؟
+                bool Exist_Article_View = _articleRepository.ViewTwoArticle(UserId.Value);
+                bool Exist_Comment = _commentRepository.ExistCommentForUser(UserId.Value);
+
+                if(Exist_Article_View && Exist_Comment)
+                {
+                    //یک کد تخفیف باید ایجاد بشه
+                    //و یک فیلد هم مثلا برای
+                }
+
+            }
+
+
+
+
+
 
             //بدست آوردن مقاله
             var article = _articleRepository.GetArticle(id);

@@ -52,6 +52,32 @@ namespace TvRepairWebsite.Migrations
                     b.ToTable("Articles");
                 });
 
+            modelBuilder.Entity("TvRepairWebsite.Models.ArticleView", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ViewedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ArticleViews");
+                });
+
             modelBuilder.Entity("TvRepairWebsite.Models.CategoryProduct", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -137,6 +163,32 @@ namespace TvRepairWebsite.Migrations
                     b.HasKey("ContactUsId");
 
                     b.ToTable("contactUs");
+                });
+
+            modelBuilder.Entity("TvRepairWebsite.Models.DiscountCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreateDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DicountCodes");
                 });
 
             modelBuilder.Entity("TvRepairWebsite.Models.PartType", b =>
@@ -257,6 +309,36 @@ namespace TvRepairWebsite.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TvRepairWebsite.Models.ArticleView", b =>
+                {
+                    b.HasOne("TvRepairWebsite.Models.Article", "Article")
+                        .WithMany()
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TvRepairWebsite.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TvRepairWebsite.Models.DiscountCode", b =>
+                {
+                    b.HasOne("TvRepairWebsite.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TvRepairWebsite.Models.Product", b =>

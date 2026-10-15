@@ -40,16 +40,16 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script type="application/ld+json">
-        {
-        "@@context":"https://schema.org",
-        "@@type":"LocalBusiness",
-        "name":"تعمیرات تلویزیون سلیمی",
-        "telephone":"09154868011",
-        "address":{
-        "@@type":"PostalAddress",
-        "addressLocality":"مشهد"
-        }
-        }
+            {
+            "@@context":"https://schema.org",
+            "@@type":"LocalBusiness",
+            "name":"تعمیرات تلویزیون سلیمی",
+            "telephone":"09154868011",
+            "address":{
+            "@@type":"PostalAddress",
+            "addressLocality":"مشهد"
+            }
+            }
     </script>
 </head>
 <body>
@@ -68,15 +68,21 @@
                 </ul>
             </nav>
             <div class="header-item num-header">
-                <a href="tel:+989154868011" class="num-subs number-box">
-                    09154868011
-                </a>
+
                 @{
 
                     if (!string.IsNullOrEmpty(PhoneUser))
                     {
+                        <a href="tel:+989154868011" class="num-subs number-box">
+                            @PhoneUser
+                        </a>
+
+
                         if (Admin == "True")
                         {
+
+
+
                             <a asp-controller="Admin" asp-action="AdminPanel" class="Btn num-subs">
                                 پنل ادمین
                             </a>
@@ -198,127 +204,127 @@
         </div>
     </footer>
     <script>
-        $(document).ready(function() {
-        const $menu = $('#little-menu');
-        const $header = $('.header1');
+            $(document).ready(function() {
+                const $menu = $('#little-menu');
+                const $header = $('.header1');
 
-        // toggle منو با کلیک روی آیکون
-        $menu.on('click', function(e) {
-        e.stopPropagation(); // جلوگیری از بسته شدن بلافاصله
-        $header.toggleClass('active');
-        });
-
-        // بستن منو وقتی خارج از آن کلیک شد
-        $(document).on('click', function(e) {
-        if (!$header.is(e.target) && $header.has(e.target).length === 0 && !$menu.is(e.target)) {
-        $header.removeClass('active');
-        }
-        });
-        });
-             /* =========================
-           Discount Popup
-        ========================= */
-
-        function generateDiscountCode() {
-
-            // بررسی می‌کنیم آیا قبلاً کدی ساخته شده
-            let savedCode = localStorage.getItem("siteDiscountCode");
-
-            if (savedCode) {
-                return savedCode;
-            }
-
-            // تولید عدد 6 رقمی
-            const randomNumber = Math.floor(
-                100000 + Math.random() * 900000
-            );
-
-            const code = "sm" + randomNumber;
-
-            // ذخیره کد
-            localStorage.setItem(
-                "siteDiscountCode",
-                code
-            );
-
-            return code;
-        }
-
-
-        /* نمایش Popup */
-
-        function showDiscountPopup() {
-
-            const code = generateDiscountCode();
-
-            document.getElementById("discountCode").innerText = code;
-
-            document
-                .getElementById("discountPopup")
-                .classList.add("show");
-        }
-
-
-        /* بستن Popup */
-
-        function closeDiscountPopup() {
-
-            document
-                .getElementById("discountPopup")
-                .classList.remove("show");
-        }
-
-
-        /* کپی کردن کد */
-
-        function copyDiscountCode() {
-
-            const code =
-                document.getElementById("discountCode").innerText;
-
-            navigator.clipboard.writeText(code)
-                .then(function () {
-
-                    const message =
-                        document.getElementById("copyMessage");
-
-                    message.classList.add("show");
-
-                    setTimeout(function () {
-                        message.classList.remove("show");
-                    }, 2000);
-
-                })
-                .catch(function () {
-
-                    // fallback برای مرورگرهای قدیمی
-                    const tempInput =
-                        document.createElement("input");
-
-                    tempInput.value = code;
-
-                    document.body.appendChild(tempInput);
-
-                    tempInput.select();
-
-                    document.execCommand("copy");
-
-                    document.body.removeChild(tempInput);
+                // toggle منو با کلیک روی آیکون
+                $menu.on('click', function(e) {
+                    e.stopPropagation(); // جلوگیری از بسته شدن بلافاصله
+                    $header.toggleClass('active');
                 });
-        }
 
+                // بستن منو وقتی خارج از آن کلیک شد
+                $(document).on('click', function(e) {
+                    if (!$header.is(e.target) && $header.has(e.target).length === 0 && !$menu.is(e.target)) {
+                        $header.removeClass('active');
+                    }
+                });
+            });
+            /* =========================
+            Discount Popup
+            ========================= */
 
-        /* کلیک روی فضای بیرون Popup */
+            function generateDiscountCode() {
 
-        document
-            .getElementById("discountPopup")
-            .addEventListener("click", function (event) {
+                // بررسی می‌کنیم آیا قبلاً کدی ساخته شده
+                let savedCode = localStorage.getItem("siteDiscountCode");
 
-                if (event.target === this) {
-                    closeDiscountPopup();
+                if (savedCode) {
+                    return savedCode;
                 }
 
-            });
+                // تولید عدد 6 رقمی
+                const randomNumber = Math.floor(
+                    100000 + Math.random() * 900000
+                );
+
+                const code = "sm" + randomNumber;
+
+                // ذخیره کد
+                localStorage.setItem(
+                    "siteDiscountCode",
+                    code
+                );
+
+                return code;
+            }
+
+
+            /* نمایش Popup */
+
+            function showDiscountPopup() {
+
+                const code = generateDiscountCode();
+
+                document.getElementById("discountCode").innerText = code;
+
+                document
+                    .getElementById("discountPopup")
+                    .classList.add("show");
+            }
+
+
+            /* بستن Popup */
+
+            function closeDiscountPopup() {
+
+                document
+                    .getElementById("discountPopup")
+                    .classList.remove("show");
+            }
+
+
+            /* کپی کردن کد */
+
+            function copyDiscountCode() {
+
+                const code =
+                    document.getElementById("discountCode").innerText;
+
+                navigator.clipboard.writeText(code)
+                    .then(function() {
+
+                        const message =
+                            document.getElementById("copyMessage");
+
+                        message.classList.add("show");
+
+                        setTimeout(function() {
+                            message.classList.remove("show");
+                        }, 2000);
+
+                    })
+                    .catch(function() {
+
+                        // fallback برای مرورگرهای قدیمی
+                        const tempInput =
+                            document.createElement("input");
+
+                        tempInput.value = code;
+
+                        document.body.appendChild(tempInput);
+
+                        tempInput.select();
+
+                        document.execCommand("copy");
+
+                        document.body.removeChild(tempInput);
+                    });
+            }
+
+
+            /* کلیک روی فضای بیرون Popup */
+
+            document
+                .getElementById("discountPopup")
+                .addEventListener("click", function(event) {
+
+                    if (event.target === this) {
+                        closeDiscountPopup();
+                    }
+
+                });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

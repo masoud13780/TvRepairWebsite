@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projects\\TvRepairWebsite\\TvRepairWebsite.csproj": {}
+    "E:\\Atiyeh\\Projects\\TvSalimi\\TvRepairWebsite\\TvRepairWebsite.csproj": {}
   },
   "projects": {
-    "D:\\projects\\TvRepairWebsite\\TvRepairWebsite.csproj": {
+    "E:\\Atiyeh\\Projects\\TvSalimi\\TvRepairWebsite\\TvRepairWebsite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\TvRepairWebsite\\TvRepairWebsite.csproj",
+        "projectUniqueName": "E:\\Atiyeh\\Projects\\TvSalimi\\TvRepairWebsite\\TvRepairWebsite.csproj",
         "projectName": "TvRepairWebsite",
-        "projectPath": "D:\\projects\\TvRepairWebsite\\TvRepairWebsite.csproj",
-        "packagesPath": "C:\\Users\\m.hasanzadeh\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\TvRepairWebsite\\obj\\",
+        "projectPath": "E:\\Atiyeh\\Projects\\TvSalimi\\TvRepairWebsite\\TvRepairWebsite.csproj",
+        "packagesPath": "C:\\Users\\a.yousefi\\.nuget\\packages\\",
+        "outputPath": "E:\\Atiyeh\\Projects\\TvSalimi\\TvRepairWebsite\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\m.hasanzadeh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\a.yousefi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -31,6 +30,7 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {}
           }
@@ -45,10 +45,11 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
@@ -85,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

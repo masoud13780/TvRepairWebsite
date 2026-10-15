@@ -1,9 +1,11 @@
-﻿namespace TvRepairWebsite.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TvRepairWebsite.Models
 {
     public class ArticleView
     {
         public int Id { get; set; }
-
+        [ForeignKey(nameof(User))]
         public int UserId { get; set; }
         public User User { get; set; }
 

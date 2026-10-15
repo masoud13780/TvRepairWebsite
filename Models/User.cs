@@ -40,8 +40,6 @@ namespace TvRepairWebsite.Models
         [Display(Name = "مدل تلویزیون")]
         [MaxLength(50)]
         public string? TVType { get; set; } = null;
-        [Display(Name = "کد تخفیف")]
-        public string? DiscountCode { get; set; }
 
 
 

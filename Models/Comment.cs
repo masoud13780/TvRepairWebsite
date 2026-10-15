@@ -7,6 +7,9 @@ namespace TvRepairWebsite.Models
     {
         [Key]
         public int CommentId { get; set; }
+        public User User { get; set; }
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
 
         [Display(Name = "نام و نام خانوادگی")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
