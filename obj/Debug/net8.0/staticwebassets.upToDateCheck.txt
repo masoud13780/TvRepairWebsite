@@ -3,7 +3,6 @@ wwwroot\css\Account.css
 wwwroot\css\Admin.css
 wwwroot\css\Blog.css
 wwwroot\css\ContactUs.css
-wwwroot\css\site.css
 wwwroot\css\store.css
 wwwroot\fonts\IRANSansWeb_Bold.eot
 wwwroot\fonts\IRANSansWeb_Bold.ttf
@@ -95,3 +94,4 @@ wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
 wwwroot\robots.txt
 wwwroot\sitemap.xml
+wwwroot\css\site.css

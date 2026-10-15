@@ -18,10 +18,10 @@
     </title>
 
     <meta name="description"
-        content="@(ViewData["Description"] ?? "تعمیر تخصصی تلویزیون در مشهد")">
+          content="@(ViewData["Description"] ?? "تعمیر تخصصی تلویزیون در مشهد")">
     <link rel="icon" type="image/png" sizes="256x256" href="~/images/logo.png" />
     <link rel="canonical"
-        href="@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}")">
+          href="@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}")">
     <meta property="og:title" content="@ViewData["Title"]" />
     <meta property="og:description" content="@ViewData["Description"]" />
     <meta property="og:type" content="website" />
@@ -92,17 +92,64 @@
                             ورود
                         </a>
                     }
-                   
+
                 }
 
-      
+
             </div>
         </div>
     </header>
     <i class="fas fa-bars" id="little-menu"></i>
 
-    <main role="main" >
+    <main role="main">
         @RenderBody()
+        <!-- Discount Popup -->
+        <div id="discountPopup" class="discount-popup-overlay">
+            <div class="discount-popup">
+
+                <button type="button" class="discount-close" onclick="closeDiscountPopup()">
+                    ×
+                </button>
+
+                <div class="discount-icon">
+                    🎁
+                </div>
+
+                <div class="discount-title">
+                    تبریک!
+                </div>
+
+                <div class="discount-subtitle">
+                    شما برنده کد تخفیف شدید
+                </div>
+
+                <div class="discount-divider"></div>
+
+                <div class="discount-message">
+                    کد تخفیف شما:
+                </div>
+
+                <div id="discountCode" class="discount-code">
+                    sm000000
+                </div>
+
+                <button type="button"
+                        class="discount-copy-btn"
+                        onclick="copyDiscountCode()">
+                    📋 کپی کردن کد
+                </button>
+
+                <div class="discount-warning">
+                    لطفاً اسکرین‌شات بگیرید و هنگام تحویل دستگاه،
+                    اسکرین‌شات را نشان دهید.
+                </div>
+
+                <div id="copyMessage" class="copy-message">
+                    کد با موفقیت کپی شد ✓
+                </div>
+
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -168,7 +215,110 @@
         }
         });
         });
+             /* =========================
+           Discount Popup
+        ========================= */
 
+        function generateDiscountCode() {
+
+            // بررسی می‌کنیم آیا قبلاً کدی ساخته شده
+            let savedCode = localStorage.getItem("siteDiscountCode");
+
+            if (savedCode) {
+                return savedCode;
+            }
+
+            // تولید عدد 6 رقمی
+            const randomNumber = Math.floor(
+                100000 + Math.random() * 900000
+            );
+
+            const code = "sm" + randomNumber;
+
+            // ذخیره کد
+            localStorage.setItem(
+                "siteDiscountCode",
+                code
+            );
+
+            return code;
+        }
+
+
+        /* نمایش Popup */
+
+        function showDiscountPopup() {
+
+            const code = generateDiscountCode();
+
+            document.getElementById("discountCode").innerText = code;
+
+            document
+                .getElementById("discountPopup")
+                .classList.add("show");
+        }
+
+
+        /* بستن Popup */
+
+        function closeDiscountPopup() {
+
+            document
+                .getElementById("discountPopup")
+                .classList.remove("show");
+        }
+
+
+        /* کپی کردن کد */
+
+        function copyDiscountCode() {
+
+            const code =
+                document.getElementById("discountCode").innerText;
+
+            navigator.clipboard.writeText(code)
+                .then(function () {
+
+                    const message =
+                        document.getElementById("copyMessage");
+
+                    message.classList.add("show");
+
+                    setTimeout(function () {
+                        message.classList.remove("show");
+                    }, 2000);
+
+                })
+                .catch(function () {
+
+                    // fallback برای مرورگرهای قدیمی
+                    const tempInput =
+                        document.createElement("input");
+
+                    tempInput.value = code;
+
+                    document.body.appendChild(tempInput);
+
+                    tempInput.select();
+
+                    document.execCommand("copy");
+
+                    document.body.removeChild(tempInput);
+                });
+        }
+
+
+        /* کلیک روی فضای بیرون Popup */
+
+        document
+            .getElementById("discountPopup")
+            .addEventListener("click", function (event) {
+
+                if (event.target === this) {
+                    closeDiscountPopup();
+                }
+
+            });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
