@@ -7,8 +7,8 @@ namespace TvRepairWebsite.Models
         [Key]
         public int Id { get; set; }
         public string Code { get; set; }
-        public string CreateDate  { get; set; } // تاریخ ایجاد کد تخفیف به شمسی و اعداد انگلیسی
-
+        public DateTime CreateDate  { get; set; }
+        public bool IsShown { get; set; }
 
         //Navigation Property
         public User User { get; set; }

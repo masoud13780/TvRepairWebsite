@@ -50,8 +50,9 @@ namespace TvRepairWebsite.Controllers
                     //ذخیره کاربر در سشن
                     HttpContext.Session.SetString("PhoneUser", user.Phone);
                     HttpContext.Session.SetString("Admin", user.Admin.ToString());
-                    return RedirectToAction("Index", "Home");
+                    HttpContext.Session.SetInt32("UserId", user.UserId);
 
+                    return RedirectToAction("Index", "Home");
                 }
 
 

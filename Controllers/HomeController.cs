@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TvRepairWebsite.Data;
 using TvRepairWebsite.Models;
 using TvRepairWebsite.Models.ViewModels;
+using TvRepairWebsite.Services;
 
 namespace TvRepairWebsite.Controllers
 {
@@ -10,15 +11,20 @@ namespace TvRepairWebsite.Controllers
     {
 
         private readonly TvRepairWebSiteDbContext _contex;
-        public HomeController(TvRepairWebSiteDbContext cntx)
+        private readonly IDiscountCodeService _codeServices;
+        public HomeController(TvRepairWebSiteDbContext cntx, IDiscountCodeService codeServices)
         {
             _contex = cntx;
+            _codeServices = codeServices;
         }
 
         //صفحه اصلی
         [HttpGet]
         public IActionResult Index()
         {
+
+            var UserId = HttpContext.Session.GetInt32("UserId");
+
             //لیست نظرات
             List<Comment> comments = _contex.Comments.ToList();
             //لیست محصولات
@@ -27,9 +33,9 @@ namespace TvRepairWebsite.Controllers
             List<Article> articles = _contex.Articles.ToList();
 
 
-
             var HomeVM = new HomeVM
             {
+                user = _contex.Users.FirstOrDefault(u => u.UserId == UserId),
                 Comments = comments,
                 Products = products,
                 Articles = articles
@@ -47,6 +53,11 @@ namespace TvRepairWebsite.Controllers
 
             try
             {
+
+                var userId = HttpContext.Session.GetInt32("UserId");
+                if (userId == null)
+                    return RedirectToAction("Login", "Account");
+
                 //ثبت نظر
                 Comment commentdb = new Comment()
                 {
@@ -54,11 +65,19 @@ namespace TvRepairWebsite.Controllers
                     Phone = comment.Phone,
                     Description = comment.Description,
                     CreateDate = comment.CreateDate,
-                    Rate = comment.Rate
+                    Rate = comment.Rate,
+                    UserId = userId
                 };
 
                 _contex.Comments.Add(commentdb);
                 _contex.SaveChanges();
+
+                string? discountCode = _codeServices.CheckAndCreateDiscountAsync(userId.Value);
+                // اگر کد تخفیفی تعلق گرفت، ذخیره در TempData برای نمایش بعد از ریدایرکت
+                if (!string.IsNullOrEmpty(discountCode))
+                {
+                    TempData["NewDiscountCode"] = discountCode;
+                }
 
                 ModelState.AddModelError("", "نظر شما با موفقیت ثبت گردید");
                 return RedirectToAction("Index");

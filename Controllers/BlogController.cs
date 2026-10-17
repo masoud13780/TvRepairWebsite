@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TvRepairWebsite.Models;
 using TvRepairWebsite.Repository;
+using TvRepairWebsite.Services;
 
 namespace TvRepairWebsite.Controllers
 {
@@ -10,11 +11,13 @@ namespace TvRepairWebsite.Controllers
         private readonly IArticleRepository _articleRepository;
         private readonly IDiscountCodeRepository _codeRepository;
         private readonly ICommentRepository _commentRepository;
-        public BlogController(IArticleRepository articleRepository, IDiscountCodeRepository codeRepository, ICommentRepository commentRepository)
+        private readonly IDiscountCodeService _codeServices;
+        public BlogController(IArticleRepository articleRepository, IDiscountCodeRepository codeRepository, ICommentRepository commentRepository, IDiscountCodeService codeServices)
         {
             _articleRepository = articleRepository;
             _codeRepository = codeRepository;
             _commentRepository = commentRepository;
+            _codeServices = codeServices;
         }
 
         [Authorize]
@@ -36,30 +39,14 @@ namespace TvRepairWebsite.Controllers
             };
             //ثبت ویو مقاله
             _articleRepository.InsertArticleView(articleView);
-            //*اگر کاربر کد تخفیف نداشت باید چک کنیم ایا دو مقاله خونده و یک نظر
-            //که کد تخفیف براش ایجاد بشه*//
-            bool ExistDiscountCode = _codeRepository.ExistCodeForUser(UserId.Value);
-            if (!ExistDiscountCode)
+            _articleRepository.Save();
+
+             string? discountCode = _codeServices.CheckAndCreateDiscountAsync(UserId.Value);
+            // اگر کد تخفیفی تعلق گرفت، ذخیره در TempData برای نمایش بعد از ریدایرکت
+            if (!string.IsNullOrEmpty(discountCode))
             {
-                //کاربر تاحالا کد تخفیف نگرفته
-                //آیا تا الان دو مقاله دیده؟
-                //آیا کامنتی گذاشته؟
-                bool Exist_Article_View = _articleRepository.ViewTwoArticle(UserId.Value);
-                bool Exist_Comment = _commentRepository.ExistCommentForUser(UserId.Value);
-
-                if(Exist_Article_View && Exist_Comment)
-                {
-                    //یک کد تخفیف باید ایجاد بشه
-                    //و یک فیلد هم مثلا برای
-                }
-
+                TempData["NewDiscountCode"] = discountCode;
             }
-
-
-
-
-
-
             //بدست آوردن مقاله
             var article = _articleRepository.GetArticle(id);
 

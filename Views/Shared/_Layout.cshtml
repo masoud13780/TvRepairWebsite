@@ -220,111 +220,72 @@
                         $header.removeClass('active');
                     }
                 });
+
+                @if (TempData["NewDiscountCode"] != null)
+                    {
+                        // صدا زدن همان تابعی که در Layout اصلاح کردیم
+                        <text>
+                                showDiscountPopup('@TempData["NewDiscountCode"]');
+                        </text>
+                }
+
+
             });
+
             /* =========================
             Discount Popup
             ========================= */
 
-            function generateDiscountCode() {
+            /* نمایش Popup با دریافت کدی که سرور فرستاده */
+            function showDiscountPopup(code) {
+                if (!code) return;
 
-                // بررسی می‌کنیم آیا قبلاً کدی ساخته شده
-                let savedCode = localStorage.getItem("siteDiscountCode");
-
-                if (savedCode) {
-                    return savedCode;
-                }
-
-                // تولید عدد 6 رقمی
-                const randomNumber = Math.floor(
-                    100000 + Math.random() * 900000
-                );
-
-                const code = "sm" + randomNumber;
-
-                // ذخیره کد
-                localStorage.setItem(
-                    "siteDiscountCode",
-                    code
-                );
-
-                return code;
-            }
-
-
-            /* نمایش Popup */
-
-            function showDiscountPopup() {
-
-                const code = generateDiscountCode();
-
+                // قرار دادن کد دریافتی از سرور داخل المان پاپ‌آپ
                 document.getElementById("discountCode").innerText = code;
 
-                document
-                    .getElementById("discountPopup")
-                    .classList.add("show");
+                // باز کردن پاپ‌آپ
+                document.getElementById("discountPopup").classList.add("show");
             }
-
 
             /* بستن Popup */
-
             function closeDiscountPopup() {
-
-                document
-                    .getElementById("discountPopup")
-                    .classList.remove("show");
+                document.getElementById("discountPopup").classList.remove("show");
             }
 
-
             /* کپی کردن کد */
-
             function copyDiscountCode() {
-
-                const code =
-                    document.getElementById("discountCode").innerText;
+                const code = document.getElementById("discountCode").innerText;
 
                 navigator.clipboard.writeText(code)
                     .then(function() {
-
-                        const message =
-                            document.getElementById("copyMessage");
-
+                        const message = document.getElementById("copyMessage");
                         message.classList.add("show");
 
                         setTimeout(function() {
                             message.classList.remove("show");
                         }, 2000);
-
                     })
                     .catch(function() {
-
                         // fallback برای مرورگرهای قدیمی
-                        const tempInput =
-                            document.createElement("input");
-
+                        const tempInput = document.createElement("input");
                         tempInput.value = code;
-
                         document.body.appendChild(tempInput);
-
                         tempInput.select();
-
                         document.execCommand("copy");
-
                         document.body.removeChild(tempInput);
                     });
             }
 
-
-            /* کلیک روی فضای بیرون Popup */
-
-            document
-                .getElementById("discountPopup")
-                .addEventListener("click", function(event) {
-
+            /* کلیک روی فضای بیرون Popup برای بستن */
+            const discountPopupElem = document.getElementById("discountPopup");
+            if (discountPopupElem) {
+                discountPopupElem.addEventListener("click", function(event) {
                     if (event.target === this) {
                         closeDiscountPopup();
                     }
-
                 });
+            }
+
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

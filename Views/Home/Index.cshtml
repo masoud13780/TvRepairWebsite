@@ -4,6 +4,32 @@
     ViewData["Description"] =
         "تعمیر تخصصی تلویزیون ال جی، سامسونگ، سونی، آیوا، پاناسونیک، ایکس ویژن، تی سی ال، سام و انواع تلویزیون‌ها در مشهد";
 }
+
+<style>
+    /* تا وقتی اروری وجود ندارد، کادر به طور کامل مخفی باشد */
+    .validation-summary-valid {
+        display: none !important;
+    }
+
+    /* وقتی ارور وجود دارد، این استایل‌ها اعمال شوند */
+    .validation-summary-errors {
+        background-color: rgba(220, 53, 69, 0.1) !important; /* قرمز کم‌حال */
+        color: #dc3545 !important; /* رنگ متن قرمز */
+        border: 1px solid rgba(220, 53, 69, 0.25) !important; /* کادر ملایم */
+        border-radius: 8px !important; /* گوشه‌های گرد */
+        padding: 12px !important;
+        margin-bottom: 15px !important;
+        text-align: center !important;
+    }
+
+        /* حذف نقطه‌های بالت لیست خطاها و وسط‌چین کردن */
+        .validation-summary-errors ul {
+            list-style: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+</style>
+
 <div class="banner diagonal-soft-bg">
     <div class="banner-text">
         <h1>تعمیر تخصصی تلویزیون در مشهد</h1>
@@ -130,10 +156,10 @@
         </p>
     </div>
     <form class="comments-container elevated" method="post" asp-action="Index" asp-controller="Home">
-        <div asp-validation-summary="All"></div>
-        <h2>نظرات خود را بنویسید</h2>
-        <input type="text" asp-for="CreateComment.FullName" placeholder="نام و نام خانوادگی شما">
-        <input type="text" asp-for="CreateComment.Phone" placeholder="شماره تماس">
+        <div asp-validation-summary="All" class="alert alert-danger bg-danger bg-opacity-10 text-danger border-danger border-opacity-25 rounded-3 p-3 mb-3 text-center"></div>
+         <h2>نظرات خود را بنویسید</h2>
+        <input type="text" asp-for="CreateComment.FullName" value="@(Model.user != null ? $"{Model.user.FirstName} {" "} {Model.user.LastName}" : "")" placeholder="نام و نام خانوادگی شما">
+        <input type="text" asp-for="CreateComment.Phone" value="@(Model.user != null ? $"{Model.user.Phone}" : "")" placeholder="شماره تماس">
         <textarea asp-for="CreateComment.Description" placeholder="نظر خود را بنویسید..."></textarea>
         <div class="rating">
             <div class="stars" id="starRating">

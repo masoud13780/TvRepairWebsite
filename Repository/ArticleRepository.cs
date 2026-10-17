@@ -11,6 +11,7 @@ namespace TvRepairWebsite.Repository
 
         public void InsertArticleView(ArticleView articleView);
         public bool ViewTwoArticle(int userId);
+        public void Save(); 
     }
 
 
@@ -23,6 +24,11 @@ namespace TvRepairWebsite.Repository
             _context = context;
         }
 
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
         public List<Article> GetAllArticles()
         {
             try
@@ -31,7 +37,7 @@ namespace TvRepairWebsite.Repository
                 return _context.Articles.ToList();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -43,9 +49,9 @@ namespace TvRepairWebsite.Repository
             try
             {
                 return _context.Articles
-                    .FirstOrDefault(a=> a.ArticleId == ArticleId);
+                    .FirstOrDefault(a => a.ArticleId == ArticleId);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -71,7 +77,7 @@ namespace TvRepairWebsite.Repository
         }
         public bool ViewTwoArticle(int userId)
         {
-           int Count = _context.ArticleViews.Count(a => a.UserId == userId);
+            int Count = _context.ArticleViews.Count(a => a.UserId == userId);
 
             return Count >= 2;
         }

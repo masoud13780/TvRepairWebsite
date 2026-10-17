@@ -124,7 +124,12 @@ namespace TvRepairWebsite.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("CommentId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -177,9 +182,11 @@ namespace TvRepairWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreateDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsShown")
+                        .HasColumnType("bit");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -330,6 +337,16 @@ namespace TvRepairWebsite.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TvRepairWebsite.Models.Comment", b =>
+                {
+                    b.HasOne("TvRepairWebsite.Models.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("TvRepairWebsite.Models.DiscountCode", b =>
                 {
                     b.HasOne("TvRepairWebsite.Models.User", "User")
@@ -364,6 +381,11 @@ namespace TvRepairWebsite.Migrations
             modelBuilder.Entity("TvRepairWebsite.Models.PartType", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("TvRepairWebsite.Models.User", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

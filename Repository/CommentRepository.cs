@@ -20,7 +20,7 @@ namespace TvRepairWebsite.Repository
 
         public bool ExistCommentForUser(int userId)
         {
-            return _dbContext.Comments.Any(c = c => c.UserId == userId);
+            return _dbContext.Comments.Any(c => c.UserId == userId);
         }
     }
 }

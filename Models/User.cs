@@ -43,6 +43,10 @@ namespace TvRepairWebsite.Models
 
 
 
+        //Navigation Property
+        public List<Comment> Comments { get; set; }
+
+
         //public ICollection<Article> Articles { get; set; } = new List<Article>();
 
     }

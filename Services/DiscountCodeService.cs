@@ -44,7 +44,7 @@ namespace TvRepairWebsite.Services
 
             // ۳. بررسی شرط دوم: آیا حداقل ۱ نظر ثبت کرده است؟
             bool hasComment =  _context.Comments
-                .Any(x => x. == userId);
+                .Any(x => x.UserId == userId);
 
             if (!hasComment)
             {
@@ -58,15 +58,13 @@ namespace TvRepairWebsite.Services
             {
                 UserId = userId,
                 Code = generatedCode,
-                Percent = 20,              // درصد تخفیف دلخواه شما
-                CreatedAt = DateTime.UtcNow,
-                IsUsed = false,            // آیا خرج شده؟ خیر
+                CreateDate = DateTime.UtcNow,
                 IsShown = true             // چون همین الان در Ajax پاپ‌آپ را باز می‌کنیم، تیک بخورد که بعداً دوباره لود نشود
             };
 
             // ۵. ذخیره در دیتابیس
-            await _context.DiscountCodes.AddAsync(discount);
-            await _context.SaveChangesAsync();
+            _context.DicountCodes.Add(discount);
+            _context.SaveChanges();
 
             // ۶. برگرداندن کد ساخته‌شده جهت ارسال به فرانت‌اند
             return generatedCode;
