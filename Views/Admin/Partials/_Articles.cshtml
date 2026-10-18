@@ -1,5 +1,78 @@
 ﻿@model IEnumerable<Article>
 
+
+<style>
+    .article-editor-page {
+        direction: rtl;
+        text-align: right;
+        padding: 25px;
+        background: #f5f7fb;
+        min-height: 100vh;
+    }
+
+    .editor-card {
+        background: #fff;
+        padding: 24px;
+        margin-bottom: 22px;
+        border-radius: 14px;
+        border: 1px solid #e5e7eb;
+    }
+
+        .editor-card h5 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+    .form-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .quill-editor {
+        min-height: 220px;
+        background: #fff;
+    }
+
+    .ql-toolbar.ql-snow {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .ql-container.ql-snow {
+        border-radius: 0 0 8px 8px;
+        font-family: inherit;
+        font-size: 15px;
+    }
+
+    .ql-editor {
+        min-height: 220px;
+        direction: rtl;
+        text-align: right;
+        line-height: 2;
+    }
+
+    .faq-item {
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 14px;
+    }
+
+    .image-preview {
+        max-width: 250px;
+        max-height: 160px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-top: 12px;
+        display: none;
+    }
+</style>
+
+
 <div class="content">
 
     <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -21,7 +94,7 @@
                     <td>@item.Title</td>
                     <td>
                         <button class="btn btn-danger deleteBtn" data-id="@item.ArticleId">
-                              
+
                             حذف
                         </button>
                     </td>
@@ -33,28 +106,110 @@
 
 </div>
 
-<div class="modal-overlay" id="articleModal" style="display:none;">
+<div class="modal-overlay" id="articleModal" style="display:none; color:black;">
     <div class="Modal">
+        <div id="articleForm" class="article-editor-page container-fluid" enctype="multipart/form-data">
 
-        <h3>افزودن مقاله</h3>
-
-        <form id="articleForm" enctype="multipart/form-data">
-
-            <label>عکس مقاله</label>
-            <input type="file" name="ImageFile" required />
-
-            <label>عنوان مقاله</label>
-            <input type="text" name="Title" required />
-
-            <label>متن مقاله</label>
-            <textarea name="Content" id="editor"></textarea>
-
-            <div style="margin-top:20px;">
-                <button type="submit" class="btn btn-success">ذخیره</button>
-                <button type="button" class="btn btn-danger" onclick="closeArticleModal()">انصراف</button>
+            <div class="d-flex justify-content-between align-items-center mb-4" style="color:black;">
+                <div>
+                    <h3>ایجاد مقاله جدید</h3>
+                    <p class="text-muted mb-0">
+                        اطلاعات مقاله و محتوای آن را وارد کنید.
+                    </p>
+                </div>
+                <button type="button" class="btn btn-outline-secondary"
+                        onclick="previewArticle()">
+                    پیش‌نمایش محتوا
+                </button>
             </div>
 
-        </form>
+            <!-- اطلاعات اصلی -->
+            <div class="editor-card" style="color:black;">
+                <h5>اطلاعات اصلی مقاله</h5>
+
+                <div class="mb-3">
+                    <label class="form-label">عنوان مقاله</label>
+                    <input id="articleTitle" class="form-control"
+                           placeholder="عنوان مقاله را وارد کنید">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">توضیحات کوتاه</label>
+                    <textarea id="articleDescription" class="form-control"
+                              rows="3"
+                              placeholder="خلاصه مقاله..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">تصویر اصلی مقاله</label>
+                    <input id="articleImage" type="file"
+                           class="form-control" accept="image/*">
+                    <img id="imagePreview" class="image-preview"
+                         alt="پیش‌نمایش تصویر مقاله">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">توضیحات متا برای گوگل</label>
+                    <textarea id="metaDescription" class="form-control"
+                              rows="2" maxlength="160"
+                              placeholder="توضیحات سئو مقاله"></textarea>
+                </div>
+
+                <div>
+                    <label class="form-label">آدرس مقاله (Slug)</label>
+                    <input id="articleSlug" class="form-control"
+                           placeholder="tv-power-light-blinking">
+                </div>
+            </div>
+
+            <!-- مقدمه -->
+            <div class="editor-card" style="color:black;">
+                <h5>مقدمه مقاله</h5>
+                <div id="introEditor" class="quill-editor"></div>
+            </div>
+
+            <!-- متن اصلی -->
+            <div class="editor-card" style="color:black;">
+                <h5>متن اصلی مقاله</h5>
+                <div id="contentEditor" class="quill-editor"></div>
+            </div>
+
+            <!-- جمع بندی -->
+            <div class="editor-card" style="color:black;">
+                <h5>جمع‌بندی</h5>
+                <div id="conclusionEditor" class="quill-editor"></div>
+            </div>
+
+            <!-- سوالات متداول -->
+            <div class="editor-card" style="color:black;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">سؤالات متداول</h5>
+                    <button type="button" class="btn btn-outline-primary"
+                            onclick="addFaq()">
+                        + افزودن سؤال
+                    </button>
+                </div>
+
+                <div id="faqContainer"></div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mb-5" style="color:black;">
+                <button type="button" class="btn btn-outline-secondary"
+                        onclick="previewArticle()">
+                    پیش‌نمایش
+                </button>
+
+                <button type="button" class="btn btn-primary"
+                        onclick="collectArticle()">
+                    آماده‌سازی اطلاعات مقاله
+                </button>
+            </div>
+
+            <pre id="output"
+                 class="bg-white p-3 rounded text-start"
+                 dir="ltr" style="color:black;"></pre>
+
+        </div>
 
     </div>
 </div>
@@ -148,4 +303,189 @@
             });
     }
 
+    const toolbarOptions = [
+        ['bold', 'italic', 'underline'],
+        [{ header: [2, 3, 4, false] }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ align: [] }],
+        ['link', 'blockquote'],
+        ['clean']
+    ];
+
+    const editorOptions = {
+        theme: 'snow',
+        modules: {
+            toolbar: toolbarOptions
+        },
+        placeholder: 'محتوای مقاله را اینجا بنویسید...'
+    };
+
+    const introEditor = new Quill('#introEditor', editorOptions);
+    const contentEditor = new Quill('#contentEditor', editorOptions);
+    const conclusionEditor =
+        new Quill('#conclusionEditor', editorOptions);
+
+    const faqs = [];
+
+    function addFaq() {
+        const id = Date.now() + Math.random();
+
+        const item = document.createElement('div');
+        item.className = 'faq-item';
+        item.dataset.id = id;
+
+        item.innerHTML = `
+            <div class="mb-3">
+                <label class="form-label">سؤال</label>
+                <input class="form-control faq-question"
+                       placeholder="سؤال متداول را وارد کنید">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">پاسخ</label>
+                <textarea class="form-control faq-answer"
+                          rows="3"
+                          placeholder="پاسخ سؤال را وارد کنید"></textarea>
+            </div>
+
+            <button type="button"
+                    class="btn btn-sm btn-outline-danger"
+                    onclick="this.closest('.faq-item').remove()">
+                حذف سؤال
+            </button>
+        `;
+
+        document.getElementById('faqContainer').appendChild(item);
+    }
+
+    document.getElementById('articleImage')
+        .addEventListener('change', function () {
+            const file = this.files[0];
+            const preview = document.getElementById('imagePreview');
+
+            if (!file) {
+                preview.removeAttribute('src');
+                preview.style.display = 'none';
+                return;
+            }
+
+            if (!file.type.startsWith('image/')) {
+                this.value = '';
+                preview.removeAttribute('src');
+                preview.style.display = 'none';
+                alert('لطفاً یک فایل تصویری انتخاب کنید.');
+                return;
+            }
+
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+        });
+
+    function collectArticle() {
+        const faqItems = [
+            ...document.querySelectorAll('#faqContainer .faq-item')
+        ];
+
+        const article = {
+            title: document.getElementById('articleTitle').value,
+            description:
+                document.getElementById('articleDescription').value,
+            metaDescription:
+                document.getElementById('metaDescription').value,
+            slug: document.getElementById('articleSlug').value,
+
+            introHtml: introEditor.getSemanticHTML(),
+            contentHtml: contentEditor.getSemanticHTML(),
+            conclusionHtml: conclusionEditor.getSemanticHTML(),
+
+            faqs: faqItems.map(item => ({
+                question:
+                    item.querySelector('.faq-question').value,
+                answer:
+                    item.querySelector('.faq-answer').value
+            }))
+        };
+
+        document.getElementById('output').textContent =
+            JSON.stringify(article, null, 2);
+
+        console.log(article);
+        return article;
+    }
+
+    function previewArticle() {
+        const article = collectArticle();
+
+        const previewWindow = window.open('', '_blank');
+
+        if (!previewWindow) {
+            alert('مرورگر اجازه باز شدن پنجره پیش‌نمایش را نداد.');
+            return;
+        }
+
+        const previewDocument = previewWindow.document;
+
+        previewDocument.open();
+        previewDocument.write(`
+            <!DOCTYPE html>
+            <html lang="fa" dir="rtl">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport"
+                      content="width=device-width, initial-scale=1">
+                <title>پیش‌نمایش مقاله</title>
+                <style>
+                    body {
+                        font-family: Tahoma, sans-serif;
+                        max-width: 900px;
+                        margin: 40px auto;
+                        padding: 20px;
+                        line-height: 2;
+                    }
+                    h1 { line-height: 1.6; }
+                    img { max-width: 100%; }
+                </style>
+            </head>
+            <body>
+                <h1></h1>
+                <p id="description"></p>
+                <section id="intro"></section>
+                <section id="content"></section>
+                <section id="conclusion"></section>
+                <section id="faqs"></section>
+            </body>
+            </html>
+        `);
+        previewDocument.close();
+
+        previewDocument.querySelector('h1').textContent = article.title;
+        previewDocument.querySelector('#description').textContent =
+            article.description;
+
+        previewDocument.querySelector('#intro').innerHTML =
+            article.introHtml;
+
+        previewDocument.querySelector('#content').innerHTML =
+            article.contentHtml;
+
+        previewDocument.querySelector('#conclusion').innerHTML =
+            article.conclusionHtml;
+
+        const faqSection = previewDocument.querySelector('#faqs');
+        const heading = previewDocument.createElement('h2');
+        heading.textContent = 'سؤالات متداول';
+        faqSection.appendChild(heading);
+
+        article.faqs.forEach(faq => {
+            const question = previewDocument.createElement('h3');
+            question.textContent = faq.question;
+
+            const answer = previewDocument.createElement('p');
+            answer.textContent = faq.answer;
+
+            faqSection.append(question, answer);
+        });
+    }
+
+    addFaq();
 </script>

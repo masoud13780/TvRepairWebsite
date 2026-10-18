@@ -1,43 +1,309 @@
 ﻿@model TvRepairWebsite.Models.Article
 
-
 @{
-    ViewData["Title"] = "مقالات تخصصی تعمیرات تلویزیون";
+    ViewData["Title"] = "همون عنوان مقاله";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<head>
-    <link href="~/css/Blog.css" rel="stylesheet" />
-    <title>@Model.Title</title>
-    <meta name="description" content="@Model.Description">
-    <meta name="keywords" content="خرابی پنل تلویزیون, تعمیر تلویزیون, خطوط روی تلویزیون, لکه روی تلویزیون, تعمیرات تلویزیون سلیمی">+
+@section Styles {
+    <link href="~/css/BlogPro.css" rel="stylesheet" />
+}
+
+@section Meta {
+    @* اینجا برای شیما هستش *@
+    <title>
+        @* عنوان مقاله *@
+    </title>
+    <meta name="description" content="توضیحات مقاله برای گوگل">
+    <meta name="keywords" content="کلمات کلیدی مقاله" />
+    <link rel="canonical" href="لینک مقاله در قسمت url" />
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "Article",
+          "headline": "عنوان مقاله",
+          "description": "توضیحات مقاله",
+          "datePublished": "تاریخ ریلیز شدن مقاله"
+          "author": {
+            "@@type": "Organization",
+            "name": "تعمیرات تلویزیون سلیمی"
+          },
+          "publisher": {
+            "@@type": "Organization",
+            "name": "تعمیرات تلویزیون سلیمی",
+            "logo": {
+              "@@type": "ImageObject",
+              "url": "https://salimivision.ir/images/logo.png"
+            },
+          "mainEntityOfPage": {
+          "@@type": "WebPage",
+          "@@id": "لینک صفحه در قسمت url"
+           }
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "BreadcrumbList",
+          "itemListElement": [
+
+            {
+              "@@type": "ListItem",
+              "position": 1,
+              "name": "خانه",
+              "item": "https://salimivision.ir/"
+            },
+
+            {
+              "@@type": "ListItem",
+              "position": 2,
+              "name": "وبلاگ",
+              "item": "https://salimivision.ir/Blog"
+            },
+
+            {
+              "@@type": "ListItem",
+              "position": 3,
+              "name": "نام مقاله",
+              "item": "لینک مقاله در قسمت url"
+            }
+
+          ]
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",@*FAQ'S schema*@
+          "@@type": "FAQPage",
+          "mainEntity": [
+
+            {
+              "@@type": "Question",
+              "name": "چرا چراغ پاور تلویزیون چشمک می‌زند اما دستگاه روشن نمی‌شود؟",
+              "acceptedAnswer": {
+                "@@type": "Answer",
+                "text": "این مشکل معمولاً به خرابی برد پاور، مین برد، بک لایت، برد T-Con یا نوسانات برق مربوط می‌شود. در برخی مدل‌ها نیز چشمک زدن چراغ پاور به عنوان کد خطا برای تشخیص نوع خرابی استفاده می‌شود."
+              }
+            }
+
+          ]
+        }
+    </script>
     <style>
+        .article-hero {
+            background: linear-gradient(135deg,#0f172a,#1e293b);
+            color: #ffff;
+            padding: 60px 0;
+        }
+
+            .article-hero img {
+                margin-top: 10%;
+                width: 500px;
+                height: 250px;
+                border-radius: 25px;
+            }
+
+        .article-title {
+            margin-top: 3%;
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .article-desc {
+            opacity: .85;
+            margin-top: 10px;
+        }
+
+        .article-badges span {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .article-cta {
+            margin-top: 20px;
+        }
+
+        .toc {
+            position: sticky;
+            top: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .article-content {
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .trust-box {
+            margin-top: 40px;
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .mid-cta {
+            background: #111827;
+            color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .final-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .accordion-button {
+            font-size: 15px !important;
+            text-align: right !important;
+        }
+
+        .accordion-body {
+            font-size: 12px !important;
+        }
+
     </style>
-</head>
-<section class="blogpage-hero  diagonal-soft-bg">
-    <div class="blogpage-hero-content">
-        <h1>مقالات تخصصی تعمیرات تلویزیون</h1>
-        <p>آموزش‌ها، نکات فنی و راهنمای عیب‌یابی توسط تیم مهندسی سلیمی</p>
+}
+
+<!-- HERO -->
+<section class="article-hero">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8">
+                <img src="~/images/power-binking.jpg" alt="چراغ چشمک زن پاور" />@*عکس مقاله*@
+                <h1 class="article-title">
+                    @*عنوان مقاله*@
+                </h1>
+                <p class="article-desc">
+                    @*توضیحات مقاله*@
+                </p>
+
+                <div class="article-badges">
+                    <span>تعمیر تخصصی</span>
+                    <span>خدمات در محل</span>
+                    <span>گارانتی خدمات</span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 d-none d-lg-block">
+                <div class="hero-card">
+                    <h5>نیاز به تعمیر دارید؟</h5>
+                    <p>مشاوره رایگان + اعزام سریع</p>
+                    <a href="tel:09154868011" class="btn btn-light w-100">تماس</a>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </section>
-<section class="Blog-page">
-    <article>
-        <h1>@Model.Title</h1>
-        <p>@Model.Description</p>
-        @* 
-        <p>از جمله علائم خرابی پنل تلویزیون می‌توان به موارد زیر اشاره کرد:</p>
-        <ul>
-            <li>تلویزیون روشن است اما تصویر ندارد، در حالی که صدا همچنان فعال است.</li>
-            <li>خطوط عمودی یا افقی روی تصویر دیده می‌شود.</li>
-            <li>لکه‌های سیاه یا نقاط تاریک و جوهری روی صفحه ظاهر شده‌اند.</li>
-            <li>نصف تصویر تاریک شده یا رنگ‌ها به‌درستی نمایش داده نمی‌شوند.</li>
-            <li>تصویر سایه‌دار، دوتایی یا کمرنگ شده است.</li>
-            <li>شیشه پنل ترک خورده یا شکسته است.</li>
-        </ul>
 
-        <p>این علائم نشان می‌دهند که مشکل از خود پنل است و در اغلب موارد نیاز به تعویض تخصصی دارد. در چنین شرایطی، تشخیص دقیق بین خرابی پنل و مشکلاتی مثل بک‌لایت یا برد تصویر اهمیت زیادی دارد. یک بررسی اشتباه ممکن است شما را به پرداخت هزینه‌های سنگین برای تعویض پنل یا حتی خرید تلویزیون جدید مجبور کند، در حالی که تعمیر تخصصی می‌تواند مشکل را با هزینه کمتر حل کند.</p> *@
+<!-- CONTENT AREA -->
+<section class="article-body container" style="margin-top:2%;">
 
-        <p>اگر به دنبال تعمیر سریع و مطمئن تلویزیون خود هستید و می‌خواهید تشخیص درست خرابی پنل انجام شود، می‌توانید از خدمات <a asp-controller="Home" asp-action="Index" target="_blank" rel="noopener">تعمیرات تلویزیون سلیمی</a> بهره ببرید. تیم متخصص سلیمی با تجربه در تعمیر انواع تلویزیون‌های LED، OLED و LCD قادر است پنل و سایر قطعات حساس تلویزیون شما را بررسی و تعمیر یا تعویض نماید، بدون اینکه کیفیت تصویر کاهش یابد.</p>
+    <div class="row">
 
-        <p>تشخیص به موقع و استفاده از خدمات تخصصی، بهترین راه برای جلوگیری از آسیب بیشتر و صرفه‌جویی در هزینه‌هاست. بنابراین هنگام مشاهده هر یک از علائم فوق، سریعاً اقدام کنید و از تجربه حرفه‌ای تعمیرکاران متخصص استفاده کنید.</p>
-    </article>
+        <!-- TOC -->
+        <aside class="col-lg-3 d-none d-lg-block">
+            <div class="toc">
+                <h6>فهرست محتوا</h6>
+                <ul>
+                    <li><a href="#intro">مقدمه</a></li>
+                    <li><a href="#content">محتوا</a></li>
+                    <li><a href="#trust">چرا ما؟</a></li>
+                    <li><a href="#faq">سوالات متداول</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="col-lg-9">
+
+            <!-- INTRO -->
+            <section id="intro" class="mb-4">
+                @*مقدمه*@
+
+            </section>
+
+            <!-- ARTICLE CONTENT -->
+            <section id="content" class="article-content">
+                @*متن مقاله*@
+                <h2>جمع‌بندی</h2>@*جمع بندی*@
+            </section>
+
+            <!-- TRUST SECTION -->
+            <section id="trust" class="trust-box">
+                <h3>چرا تعمیرات تلویزیون سلیمی؟</h3>
+
+                <div class="trust-grid">
+                    <div>✔ تعمیر تخصصی انواع تلویزیون</div>
+                    <div>✔ اعزام سریع تعمیرکار</div>
+                    <div>✔ قیمت منصفانه</div>
+                    <div>✔ ضمانت خدمات</div>
+                </div>
+            </section>
+
+            <!-- CTA MID -->
+            <div class="mid-cta">
+                <h4>اگر مشکل تلویزیون دارید</h4>
+                <p>همین الان تماس بگیرید تا کارشناسان راهنمایی کنند</p>
+                <a href="tel:09154868011" class="btn btn-success">
+                    تماس فوری
+                </a>
+            </div>
+
+            <!-- FAQ -->
+            <section id="faq" class="faq-section">
+                <h3>سوالات متداول</h3>@*FAQ'S*@
+
+                <div class="accordion" id="faqAcc">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="f1h">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#f1" aria-expanded="true" aria-controls="f1">@*سوال*@
+                                چرا چراغ پاور تلویزیون چشمک می‌زند اما دستگاه روشن نمی‌شود؟
+                            </button>
+                        </h2>
+                        <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faqAcc">
+                            <div class="accordion-body">@*جواب*@
+                                این مشکل معمولاً به خرابی برد پاور، مین برد، بک لایت، برد T-Con یا نوسانات برق مربوط می‌شود.
+                                در برخی مدل‌ها نیز چشمک زدن چراغ پاور به عنوان کد خطا برای تشخیص نوع خرابی استفاده می‌شود.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- FINAL CTA -->
+            <section class="final-cta">
+                <h3>نیاز به تعمیر فوری دارید؟</h3>
+
+                <p>
+                    تعمیرات تخصصی در <strong>تیم مهندسی سلیمی تعمیرات</strong> با بررسی دقیق و عیب‌یابی حرفه‌ای انجام می‌شود.
+                    برای دریافت مشاوره یا ثبت درخواست تعمیر می‌توانید با
+                    <a href="tel:09154868011" class="text-primary fw-bold">این شماره</a>
+                    تماس بگیرید.
+                </p>
+            </section>
+
+        </div>
+
+    </div>
+
 </section>
