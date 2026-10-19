@@ -1,4 +1,5 @@
-﻿using TvRepairWebsite.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TvRepairWebsite.Data;
 using TvRepairWebsite.Models;
 
 namespace TvRepairWebsite.Repository
@@ -49,7 +50,9 @@ namespace TvRepairWebsite.Repository
             try
             {
                 return _context.Articles
-                    .FirstOrDefault(a => a.ArticleId == ArticleId);
+                    .Include(a => a.ArticleQuestions)
+                    .FirstOrDefault(a => a.ArticleId == ArticleId)
+                    ;
             }
             catch (Exception ex)
             {
@@ -63,17 +66,25 @@ namespace TvRepairWebsite.Repository
 
         public void InsertArticleView(ArticleView articleView)
         {
-            var articleViewDb = _context.ArticleViews
-                .FirstOrDefault(a => a.UserId == articleView.UserId && a.ArticleId == articleView.ArticleId);
-            if (articleViewDb != null)
+            try
             {
-                articleViewDb.ViewedAt = DateTime.Now;
-                _context.SaveChanges();
-                return;
-            }
+                var articleViewDb = _context.ArticleViews
+                    .FirstOrDefault(a => a.UserId == articleView.UserId && a.ArticleId == articleView.ArticleId);
+                if (articleViewDb != null)
+                {
+                    articleViewDb.ViewedAt = DateTime.Now;
+                    _context.SaveChanges();
+                    return;
+                }
 
-            _context.ArticleViews.Add(articleView);
-            _context.SaveChanges();
+                _context.ArticleViews.Add(articleView);
+                _context.SaveChanges();
+
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
         public bool ViewTwoArticle(int userId)
         {

@@ -1,7 +1,7 @@
 ﻿@model TvRepairWebsite.Models.Article
 
 @{
-    ViewData["Title"] = "همون عنوان مقاله";
+    ViewData["Title"] = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,20 +10,19 @@
 }
 
 @section Meta {
-    @* اینجا برای شیما هستش *@
-    <title>
-        @* عنوان مقاله *@
-    </title>
-    <meta name="description" content="توضیحات مقاله برای گوگل">
-    <meta name="keywords" content="کلمات کلیدی مقاله" />
-    <link rel="canonical" href="لینک مقاله در قسمت url" />
+    <title>@Model.Title</title>
+    <meta name="description" content="@Model.Meta_Description">
+    <meta name="keywords" content="تعمیر تلویزیون, مقالات آموزشی" />
+    <link rel="canonical" href="https://salimivision.ir/Blog/@Model.ArticleAddress" />
+
+    <!-- Schema.org Article -->
     <script type="application/ld+json">
         {
           "@@context": "https://schema.org",
           "@@type": "Article",
-          "headline": "عنوان مقاله",
-          "description": "توضیحات مقاله",
-          "datePublished": "تاریخ ریلیز شدن مقاله"
+          "headline": "@Model.Title",
+          "description": "@Model.Meta_Description",
+          "datePublished": "@Model.CreateDate.ToString("yyyy-MM-dd")",
           "author": {
             "@@type": "Organization",
             "name": "تعمیرات تلویزیون سلیمی"
@@ -34,61 +33,61 @@
             "logo": {
               "@@type": "ImageObject",
               "url": "https://salimivision.ir/images/logo.png"
-            },
+            }
+          },
           "mainEntityOfPage": {
-          "@@type": "WebPage",
-          "@@id": "لینک صفحه در قسمت url"
-           }
+            "@@type": "WebPage",
+            "@@id": "https://salimivision.ir/Blog/@Model.ArticleAddress"
+          }
         }
     </script>
+
+    <!-- Schema.org Breadcrumb -->
     <script type="application/ld+json">
         {
           "@@context": "https://schema.org",
           "@@type": "BreadcrumbList",
           "itemListElement": [
-
             {
               "@@type": "ListItem",
               "position": 1,
               "name": "خانه",
               "item": "https://salimivision.ir/"
             },
-
             {
               "@@type": "ListItem",
               "position": 2,
               "name": "وبلاگ",
               "item": "https://salimivision.ir/Blog"
             },
-
             {
               "@@type": "ListItem",
               "position": 3,
-              "name": "نام مقاله",
-              "item": "لینک مقاله در قسمت url"
+              "name": "@Model.Title",
+              "item": "https://salimivision.ir/Blog/@Model.ArticleAddress"
             }
-
           ]
         }
     </script>
-    <script type="application/ld+json">
-        {
-          "@@context": "https://schema.org",@*FAQ'S schema*@
-          "@@type": "FAQPage",
-          "mainEntity": [
 
+    @if (Model.ArticleQuestions != null && Model.ArticleQuestions.Any())
+    {
+        // ساخت پویا اسکیمای سوالات متداول بر اساس سوالات دیتابیس
+        <script type="application/ld+json">
             {
-              "@@type": "Question",
-              "name": "چرا چراغ پاور تلویزیون چشمک می‌زند اما دستگاه روشن نمی‌شود؟",
-              "acceptedAnswer": {
-                "@@type": "Answer",
-                "text": "این مشکل معمولاً به خرابی برد پاور، مین برد، بک لایت، برد T-Con یا نوسانات برق مربوط می‌شود. در برخی مدل‌ها نیز چشمک زدن چراغ پاور به عنوان کد خطا برای تشخیص نوع خرابی استفاده می‌شود."
-              }
+              "@@context": "https://schema.org",
+              "@@type": "FAQPage",
+              "mainEntity": [
+                @for (int i = 0; i < Model.ArticleQuestions.Count; i++)
+                {
+                        var faq = Model.ArticleQuestions[i];
+                        @:{"@@type": "Question", "name": "@faq.Question", "acceptedAnswer": {"@@type": "Answer", "text": "@faq.Awnser"}}@(i < Model.ArticleQuestions.Count - 1 ? "," : "")
+                }
+              ]
             }
+        </script>
+    }
 
-          ]
-        }
-    </script>
     <style>
         .article-hero {
             background: linear-gradient(135deg,#0f172a,#1e293b);
@@ -97,34 +96,32 @@
         }
 
             .article-hero img {
-                margin-top: 10%;
-                width: 500px;
-                height: 250px;
-                border-radius: 25px;
+                width: 100%;
+                max-height: 300px;
+                object-fit: cover;
+                border-radius: 20px;
             }
 
         .article-title {
-            margin-top: 3%;
-            font-size: 32px;
+            margin-top: 20px;
+            font-size: 30px;
             font-weight: 800;
         }
 
         .article-desc {
             opacity: .85;
-            margin-top: 10px;
+            margin-top: 15px;
+            font-size: 15px;
+            line-height: 1.8;
         }
 
         .article-badges span {
             display: inline-block;
             background: rgba(255,255,255,0.15);
-            padding: 5px 10px;
-            margin: 5px;
+            padding: 5px 12px;
+            margin: 5px 5px 5px 0;
             border-radius: 20px;
             font-size: 12px;
-        }
-
-        .article-cta {
-            margin-top: 20px;
         }
 
         .toc {
@@ -136,7 +133,7 @@
         }
 
         .article-content {
-            line-height: 1.9;
+            line-height: 2.1;
             font-size: 16px;
         }
 
@@ -174,61 +171,52 @@
         }
 
         .accordion-body {
-            font-size: 12px !important;
+            font-size: 14px !important;
+            line-height: 1.8;
         }
-
     </style>
 }
 
 <!-- HERO -->
 <section class="article-hero">
     <div class="container">
-
         <div class="row align-items-center">
-
             <div class="col-lg-8">
-                <img src="~/images/power-binking.jpg" alt="چراغ چشمک زن پاور" />@*عکس مقاله*@
-                <h1 class="article-title">
-                    @*عنوان مقاله*@
-                </h1>
-                <p class="article-desc">
-                    @*توضیحات مقاله*@
-                </p>
-
-                <div class="article-badges">
+                <h1 class="article-title">@Model.Title</h1>
+                <div class="article-desc">
+                    @Html.Raw(Model.Little_Description)
+                </div>
+                <div class="article-badges mt-3">
                     <span>تعمیر تخصصی</span>
                     <span>خدمات در محل</span>
                     <span>گارانتی خدمات</span>
+                    <span>تاریخ انتشار: @Model.CreateDate</span> <!-- اگر هلپر شمسی دارید -->
                 </div>
             </div>
-
-            <div class="col-lg-4 d-none d-lg-block">
-                <div class="hero-card">
-                    <h5>نیاز به تعمیر دارید؟</h5>
-                    <p>مشاوره رایگان + اعزام سریع</p>
-                    <a href="tel:09154868011" class="btn btn-light w-100">تماس</a>
-                </div>
+            <div class="col-lg-4 d-none d-lg-block text-center">
+                <img src="~/images/@Model.ImgUrl" alt="@Model.Title" />
             </div>
-
         </div>
-
     </div>
 </section>
 
 <!-- CONTENT AREA -->
-<section class="article-body container" style="margin-top:2%;">
-
+<section class="article-body container" style="margin-top:3%;">
     <div class="row">
 
-        <!-- TOC -->
+        <!-- TOC (فهرست) -->
         <aside class="col-lg-3 d-none d-lg-block">
             <div class="toc">
                 <h6>فهرست محتوا</h6>
-                <ul>
-                    <li><a href="#intro">مقدمه</a></li>
-                    <li><a href="#content">محتوا</a></li>
-                    <li><a href="#trust">چرا ما؟</a></li>
-                    <li><a href="#faq">سوالات متداول</a></li>
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2"><a href="#intro" class="text-decoration-none">مقدمه</a></li>
+                    <li class="mb-2"><a href="#content" class="text-decoration-none">متن اصلی</a></li>
+                    <li class="mb-2"><a href="#conclusion" class="text-decoration-none">جمع‌بندی</a></li>
+                    <li class="mb-2"><a href="#trust" class="text-decoration-none">چرا ما؟</a></li>
+                    @if (Model.ArticleQuestions != null && Model.ArticleQuestions.Any())
+                    {
+                        <li><a href="#faq" class="text-decoration-none">سوالات متداول</a></li>
+                    }
                 </ul>
             </div>
         </aside>
@@ -237,21 +225,28 @@
         <div class="col-lg-9">
 
             <!-- INTRO -->
-            <section id="intro" class="mb-4">
-                @*مقدمه*@
-
+            <section id="intro" class="mb-5">
+                <h3 class="fw-bold mb-3">مقدمه</h3>
+                <div class="article-content">
+                    @Html.Raw(Model.Introduction)
+                </div>
             </section>
 
             <!-- ARTICLE CONTENT -->
-            <section id="content" class="article-content">
-                @*متن مقاله*@
-                <h2>جمع‌بندی</h2>@*جمع بندی*@
+            <section id="content" class="article-content mb-5">
+                <h3 class="fw-bold mb-3">جزئیات مقاله</h3>
+                @Html.Raw(Model.Body)
+            </section>
+
+            <!-- CONCLUSION -->
+            <section id="conclusion" class="article-content mb-5">
+                <h3 class="fw-bold mb-3">جمع‌بندی</h3>
+                @Html.Raw(Model.Conclusion)
             </section>
 
             <!-- TRUST SECTION -->
-            <section id="trust" class="trust-box">
-                <h3>چرا تعمیرات تلویزیون سلیمی؟</h3>
-
+            <section id="trust" class="trust-box mb-5">
+                <h3 class="h5 fw-bold">چرا تعمیرات تلویزیون سلیمی؟</h3>
                 <div class="trust-grid">
                     <div>✔ تعمیر تخصصی انواع تلویزیون</div>
                     <div>✔ اعزام سریع تعمیرکار</div>
@@ -263,38 +258,45 @@
             <!-- CTA MID -->
             <div class="mid-cta">
                 <h4>اگر مشکل تلویزیون دارید</h4>
-                <p>همین الان تماس بگیرید تا کارشناسان راهنمایی کنند</p>
-                <a href="tel:09154868011" class="btn btn-success">
+                <p class="mb-3">همین الان تماس بگیرید تا کارشناسان راهنمایی کنند</p>
+                <a href="tel:09154868011" class="btn btn-success px-4 py-2">
                     تماس فوری
                 </a>
             </div>
 
-            <!-- FAQ -->
-            <section id="faq" class="faq-section">
-                <h3>سوالات متداول</h3>@*FAQ'S*@
+            <!-- FAQ (نمایش پویا سوالات متداول از دیتابیس) -->
+            @if (Model.ArticleQuestions != null && Model.ArticleQuestions.Any())
+            {
+                <section id="faq" class="faq-section mb-5">
+                    <h3 class="fw-bold mb-3">سوالات متداول</h3>
+                    <div class="accordion" id="faqAcc">
+                        @for (int i = 0; i < Model.ArticleQuestions.Count; i++)
+                        {
+                            var faq = Model.ArticleQuestions[i];
+                            string collapseId = $"faqCollapse{i}";
+                            string headerId = $"faqHeader{i}";
 
-                <div class="accordion" id="faqAcc">
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="f1h">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#f1" aria-expanded="true" aria-controls="f1">@*سوال*@
-                                چرا چراغ پاور تلویزیون چشمک می‌زند اما دستگاه روشن نمی‌شود؟
-                            </button>
-                        </h2>
-                        <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faqAcc">
-                            <div class="accordion-body">@*جواب*@
-                                این مشکل معمولاً به خرابی برد پاور، مین برد، بک لایت، برد T-Con یا نوسانات برق مربوط می‌شود.
-                                در برخی مدل‌ها نیز چشمک زدن چراغ پاور به عنوان کد خطا برای تشخیص نوع خرابی استفاده می‌شود.
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="@headerId">
+                                    <button class="accordion-button @(i > 0 ? "collapsed" : "")" type="button" data-bs-toggle="collapse" data-bs-target="#@collapseId" aria-expanded="@(i == 0 ? "true" : "false")" aria-controls="@collapseId">
+                                        @faq.Question
+                                    </button>
+                                </h2>
+                                <div id="@collapseId" class="accordion-collapse collapse @(i == 0 ? "show" : "")" aria-labelledby="@headerId" data-bs-parent="#faqAcc">
+                                    <div class="accordion-body">
+                                        @faq.Awnser
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
-                </div>
-            </section>
-            <!-- FINAL CTA -->
-            <section class="final-cta">
-                <h3>نیاز به تعمیر فوری دارید؟</h3>
+                </section>
+            }
 
-                <p>
+            <!-- FINAL CTA -->
+            <section class="final-cta p-4 bg-light rounded border">
+                <h3 class="h5 fw-bold">نیاز به تعمیر فوری دارید؟</h3>
+                <p class="text-muted mt-2">
                     تعمیرات تخصصی در <strong>تیم مهندسی سلیمی تعمیرات</strong> با بررسی دقیق و عیب‌یابی حرفه‌ای انجام می‌شود.
                     برای دریافت مشاوره یا ثبت درخواست تعمیر می‌توانید با
                     <a href="tel:09154868011" class="text-primary fw-bold">این شماره</a>
@@ -303,7 +305,5 @@
             </section>
 
         </div>
-
     </div>
-
 </section>

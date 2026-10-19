@@ -20,8 +20,8 @@ namespace TvRepairWebsite.Controllers
             _codeServices = codeServices;
         }
 
-        [Authorize]
-        public IActionResult BlogPage(int id)
+        
+        public IActionResult BlogPage(int ArticleId)
         {
             //بدست آوردن کاربر برای ذخیره لاگ دیدن مقاله
             var UserId = HttpContext.Session.GetInt32("UserId");
@@ -34,7 +34,7 @@ namespace TvRepairWebsite.Controllers
             ArticleView articleView = new ArticleView()
             {
                 UserId = UserId.Value,
-                ArticleId = id,
+                ArticleId = ArticleId,
                 ViewedAt = DateTime.Now
             };
             //ثبت ویو مقاله
@@ -48,7 +48,7 @@ namespace TvRepairWebsite.Controllers
                 TempData["NewDiscountCode"] = discountCode;
             }
             //بدست آوردن مقاله
-            var article = _articleRepository.GetArticle(id);
+            var article = _articleRepository.GetArticle(ArticleId);
 
             return View(article);
         }

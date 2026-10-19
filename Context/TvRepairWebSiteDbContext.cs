@@ -29,10 +29,13 @@ namespace TvRepairWebsite.Data
         public DbSet<PartType> partTypes { get; set; }
         //تعریف جدول محصولات
         public DbSet<Product> products { get; set; }
-       //جدول
-       public DbSet<SmsTemplate> smsTemplates { get; set; }
+        //جدول
+        public DbSet<SmsTemplate> smsTemplates { get; set; }
         public DbSet<ArticleView> ArticleViews { get; set; }
         public DbSet<DiscountCode> DicountCodes { get; set; }
+        public DbSet<ArticleQuestion> ArticleQuestions { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +46,14 @@ namespace TvRepairWebsite.Data
                 .WithMany(c => c.Comments)
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<ArticleQuestion>()
+                .HasOne(q => q.Article)
+                .WithMany(a => a.ArticleQuestions)
+                .HasForeignKey(q => q.ArticleId)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
         }
     }

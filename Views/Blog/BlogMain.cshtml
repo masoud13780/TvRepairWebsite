@@ -26,9 +26,9 @@
                 <div class="blog-content">
                     <h4>@item.Title</h4>
                     <p>
-                        @item.Description
+                        @* @item.Description *@
                     </p>
-                    <a asp-controller="Blog" asp-action="BlogPage" asp-route-id = "@item.ArticleId" class="Btn">ادامه مطلب</a>
+                    <a asp-controller="Blog" asp-action="BlogPage" asp-route-ArticleId="@item.ArticleId" class="Btn">ادامه مطلب</a>
                 </div>
             </div>
 

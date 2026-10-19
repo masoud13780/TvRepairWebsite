@@ -200,8 +200,8 @@
                 </button>
 
                 <button type="button" class="btn btn-primary"
-                        onclick="collectArticle()">
-                    آماده‌سازی اطلاعات مقاله
+                        onclick="saveArticle()">
+                    ذخیره و ثبت مقاله
                 </button>
             </div>
 
@@ -217,7 +217,7 @@
     CKEDITOR.replace('editor');
 
     document.getElementById("articleForm")
-        .addEventListener("submit", function (e) {
+        .addEventListener("submit", function(e) {
 
             e.preventDefault();
 
@@ -259,7 +259,7 @@
     });
 
     document.querySelectorAll(".deleteBtn").forEach(btn => {
-        btn.addEventListener("click", function () {
+        btn.addEventListener("click", function() {
             const id = this.dataset.id;
             if (!confirm("آیا از حذف مقاله مطمئن هستید؟")) return;
             deleteArticle(id);
@@ -279,27 +279,28 @@
     // }
 
     function deleteArticle(id) {
-
-        if (!confirm("آیا از حذف این محصول مطمئن هستید؟"))
+        if (!confirm("آیا از حذف این مقاله مطمئن هستید؟"))
             return;
 
         fetch(`/Admin/ArticleDelete?id=${id}`, {
             method: 'POST'
         })
-            .then(res => res.json())
+            .then(res => {
+                // اینجا چک میکنیم هدر پاسخ چیست
+                console.log("Response status:", res.status);
+                return res.json();
+            })
             .then(data => {
-
-                if (data.success) {
+                console.log("Response data:", data);
+                if (data && data.success) {
                     location.reload();
+                } else {
+                    alert(data ? data.message : "پاسخ نامعتبر از سرور");
                 }
-                else {
-                    alert(data.message || "خطا در حذف");
-                }
-
             })
             .catch(err => {
-                console.error(err);
-                alert("خطای سیستمی رخ داده است");
+                console.error("Fetch Error:", err);
+                alert("خطا: ممکن است اکشن سرور خروجی JSON ندهد.");
             });
     }
 
@@ -335,31 +336,31 @@
         item.dataset.id = id;
 
         item.innerHTML = `
-            <div class="mb-3">
-                <label class="form-label">سؤال</label>
-                <input class="form-control faq-question"
-                       placeholder="سؤال متداول را وارد کنید">
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">سؤال</label>
+                    <input class="form-control faq-question"
+                           placeholder="سؤال متداول را وارد کنید">
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label">پاسخ</label>
-                <textarea class="form-control faq-answer"
-                          rows="3"
-                          placeholder="پاسخ سؤال را وارد کنید"></textarea>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">پاسخ</label>
+                    <textarea class="form-control faq-answer"
+                              rows="3"
+                              placeholder="پاسخ سؤال را وارد کنید"></textarea>
+                </div>
 
-            <button type="button"
-                    class="btn btn-sm btn-outline-danger"
-                    onclick="this.closest('.faq-item').remove()">
-                حذف سؤال
-            </button>
-        `;
+                <button type="button"
+                        class="btn btn-sm btn-outline-danger"
+                        onclick="this.closest('.faq-item').remove()">
+                    حذف سؤال
+                </button>
+            `;
 
         document.getElementById('faqContainer').appendChild(item);
     }
 
     document.getElementById('articleImage')
-        .addEventListener('change', function () {
+        .addEventListener('change', function() {
             const file = this.files[0];
             const preview = document.getElementById('imagePreview');
 
@@ -427,35 +428,35 @@
 
         previewDocument.open();
         previewDocument.write(`
-            <!DOCTYPE html>
-            <html lang="fa" dir="rtl">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport"
-                      content="width=device-width, initial-scale=1">
-                <title>پیش‌نمایش مقاله</title>
-                <style>
-                    body {
-                        font-family: Tahoma, sans-serif;
-                        max-width: 900px;
-                        margin: 40px auto;
-                        padding: 20px;
-                        line-height: 2;
-                    }
-                    h1 { line-height: 1.6; }
-                    img { max-width: 100%; }
-                </style>
-            </head>
-            <body>
-                <h1></h1>
-                <p id="description"></p>
-                <section id="intro"></section>
-                <section id="content"></section>
-                <section id="conclusion"></section>
-                <section id="faqs"></section>
-            </body>
-            </html>
-        `);
+                <!DOCTYPE html>
+                <html lang="fa" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport"
+                          content="width=device-width, initial-scale=1">
+                    <title>پیش‌نمایش مقاله</title>
+                    <style>
+                        body {
+                            font-family: Tahoma, sans-serif;
+                            max-width: 900px;
+                            margin: 40px auto;
+                            padding: 20px;
+                            line-height: 2;
+                        }
+                        h1 { line-height: 1.6; }
+                        img { max-width: 100%; }
+                    </style>
+                </head>
+                <body>
+                    <h1></h1>
+                    <p id="description"></p>
+                    <section id="intro"></section>
+                    <section id="content"></section>
+                    <section id="conclusion"></section>
+                    <section id="faqs"></section>
+                </body>
+                </html>
+            `);
         previewDocument.close();
 
         previewDocument.querySelector('h1').textContent = article.title;
@@ -486,6 +487,67 @@
             faqSection.append(question, answer);
         });
     }
+
+    function saveArticle() {
+    const title = document.getElementById('articleTitle').value.trim();
+    const littleDesc = document.getElementById('articleDescription').value.trim();
+    const metaDesc = document.getElementById('metaDescription').value.trim();
+    const address = document.getElementById('articleSlug').value.trim();
+
+    if (!title || !littleDesc || !metaDesc) {
+        alert("لطفاً عنوان، توضیحات کوتاه و توضیحات متا را پر کنید.");
+        return;
+    }
+
+    // گرفتن خروجی ادیتورهای Quill
+    const introHtml = introEditor.getSemanticHTML ? introEditor.getSemanticHTML() : introEditor.root.innerHTML;
+    const contentHtml = contentEditor.getSemanticHTML ? contentEditor.getSemanticHTML() : contentEditor.root.innerHTML;
+    const conclusionHtml = conclusionEditor.getSemanticHTML ? conclusionEditor.getSemanticHTML() : conclusionEditor.root.innerHTML;
+
+    // استخراج سؤالات متداول
+    const faqItems = [...document.querySelectorAll('#faqContainer .faq-item')];
+    const faqs = faqItems.map(item => ({
+        Question: item.querySelector('.faq-question').value.trim(),
+        Answer: item.querySelector('.faq-answer').value.trim()
+    })).filter(f => f.Question && f.Answer);
+
+    // پکیج کردن دیتا داخل FormData برای ارسال فایل و فیلدها
+    const formData = new FormData();
+    formData.append("Title", title);
+    formData.append("Little_Description", littleDesc);
+    formData.append("Meta_Description", metaDesc);
+    formData.append("ArticleAddress", address);
+    formData.append("Introduction", introHtml);
+    formData.append("Body", contentHtml);
+    formData.append("Conclusion", conclusionHtml);
+    formData.append("FaqsJson", JSON.stringify(faqs));
+
+    const imageInput = document.getElementById('articleImage');
+    if (imageInput.files.length > 0) {
+        formData.append("ImageFile", imageInput.files[0]);
+    }
+
+    // ارسال به اکشن
+    fetch('/Admin/ArticleCreate', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(data.message || "خطا در ثبت اطلاعات");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("خطایی در ارتباط با سرور رخ داده است.");
+    });
+}
+
+
 
     addFaq();
 </script>

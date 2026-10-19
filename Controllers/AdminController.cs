@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using TvRepairWebsite.Data;
 using TvRepairWebsite.Models;
 using TvRepairWebsite.Models.ViewModels;
@@ -15,7 +16,7 @@ namespace TvRepairWebsite.Controllers
         }
 
         public IActionResult AdminPanel()
-        { 
+        {
             return View();
         }
 
@@ -23,10 +24,10 @@ namespace TvRepairWebsite.Controllers
         {
 
             //بدست آوردن تعداد کاربران
-            int UserCount = 
+            int UserCount =
                 _contex
                 .Users
-                .Where(x=>x.Admin == false)
+                .Where(x => x.Admin == false)
                 .Count();
             //تعداد محصولات
             int ProductCount = _contex.products.Count();
@@ -40,7 +41,7 @@ namespace TvRepairWebsite.Controllers
                 ArticleCount = ArticleCount
             };
 
-            return PartialView("Partials/_Dashboard",adminPanel);
+            return PartialView("Partials/_Dashboard", adminPanel);
         }
 
         #region Product
@@ -152,7 +153,7 @@ namespace TvRepairWebsite.Controllers
         [HttpPost]
         public IActionResult DeleteProduct(int id)
         {
-            var product =  _contex.products.Find(id);
+            var product = _contex.products.Find(id);
 
             if (product == null)
                 return Json(new { success = false });
@@ -172,39 +173,86 @@ namespace TvRepairWebsite.Controllers
             //گرفتن تمامی مقالات
             List<Article> articles = _contex.Articles.ToList();
 
-            return PartialView("Partials/_Articles",articles);
+            return PartialView("Partials/_Articles", articles);
         }
-
+   
         [HttpPost]
-        public IActionResult ArticleCreate(IFormFile ImageFile, string Title, string Content)
+        public async Task<IActionResult> ArticleCreate([FromForm] CreateArticleDto dto)
         {
-            if (ImageFile == null || ImageFile.Length == 0)
-                return BadRequest("تصویر انتخاب نشده است");
-
-            // ساخت نام یکتا برای عکس
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
-
-            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(),
-                                          "wwwroot/images",
-                                          fileName);
-
-            using (var stream = new FileStream(uploadPath, FileMode.Create))
+            if (!ModelState.IsValid)
             {
-                 ImageFile.CopyTo(stream);
+                return BadRequest("اطلاعات ارسالی ناقص است.");
             }
 
-            var article = new Article
+            try
             {
-                Title = Title,
-                Description = Content,
-                ImgUrl = fileName,
-                CreateDate = DateTime.Now
-            };
+                string imgName = "default.png";
 
-            _contex.Articles.Add(article);
-            _contex.SaveChanges();
+                // ۱. آپلود تصویر در مسیر wwwroot/images/articles
+                if (dto.ImageFile != null && dto.ImageFile.Length > 0)
+                {
+                    imgName = Guid.NewGuid().ToString() + Path.GetExtension(dto.ImageFile.FileName);
+                    var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
 
-            return Ok();
+                    if (!Directory.Exists(uploadPath))
+                        Directory.CreateDirectory(uploadPath);
+
+                    var filePath = Path.Combine(uploadPath, imgName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await dto.ImageFile.CopyToAsync(stream);
+                    }
+                }
+
+                // ۲. ساخت آبجکت مقاله
+                var article = new Article()
+                {
+                    Title = dto.Title,
+                    Little_Description = dto.Little_Description,
+                    Meta_Description = dto.Meta_Description,
+                    ArticleAddress = string.IsNullOrWhiteSpace(dto.ArticleAddress)
+                        ? dto.Title.Trim().Replace(" ", "-")
+                        : dto.ArticleAddress.Trim().Replace(" ", "-"),
+                    Introduction = dto.Introduction,
+                    Body = dto.Body,
+                    Conclusion = dto.Conclusion,
+                    ImgUrl = imgName,
+                    CreateDate = DateTime.Now,
+                    ArticleQuestions = new List<ArticleQuestion>()
+                };
+
+                // ۳. استخراج سوالات متداول از JSON
+                if (!string.IsNullOrEmpty(dto.FaqsJson))
+                {
+                    var faqs = JsonSerializer.Deserialize<List<FaqItemDto>>(dto.FaqsJson);
+                    if (faqs != null)
+                    {
+                        foreach (var faq in faqs)
+                        {
+                            if (!string.IsNullOrWhiteSpace(faq.Question) && !string.IsNullOrWhiteSpace(faq.Answer))
+                            {
+                                article.ArticleQuestions.Add(new ArticleQuestion
+                                {
+                                    Question = faq.Question,
+                                    Awnser = faq.Answer
+                                    // فیلدهای دیگر مثل ArticleId توسط خود EF Core مقداردهی می‌شود
+                                });
+                            }
+                        }
+                    }
+                }
+
+                // ۴. ذخیره در دیتابیس
+                _contex.Articles.Add(article);
+                _contex.SaveChanges();
+
+                return Json(new { success = true, message = "مقاله با موفقیت افزوده شد." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "خطای سیستمی رخ داده است.");
+            }
         }
 
         [HttpPost]
@@ -218,8 +266,9 @@ namespace TvRepairWebsite.Controllers
             _contex.Articles.Remove(article);
             _contex.SaveChangesAsync();
 
-            return Ok();
+            return Json(new { success = true });
         }
+
         #endregion
 
         #region User
@@ -228,7 +277,7 @@ namespace TvRepairWebsite.Controllers
             //لیست کاربران
             List<User> users = _contex.Users.ToList();
 
-            return PartialView("Partials/_Users",users);
+            return PartialView("Partials/_Users", users);
         }
 
         [HttpPost]
@@ -277,7 +326,7 @@ namespace TvRepairWebsite.Controllers
             if (model == null || model.UserId == null)
                 return Json(new { success = false, message = "اطلاعات نامعتبر است" });
 
-            var user =  _contex.Users.Find(model.UserId);
+            var user = _contex.Users.Find(model.UserId);
 
             if (user == null)
                 return Json(new { success = false, message = "کاربر یافت نشد" });
@@ -294,8 +343,8 @@ namespace TvRepairWebsite.Controllers
             user.Phone = model.Phone;
             user.TVType = model.TVType;
             user.Admin = model.Admin;
-            if(user.Password != model.Password)
-            user.Password = model.Password;
+            if (user.Password != model.Password)
+                user.Password = model.Password;
             _contex.SaveChanges();
 
             return Json(new { success = true });

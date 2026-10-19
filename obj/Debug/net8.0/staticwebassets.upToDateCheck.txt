@@ -10,6 +10,7 @@ wwwroot\fonts\IRANSansWeb_Bold.ttf
 wwwroot\fonts\IRANSansWeb_Bold.woff
 wwwroot\fonts\IRANSansWeb_Bold.woff2
 wwwroot\images\33871406-8b6f-4798-b42c-5e22d31ca1c0.jpg
+wwwroot\images\aa7597df-c9dd-4084-8716-b58899d9a186.jpg
 wwwroot\images\BadFlat.jpg
 wwwroot\images\banner.png
 wwwroot\images\Bonding.png

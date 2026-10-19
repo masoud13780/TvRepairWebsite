@@ -30,17 +30,41 @@ namespace TvRepairWebsite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleId"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ArticleAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Body")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<string>("Conclusion")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ImgUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Introduction")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Little_Description")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Meta_Description")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -50,6 +74,34 @@ namespace TvRepairWebsite.Migrations
                     b.HasKey("ArticleId");
 
                     b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("TvRepairWebsite.Models.ArticleQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Awnser")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("ArticleQuestions");
                 });
 
             modelBuilder.Entity("TvRepairWebsite.Models.ArticleView", b =>
@@ -318,6 +370,17 @@ namespace TvRepairWebsite.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TvRepairWebsite.Models.ArticleQuestion", b =>
+                {
+                    b.HasOne("TvRepairWebsite.Models.Article", "Article")
+                        .WithMany("ArticleQuestions")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+                });
+
             modelBuilder.Entity("TvRepairWebsite.Models.ArticleView", b =>
                 {
                     b.HasOne("TvRepairWebsite.Models.Article", "Article")
@@ -371,6 +434,11 @@ namespace TvRepairWebsite.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Part");
+                });
+
+            modelBuilder.Entity("TvRepairWebsite.Models.Article", b =>
+                {
+                    b.Navigation("ArticleQuestions");
                 });
 
             modelBuilder.Entity("TvRepairWebsite.Models.CategoryProduct", b =>

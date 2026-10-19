@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -15,6 +16,11 @@ Options.UseSqlServer(
     .GetConnectionString("DefaultConnection")
   )
 );
+
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie();
+
 
 //Add Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
